@@ -10,41 +10,35 @@ import { addNewCourse, deleteCourse } from "../../../api/courseAPIs";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import MyModal from "../../../components/modal/Modal";
+import FormEditCourse from "../../../components/form/FormEditCourse";
 
 export default function Course() {
+  //#region redux
+  const allCourses = useSelector((state) => state.courseSlice);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  //#endregion
+
+  //#region State
   const [showForm, setShowForm] = useState(false);
   const [flag, setFlag] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const allCourses = useSelector((state) => state.courseSlice);
   const [pagination, setPagination] = useState(allCourses.current);
+  const [editCourseInfo, setEditCourseInfo] = useState(null);
+  const [showFormEdit, setShowFormEdit] = useState(false);
+  //#endregion
+
   useEffect(() => {
     dispatch(getAllCoursesAPI({ page: 0 }));
   }, [flag]);
-  // Hàm tính toán số thứ tự cho mỗi dòng dữ liệu
+
+  // Hàm tính toán số thứ tự cho mỗi dòng dữ l  iệu
   const calculateIndex = (index) => index + 1;
   // Click chuyển trang
   const handlePageChange = (page, value) => {
     dispatch(getAllCoursesAPI({ page: value - 1 }));
     setPagination(value);
-  };
-  //Hàm hiển thị form thêm mới khóa học
-  const openForm = () => {
-    setShowForm(true);
-  };
-  //Hàm hiển thị form thêm mới khóa học
-  const closeForm = () => {
-    setShowForm(false);
-  };
-  const handleShowModal = (description) => {
-    setSelectedCourse(description);
-    setIsModalVisible(true);
-  };
-
-  const handleCancelModal = () => {
-    setIsModalVisible(false);
   };
 
   const columns = [
@@ -65,7 +59,7 @@ export default function Course() {
       dataIndex: "image",
       align: "center",
       render: (text) => (
-        <img src={"http://10.101.44.231:8081/img/" + text} width={100} />
+        <img src={"http://10.101.44.218:8080/img/" + text} width={100} />
       ),
     },
     {
@@ -92,7 +86,9 @@ export default function Course() {
             <Button onClick={() => navigate(`/admin/course/${item.id}`)}>
               Chi tiết khóa học
             </Button>
-            <Button primary>Chỉnh sửa</Button>
+            <Button primary onClick={() => handleEditCourse(item)}>
+              Chỉnh sửa
+            </Button>
             <Button danger onClick={() => handleDeleteCourse(item.id)}>
               Xóa
             </Button>
@@ -102,11 +98,37 @@ export default function Course() {
     },
   ];
 
+  //Hàm hiển thị form thêm mới khóa học
+  const openForm = () => {
+    setShowForm(true);
+  };
+  //Hàm đóng form thêm mới khóa học
+  const closeForm = () => {
+    setShowForm(false);
+  };
+  //Hàm hiển thị form sửa khóa học
+  const openFormEdit = () => {
+    setShowFormEdit(true);
+  };
+  //Hàm đóng form sửa khóa học
+  const closeFormEdit = () => {
+    setShowFormEdit(false);
+  };
+  // Hiển thị modal mô tả
+  const handleShowModal = (description) => {
+    setSelectedCourse(description);
+    setIsModalVisible(true);
+  };
+  // Tắt modal mô tả
+  const handleCancelModal = () => {
+    setIsModalVisible(false);
+  };
+  // Change...
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
   // Thêm khóa học
-  const handleOk = async (newCourse) => {
+  const handleAddNewCourse = async (newCourse) => {
     try {
       await addNewCourse(newCourse);
       setFlag(!flag);
@@ -125,6 +147,15 @@ export default function Course() {
   const handleSearch = (searchValue) => {
     dispatch(getAllCoursesAPI({ page: 0, searchValue }));
   };
+  // Hàm chỉnh sửa thông tin khóa học
+  const handleEditCourse = (courseItem) => {
+    setEditCourseInfo(courseItem);
+    openFormEdit();
+  };
+  // Hàm lưu thông tin khi sửa khóa học
+  const handleSave = (courseEdit) => {
+    console.log("======>", courseEdit);
+  };
   return (
     <>
       <MyModal
@@ -135,10 +166,13 @@ export default function Course() {
       />
       {/* Form thêm mới khóa học */}
       {showForm && (
-        <FormAddCourse
-          closeForm={closeForm}
-          handleOk={handleOk}
-          type={"addCourse"}
+        <FormAddCourse closeForm={closeForm} handleOk={handleAddNewCourse} />
+      )}
+      {showFormEdit && (
+        <FormEditCourse
+          closeFormEdit={closeFormEdit}
+          handleEdit={handleSave}
+          courseInfo={editCourseInfo}
         />
       )}
       <div className="flex flex-col gap-4">

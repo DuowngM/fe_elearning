@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, memo } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Divider, Button, Input } from "antd";
 import ReactQuill from "react-quill";
@@ -6,11 +6,21 @@ import "react-quill/dist/quill.snow.css";
 import "./index.css";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { toolbarOptions, formats } from "../../utils/toolbarOptions";
-export default function FormAddCourse({ closeForm, handleOk }) {
+function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
   const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
-  const [description, setDiscription] = useState("");
+  const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState();
+
+  // Gán giá trị cho các state từ props courseInfo khi component được render
+  useEffect(() => {
+    if (courseInfo) {
+      setTitle(courseInfo.title);
+      setDescription(courseInfo.description);
+      setImageUrl("http://10.101.44.218:8080/img/" + courseInfo.image);
+    }
+  }, [courseInfo]);
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -22,24 +32,32 @@ export default function FormAddCourse({ closeForm, handleOk }) {
       reader.readAsDataURL(file);
     }
   };
-  const handleAdd = () => {
-    handleOk({ title, description, imageFile });
-    resetField();
+
+  const handleEditCourse = () => {
+    // Gọi hàm handleEdit và truyền thông tin cập nhật của khóa học
+    handleEdit({
+      id: courseInfo.id,
+      title,
+      description,
+      imageFile: imageFile ? imageFile : courseInfo.image,
+    });
+    //     resetField();
   };
+
   const resetField = () => {
     setTitle("");
-    setDiscription("");
-    setImageFile("");
+    setDescription("");
     setImageUrl("");
   };
+
   return (
     <>
       <div className="overlay">
         <form className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded">
           <div className="flex justify-between items-center">
-            <h3 className="text-[20px] font-semibold">Thêm mới khóa học</h3>
+            <h3 className="text-[20px] font-semibold">Sửa khóa học</h3>
             <CloseIcon
-              onClick={closeForm}
+              onClick={closeFormEdit}
               className="cursor-pointer hover:text-gray-500"
             />
           </div>
@@ -52,7 +70,6 @@ export default function FormAddCourse({ closeForm, handleOk }) {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
-
             <div>
               <label htmlFor="courseImage">
                 Chọn ảnh: <UploadFileIcon />
@@ -75,7 +92,7 @@ export default function FormAddCourse({ closeForm, handleOk }) {
                     objectFit: "cover",
                   }}
                 />
-              )}{" "}
+              )}
             </div>
           </div>
           <div className="mt-[20px]">
@@ -85,14 +102,18 @@ export default function FormAddCourse({ closeForm, handleOk }) {
               modules={toolbarOptions}
               theme="snow"
               value={description}
-              onChange={setDiscription}
+              onChange={setDescription}
               formats={formats}
             />
           </div>
           <Divider />
           <div className="flex justify-end gap-2">
-            <Button onClick={closeForm}>Hủy</Button>
-            <Button type="primary" className="bg-blue-600" onClick={handleAdd}>
+            <Button onClick={closeFormEdit}>Hủy</Button>
+            <Button
+              type="primary"
+              className="bg-blue-600"
+              onClick={handleEditCourse}
+            >
               Lưu
             </Button>
           </div>
@@ -101,3 +122,4 @@ export default function FormAddCourse({ closeForm, handleOk }) {
     </>
   );
 }
+export default memo(FormEditCourse);
