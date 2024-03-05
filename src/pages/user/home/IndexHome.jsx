@@ -23,7 +23,7 @@ function IndexHome() {
     }
   };
   return (
-    <div className="max-w-[1500px] mx-auto h-[5000px] mx-[90px]">
+    <div className="max-w-[1500px] h-[5000px] mx-[90px]">
       {/* Banner Top  */}
       <div className="w-full flex items-center">
         <div className="w-1/2 ">

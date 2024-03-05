@@ -45,10 +45,8 @@ function HeaderUser() {
       const response = await login(infoUser);
       const { accessToken, expired, roles, username, fullName } = response.data;
 
-      // Lưu tên người dùng vào state để hiển thị
       setUser(fullName);
 
-      // Lưu thông tin người dùng vào localStorage
       localStorage.setItem("user", JSON.stringify(fullName));
 
       // Lưu accessToken vào cookies
@@ -58,7 +56,7 @@ function HeaderUser() {
         sameSite: "strict",
       });
 
-      closeFormLogin(); // Tự động đóng form đăng nhập sau khi đăng nhập thành công
+      closeFormLogin();
 
       // Xử lý chuyển hướng nếu cần
       if (roles[0] === "ROLE_ADMIN") {

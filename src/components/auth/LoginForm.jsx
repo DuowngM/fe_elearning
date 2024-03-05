@@ -36,7 +36,7 @@ export default function LoginForm({ closeForm, handleLogin }) {
 
           <div className="grid grid-cols-2 gap-5 mt-[40px]">
             <div className="border-r-2  ">
-              <h1 className="text-[#0A033C] font-bold text-[30px] w-full h-[105px] leading-7 leading-[35px] mb-[40px]">
+              <h1 className="text-[#0A033C] font-bold text-[30px] w-full h-[105px]  leading-[35px] mb-[40px]">
                 Welcome to <br />
                 RikkeiEdu Online Learning Platform
               </h1>
