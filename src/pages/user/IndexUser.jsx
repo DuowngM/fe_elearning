@@ -9,6 +9,8 @@ function IndexUser() {
       <IndexHeader />
       {/* body */}
       <Outlet />
+
+      
       {/* footer */}
       <FooterUser />
     </div>
