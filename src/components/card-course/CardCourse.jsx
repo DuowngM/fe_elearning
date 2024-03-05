@@ -2,8 +2,10 @@ import React from "react";
 import { Button } from "antd";
 import Cookies from "js-cookie";
 import { notify } from "../../utils/notification";
+import { useNavigate } from "react-router";
 
 export default function CardCourse({ item }) {
+  const navigate = useNavigate();
   const getAccessTokenFromCookies = () => {
     return Cookies.get("accessToken") || null;
   };
@@ -19,9 +21,9 @@ export default function CardCourse({ item }) {
     const accessToken = getAccessTokenFromCookies();
     const userInfo = getUserInfoFromLocalStorage();
 
-    if (!accessToken || !userInfo) {
-      notify("error", "Đăng nhập để học khóa này");
-    }
+    if (!accessToken || !userInfo)
+      return notify("error", "Đăng nhập để học khóa này");
+    navigate(`/detailCourse/${item.id}`);
   };
   return (
     <div className="text-center">
