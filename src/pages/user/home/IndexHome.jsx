@@ -1,27 +1,17 @@
-import Cookies from "js-cookie";
 import { Button } from "antd";
-import { notify } from "../../../utils/notification";
+import CardCourse from "../../../components/card-course/CardCourse";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 
 function IndexHome() {
-  const getAccessTokenFromCookies = () => {
-    return Cookies.get("accessToken") || null;
-  };
-  const getUserInfoFromLocalStorage = () => {
-    const userInfoString = localStorage.getItem("user");
-    if (userInfoString) {
-      return JSON.parse(userInfoString);
-    }
-    return null;
-  };
-
-  const handleLearn = () => {
-    const accessToken = getAccessTokenFromCookies();
-    const userInfo = getUserInfoFromLocalStorage();
-
-    if (!accessToken || !userInfo) {
-      notify("error", "Đăng nhập để học khóa này");
-    }
-  };
+  //#region redux
+  const allCourses = useSelector((state) => state.courseSlice);
+  const dispatch = useDispatch();
+  //#endregion
+  useEffect(() => {
+    dispatch(getAllCoursesAPI({ page: 0, home: true }));
+  }, []);
   return (
     <div className="max-w-[1500px] h-[5000px] mx-[90px]">
       {/* Banner Top  */}
@@ -196,135 +186,9 @@ function IndexHome() {
 
           <div className="w-full mt-[60px]">
             <div className="grid gap-4 gap-y-10 grid-cols-3 grid-rows-2">
-              <div className="text-center">
-                <div className="ml-auto flex justify-center">
-                  <img
-                    className="w-[80px] h-[80px]"
-                    src="../../../../public/images/HTML-icon.png"
-                    alt=""
-                  />
-                </div>
-                <h4 className="mt-[12px] font-semibold text-[#0A033C] ">
-                  HTML, CSS
-                </h4>
-                <p className="mt-[10px] text-[#5D5A6F] text-[16px]">
-                  Standard 1 is a foundation Standard <br /> that reflects 7
-                  important concepts...
-                </p>
-                <div className="mt-[55px]">
-                  <Button
-                    className="w-[162px] h-[44px] text-[16px] font-medium"
-                    onClick={handleLearn}
-                  >
-                    Class Detail
-                  </Button>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="ml-auto flex justify-center">
-                  <img
-                    className="w-[80px] h-[80px]"
-                    src="../../../../public/images/HTML-icon.png"
-                    alt=""
-                  />
-                </div>
-                <h4 className="mt-[12px] font-semibold text-[#0A033C] ">
-                  HTML, CSS
-                </h4>
-                <p className="mt-[10px] text-[#5D5A6F] text-[16px]">
-                  Standard 1 is a foundation Standard <br /> that reflects 7
-                  important concepts...
-                </p>
-                <div className="mt-[55px]">
-                  <Button className="w-[162px] h-[44px] text-[16px] font-medium">
-                    Class Detail
-                  </Button>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="ml-auto flex justify-center">
-                  <img
-                    className="w-[80px] h-[80px]"
-                    src="../../../../public/images/HTML-icon.png"
-                    alt=""
-                  />
-                </div>
-                <h4 className="mt-[12px] font-semibold text-[#0A033C] ">
-                  HTML, CSS
-                </h4>
-                <p className="mt-[10px] text-[#5D5A6F] text-[16px]">
-                  Standard 1 is a foundation Standard <br /> that reflects 7
-                  important concepts...
-                </p>
-                <div className="mt-[55px]">
-                  <Button className="w-[162px] h-[44px] text-[16px] font-medium">
-                    Class Detail
-                  </Button>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="ml-auto flex justify-center">
-                  <img
-                    className="w-[80px] h-[80px]"
-                    src="../../../../public/images/HTML-icon.png"
-                    alt=""
-                  />
-                </div>
-                <h4 className="mt-[12px] font-semibold text-[#0A033C] ">
-                  HTML, CSS
-                </h4>
-                <p className="mt-[10px] text-[#5D5A6F] text-[16px]">
-                  Standard 1 is a foundation Standard <br /> that reflects 7
-                  important concepts...
-                </p>
-                <div className="mt-[55px]">
-                  <Button className="w-[162px] h-[44px] text-[16px] font-medium">
-                    Class Detail
-                  </Button>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="ml-auto flex justify-center">
-                  <img
-                    className="w-[80px] h-[80px]"
-                    src="../../../../public/images/HTML-icon.png"
-                    alt=""
-                  />
-                </div>
-                <h4 className="mt-[12px] font-semibold text-[#0A033C] ">
-                  HTML, CSS
-                </h4>
-                <p className="mt-[10px] text-[#5D5A6F] text-[16px]">
-                  Standard 1 is a foundation Standard <br /> that reflects 7
-                  important concepts...
-                </p>
-                <div className="mt-[55px]">
-                  <Button className="w-[162px] h-[44px] text-[16px] font-medium">
-                    Class Detail
-                  </Button>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="ml-auto flex justify-center">
-                  <img
-                    className="w-[80px] h-[80px]"
-                    src="../../../../public/images/HTML-icon.png"
-                    alt=""
-                  />
-                </div>
-                <h4 className="mt-[12px] font-semibold text-[#0A033C] ">
-                  HTML, CSS
-                </h4>
-                <p className="mt-[10px] text-[#5D5A6F] text-[16px]">
-                  Standard 1 is a foundation Standard <br /> that reflects 7
-                  important concepts...
-                </p>
-                <div className="mt-[55px]">
-                  <Button className="w-[162px] h-[44px] text-[16px] font-medium">
-                    Class Detail
-                  </Button>
-                </div>
-              </div>
+              {allCourses?.courses?.map((item, index) => {
+                return <CardCourse key={index} item={item} />;
+              })}
             </div>
 
             <div className="flex justify-center mt-[84px]">
