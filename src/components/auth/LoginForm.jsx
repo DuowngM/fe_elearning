@@ -1,25 +1,31 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import { Button, Input } from "antd";
 import "react-quill/dist/quill.snow.css";
 import "../../index.css";
-import CloseIcon from "@mui/icons-material/Close";
 
 export default function LoginForm({ closeForm, handleLogin }) {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  // Xử lý sự kiện tắt form khi click ra ngoài
+  const formRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (formRef.current && !formRef.current.contains(event.target)) {
+      closeForm(); // Đóng form nếu click bên ngoài form
+    }
+  };
   const login = () => {
     handleLogin({ phone, password });
   };
+
   return (
     <>
-      <div className="overlay">
-        <form className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded pb-[100px]">
-          <CloseIcon
-            onClick={closeForm}
-            className="cursor-pointer hover:text-gray-500"
-          />
+      <div className="overlay" onClick={handleClickOutside}>
+        <form
+          ref={formRef}
+          className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded pb-[100px]"
+        >
           <div className="flex justify-between items-center">
             <img
               className="w-[200px]"

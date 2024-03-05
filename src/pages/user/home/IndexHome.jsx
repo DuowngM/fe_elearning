@@ -1,7 +1,27 @@
+import Cookies from "js-cookie";
 import { Button } from "antd";
-import IndexCourse from "../../../components/course/IndexCourse";
+import { notify } from "../../../utils/notification";
 
 function IndexHome() {
+  const getAccessTokenFromCookies = () => {
+    return Cookies.get("accessToken") || null;
+  };
+  const getUserInfoFromLocalStorage = () => {
+    const userInfoString = localStorage.getItem("user");
+    if (userInfoString) {
+      return JSON.parse(userInfoString);
+    }
+    return null;
+  };
+
+  const handleLearn = () => {
+    const accessToken = getAccessTokenFromCookies();
+    const userInfo = getUserInfoFromLocalStorage();
+
+    if (!accessToken || !userInfo) {
+      notify("error", "Đăng nhập để học khóa này");
+    }
+  };
   return (
     <div className="max-w-[1500px] mx-auto h-[5000px] mx-[90px]">
       {/* Banner Top  */}
@@ -192,7 +212,10 @@ function IndexHome() {
                   important concepts...
                 </p>
                 <div className="mt-[55px]">
-                  <Button className="w-[162px] h-[44px] text-[16px] font-medium">
+                  <Button
+                    className="w-[162px] h-[44px] text-[16px] font-medium"
+                    onClick={handleLearn}
+                  >
                     Class Detail
                   </Button>
                 </div>
@@ -351,12 +374,15 @@ function IndexHome() {
             </h2>
             <span className="text-[14px] text-[#5D5A6F]">
               High-definition video is video of higher resolution and quality
-              than standard-definition.<br/> While there is no standardized meaning
-              for high-definition, generally any video.
+              than standard-definition.
+              <br /> While there is no standardized meaning for high-definition,
+              generally any video.
             </span>
           </div>
           <div className="mt-[30px]">
-            <Button className="w-[186px] h-[50px] bg-[#BC2228] text-white">Career Information</Button>
+            <Button className="w-[186px] h-[50px] bg-[#BC2228] text-white">
+              Career Information
+            </Button>
           </div>
         </div>
       </div>
