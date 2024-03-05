@@ -53,20 +53,46 @@ function HeaderUser() {
           />
         </Link>
       </div>
+      <div className="flex ">
+        <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
+          <p>Khóa học</p>
+          <img
+            src="../../../../public/images/Arrow-down 1.png"
+            alt=""
+            className="w-[14px] h-[9px] "
+          />
+        </div>
+        <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
+          <p>Tài nguyên</p>
+          <img
+            src="../../../../public/images/Arrow-down 1.png"
+            alt=""
+            className="w-[14px] h-[9px] "
+          />
+        </div>
+        <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
+          <p>Học liệu</p>
+          <img
+            src="../../../../public/images/Arrow-down 1.png"
+            alt=""
+            className="w-[14px] h-[9px] "
+          />
+        </div>
+      </div>
       <div className="actions flex gap-3 items-center">
         <Button
           variant="text"
           sx={{ color: "#bc2228" }}
           onClick={openFormLogin}
         >
-          Sign In
+          Đăng ký
         </Button>
         <Button
           sx={{ bgcolor: "#bc2228", "&:hover": { bgcolor: "#c14e53" } }}
           variant="contained"
           onClick={openFormRegister}
         >
-          Sign Up
+          Đăng nhập
         </Button>
       </div>
       {/* Form thêm mới khóa học */}
