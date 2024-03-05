@@ -4,8 +4,8 @@ import { getAllCourses } from "../../api/courseAPIs";
 export const getAllCoursesAPI = createAsyncThunk(
   "getCourses",
   async (infoGetData) => {
-    const { page, searchValue } = infoGetData;
-    const data = await getAllCourses(page, searchValue);
+    const { page, searchValue, home } = infoGetData;
+    const data = await getAllCourses(page, searchValue, home);
     return data;
   }
 );

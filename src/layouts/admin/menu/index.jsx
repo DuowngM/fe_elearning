@@ -20,7 +20,7 @@ export default function Menu() {
           </NavLink>
           <NavLink to="contact">
             <ConnectWithoutContactIcon />
-            <span className="menu-text">Liên hệ</span>
+            <span className="menu-text">Quản lý người dùng</span>
           </NavLink>
           {/* <NavLink to="bai-viet">
             <LocalPostOfficeIcon />
