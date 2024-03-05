@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
+import React, { useRef, useState } from "react";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
@@ -14,7 +13,13 @@ export default function RegisterForm({ closeForm, handleRegister }) {
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [confirmation, setConfirmation] = useState(null);
-
+  // Xử lý sự kiện tắt form khi click ra ngoài
+  const formRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (formRef.current && !formRef.current.contains(event.target)) {
+      closeForm(); // Đóng form nếu click bên ngoài form
+    }
+  };
   const handleSendOTP = async () => {
     try {
       // Kiểm tra nếu số điện thoại không bắt đầu bằng "+84" thì thêm "+84" vào trước số điện thoại
@@ -50,12 +55,11 @@ export default function RegisterForm({ closeForm, handleRegister }) {
 
   return (
     <>
-      <div className="overlay">
-        <form className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded pb-[90px]">
-          <CloseIcon
-            onClick={closeForm}
-            className="cursor-pointer hover:text-gray-500"
-          />
+      <div className="overlay" onClick={handleClickOutside}>
+        <form
+          ref={formRef}
+          className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded pb-[90px]"
+        >
           <div className="flex justify-between items-center">
             <img
               className="w-[200px]"

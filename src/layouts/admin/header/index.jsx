@@ -8,8 +8,21 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import PersonIcon from "@mui/icons-material/Person";
 import Tooltip from "@mui/material/Tooltip";
+import { useNavigate } from "react-router";
+import Cookies from "js-cookie";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const logout = () => {
+    // Xóa accessToken từ cookies
+    Cookies.remove("accessToken");
+
+    // Xóa dữ liệu người dùng từ localStorage
+    localStorage.clear();
+
+    // Chuyển hướng người dùng về  trang chủ
+    navigate("/");
+  };
   const items = [
     {
       label: (
@@ -31,7 +44,7 @@ export default function Header() {
     },
     {
       label: (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2" onClick={logout}>
           <LogoutIcon />
           <span>Đăng xuất</span>
         </div>
@@ -44,8 +57,14 @@ export default function Header() {
       <header className="h-14 sticky top-0 z-40 bg-white w-full px-6 flex items-center justify-between shadow-md">
         <div className="flex items-center gap-3">
           {/* <AppsIcon /> */}
-          <img className="h-8" src="../../../public/images/favicon.ico" alt="" />
-          <span className="text-[20px] font-bold text-[#1F1F20]">Quản trị viên</span>
+          <img
+            className="h-8"
+            src="../../../public/images/favicon.ico"
+            alt=""
+          />
+          <span className="text-[20px] font-bold text-[#1F1F20]">
+            Quản trị viên
+          </span>
         </div>
         <div className="flex items-center gap-6">
           <Tooltip title="Thông báo" placement="bottom">
