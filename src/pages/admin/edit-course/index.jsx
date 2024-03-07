@@ -71,11 +71,12 @@ export default function DetailCourse() {
     };
     if (infoLesson.type === "edit") {
       await editLesson(lesson);
+      setSelectedLesson(null);
       dispatch(getLessonsThunk());
       closeFormLesson();
     } else {
       await addNewLesson(lesson);
-      setSelectedLesson(null);
+
       dispatch(getLessonsThunk());
       closeFormLesson();
     }
