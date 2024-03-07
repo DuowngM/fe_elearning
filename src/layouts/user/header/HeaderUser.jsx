@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "../../../components/auth/LoginForm";
 import RegisterForm from "../../../components/auth/RegisterForm";
 import { getPhone, login, register } from "../../../api/userAPIs";
@@ -9,11 +9,11 @@ import Cookies from "js-cookie";
 function HeaderUser() {
   const [showFormLogin, setShowFormLogin] = useState(false);
   const [showFormRegister, setShowFormRegister] = useState(false);
-
   const [user, setUser] = useState(() => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
     return savedUser || null;
   });
+  const navigate = useNavigate();
   useEffect(() => {
     // Check xem đã có đăng nhập hay chưa
     const userInfo = JSON.parse(localStorage.getItem("user"));
@@ -78,6 +78,7 @@ function HeaderUser() {
     localStorage.clear();
     Cookies.remove("accessToken");
     setUser(null);
+    navigate("/");
   };
 
   return (

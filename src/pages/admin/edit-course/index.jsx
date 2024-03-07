@@ -176,7 +176,7 @@ export default function DetailCourse() {
                   allowFullScreen
                 ></iframe>
               </div>
-              <p>{selectedLesson.description}</p>
+              {/* <p>{selectedLesson.description}</p> */}
             </div>
           )}
         </div>

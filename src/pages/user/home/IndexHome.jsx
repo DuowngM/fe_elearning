@@ -169,7 +169,7 @@ function IndexHome() {
         </div>
 
         <div>
-          <div className="text-center w-full mt-[40px]">
+          {/* <div className="text-center w-full mt-[40px]">
             <Button className="w-[140px] h-[50px] hover!:border-[#BC2228] text-[14px] font-medium">
               Part-time
             </Button>
@@ -182,7 +182,7 @@ function IndexHome() {
             <Button className="w-[140px] h-[50px] text-[14px] font-medium">
               PTIT
             </Button>
-          </div>
+          </div> */}
 
           <div className="w-full mt-[60px]">
             <div className="grid gap-4 gap-y-10 grid-cols-3 grid-rows-2">

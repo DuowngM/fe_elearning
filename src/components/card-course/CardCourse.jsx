@@ -23,15 +23,13 @@ export default function CardCourse({ item }) {
 
     if (!accessToken || !userInfo)
       return notify("error", "Đăng nhập để học khóa này");
-    navigate(`/detailCourse/${item.id}`);
+    navigate(`/detailCourse/${item.id}?name=${item.title}`);
   };
+
   return (
     <div className="text-center">
       <div className="ml-auto flex justify-center">
-        <img
-          className="w-[120px] h-[120px]"
-          src={"http://10.101.44.218:8080/img/" + item.image}
-        />
+        <img className="" src={import.meta.env.VITE_API_URL_IMG + item.image} />
       </div>
       <h4 className="mt-[12px] font-semibold text-[#0A033C] ">{item.title}</h4>
       <p className="mt-[10px] text-[#5D5A6F] text-[16px]">

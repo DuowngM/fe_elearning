@@ -63,7 +63,7 @@ export default function Course() {
       dataIndex: "image",
       align: "center",
       render: (text) => (
-        <img src={"http://10.101.44.218:8080/img/" + text} width={100} />
+        <img src={import.meta.env.VITE_API_URL_IMG + text} width={100} />
       ),
     },
     {
@@ -161,7 +161,7 @@ export default function Course() {
     try {
       await editCourse(courseEdit);
       setFlag(!flag);
-      closeForm();
+      closeFormEdit();
     } catch (error) {
       console.log(error);
     }
@@ -226,7 +226,7 @@ export default function Course() {
           </div>
           <div className="flex justify-center">
             <Pagination
-              count={allCourses.totalPages}
+              count={allCourses?.totalPages}
               page={pagination}
               onChange={handlePageChange}
               color="primary"
