@@ -71,11 +71,12 @@ export default function DetailCourse() {
     };
     if (infoLesson.type === "edit") {
       await editLesson(lesson);
+      setSelectedLesson(null);
       dispatch(getLessonsThunk());
       closeFormLesson();
     } else {
       await addNewLesson(lesson);
-      setSelectedLesson(null);
+
       dispatch(getLessonsThunk());
       closeFormLesson();
     }
@@ -175,7 +176,7 @@ export default function DetailCourse() {
                   allowFullScreen
                 ></iframe>
               </div>
-              <p>{selectedLesson.description}</p>
+              {/* <p>{selectedLesson.description}</p> */}
             </div>
           )}
         </div>

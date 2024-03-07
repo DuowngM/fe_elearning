@@ -33,8 +33,10 @@ export const addNewCourse = async (newCourse) => {
 };
 export const editCourse = async (course) => {
   let formData = new FormData();
+  if (course.imageFile) {
+    formData.append("imageFile", course.imageFile);
+  }
   formData.append("title", course.title);
-  formData.append("imageFile", course.imageFile);
   formData.append("description", course.description);
   formData.append("subDescription", course.subDescription);
   try {
