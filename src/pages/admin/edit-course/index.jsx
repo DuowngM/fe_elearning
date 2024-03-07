@@ -7,20 +7,22 @@ import { addNewChapter } from "../../../api/chapterAPIs";
 import { useDispatch, useSelector } from "react-redux";
 import { getChaptersThunk } from "../../../redux/reducer/chapterSlice";
 import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { addNewLesson, editLesson } from "../../../api/lessonAPIs";
+import { useParams } from "react-router-dom";
 
 export default function DetailCourse() {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
-  console.log(chapters);
-  console.log(lesson);
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [showFormAddChapter, setShowFormAddChapter] = useState(false);
   const [showFormAddLesson, setShowFormAddLesson] = useState(false);
-
+  const [idChapter, setIdChapter] = useState(null);
+  const { id } = useParams();
   // Lấy dữ liệu chapter
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getChaptersThunk());
+    dispatch(getChaptersThunk(id));
     dispatch(getLessonsThunk());
   }, []);
   //Hàm hiển thị form thêm mới khóa học
@@ -38,6 +40,7 @@ export default function DetailCourse() {
   };
   const closeFormLesson = () => {
     setShowFormAddLesson(false);
+    setSelectedLesson(null);
   };
 
   const groupedContentItems = chapters.map((chapter) => {
@@ -49,17 +52,49 @@ export default function DetailCourse() {
   const handleLessonClick = (lesson) => {
     setSelectedLesson(lesson);
   };
-  const handleOpenFormLesson = () => {
+  const handleOpenFormLesson = (id) => {
     openForm("lesson");
+    setIdChapter(id);
   };
   const handleOpenFormChapter = () => {
     openForm("chapter");
   };
   const handleAddChapter = async (newChapter) => {
     await addNewChapter(newChapter);
+    dispatch(getChaptersThunk(id));
+    closeFormChapter();
   };
-  const handleAddLesson = () => {
-    console.log("Thêm bài học");
+  const handleSave = async (infoLesson) => {
+    const lesson = {
+      ...infoLesson,
+      chapterId: idChapter,
+    };
+    if (infoLesson.type === "edit") {
+      await editLesson(lesson);
+      dispatch(getLessonsThunk());
+      closeFormLesson();
+    } else {
+      await addNewLesson(lesson);
+      setSelectedLesson(null);
+      dispatch(getLessonsThunk());
+      closeFormLesson();
+    }
+  };
+  // Sửa bài học
+  const handleEditLesson = (lesson) => {
+    // Cập nhật trạng thái và mở form sửa với thông tin của bài học
+    setSelectedLesson(lesson);
+    setShowFormAddLesson(true);
+    setIdChapter(lesson.chapterId);
+  };
+  // Xóa bài học
+  const handleDeleteLesson = async (lessonId) => {
+    try {
+      // await callDeleteLessonAPI(lessonId);
+      dispatch(getLessonsThunk());
+    } catch (error) {
+      console.error("Lỗi khi xóa bài học: ", error);
+    }
   };
   return (
     <>
@@ -70,7 +105,11 @@ export default function DetailCourse() {
         />
       )}
       {showFormAddLesson && (
-        <FormAddLesson closeForm={closeFormLesson} handleOk={handleAddLesson} />
+        <FormAddLesson
+          closeForm={closeFormLesson}
+          handleOk={handleSave}
+          editLesson={selectedLesson}
+        />
       )}
       <div className="w-full flex justify-around">
         <div className="w-[50%]">
@@ -86,13 +125,23 @@ export default function DetailCourse() {
                     <li
                       key={item.id}
                       onClick={() => handleLessonClick(item)}
-                      className="cursor-pointer font-bold hover:text-blue-500"
+                      className="flex justify-between items-center cursor-pointer font-bold hover:text-blue-500"
                     >
-                      {item.title}
+                      <p>{item.title}</p>
+                      <div>
+                        <EditOutlined
+                          onClick={() => handleEditLesson(item)}
+                          style={{ color: "blue", marginRight: 10 }}
+                        />
+                        <DeleteOutlined
+                          onClick={() => handleDeleteLesson(item.id)}
+                          style={{ color: "red" }}
+                        />
+                      </div>
                     </li>
                   ))}
                   <li
-                    onClick={handleOpenFormLesson}
+                    onClick={() => handleOpenFormLesson(chapter.id)}
                     className="cursor-pointer font-bold text-blue-500"
                   >
                     <AddCircleIcon /> Thêm bài học...

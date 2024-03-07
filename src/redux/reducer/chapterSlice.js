@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getAllChapters } from "../../api/chapterAPIs";
 
-export const getChaptersThunk = createAsyncThunk("getChapters", async () => {
-  const data = await getAllChapters();
+export const getChaptersThunk = createAsyncThunk("getChapters", async (id) => {
+  const data = await getAllChapters(id);
   return data;
 });
 
