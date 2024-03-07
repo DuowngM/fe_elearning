@@ -52,7 +52,12 @@ export default function RegisterForm({ closeForm, handleRegister }) {
       }
     }
   };
-
+  // Gọi hàm đăng ký
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      verifyOTP();
+    }
+  };
   return (
     <>
       <div className="overlay" onClick={handleClickOutside}>
@@ -132,6 +137,7 @@ export default function RegisterForm({ closeForm, handleRegister }) {
                   className="w-3/5 h-[50px] mt-2 focus:!border-[##f60d37]"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
+                  onKeyDown={handleKeyPress}
                 />
 
                 <Button

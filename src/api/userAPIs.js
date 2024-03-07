@@ -39,3 +39,6 @@ export const login = async (user) => {
     notify("error", "Sai tài khoản hoặc mật khẩu");
   }
 };
+export const getUserById = async (id) => {
+  
+}

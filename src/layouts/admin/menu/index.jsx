@@ -16,12 +16,12 @@ export default function Menu() {
           </NavLink>
           <NavLink to="course">
             <ManageAccountsIcon />
-            <span className="menu-text">Khóa học</span>
+            <span className="menu-text">Quản lý</span>
           </NavLink>
-          <NavLink to="contact">
+          {/* <NavLink to="contact">
             <ConnectWithoutContactIcon />
             <span className="menu-text">Quản lý người dùng</span>
-          </NavLink>
+          </NavLink> */}
           {/* <NavLink to="bai-viet">
             <LocalPostOfficeIcon />
             <span className="menu-text">Bài viết</span>

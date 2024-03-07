@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import "./index.css";
 import Course from "../course";
-import Session from "../session";
-import Content from "../content";
 import { Divider } from "antd";
-
+import UserMangagement from "../user_management";
 
 export default function CourseIndex() {
   const [tabIndex, setTabIndex] = useState(1);
@@ -21,13 +19,8 @@ export default function CourseIndex() {
     },
     {
       id: 2,
-      label: "Quản lý bài học",
-      children: <Session />,
-    },
-    {
-      id: 3,
-      label: "Quản lý nội dung",
-      children: <Content />,
+      label: "Quản lý người dùng",
+      children: <UserMangagement />,
     },
   ];
   return (
@@ -53,7 +46,7 @@ export default function CourseIndex() {
           {tabIndex === 1 ? (
             <Course />
           ) : tabIndex === 2 ? (
-            <Session />
+            <UserMangagement />
           ) : (
             <Content />
           )}

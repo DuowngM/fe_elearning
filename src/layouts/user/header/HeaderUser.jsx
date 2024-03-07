@@ -43,12 +43,10 @@ function HeaderUser() {
   const handleLogin = async (infoUser) => {
     try {
       const response = await login(infoUser);
-      const { accessToken, expired, roles, username, fullName } = response.data;
-
+      const { accessToken, expired, roles, fullName } = response.data;
       setUser(fullName);
-
       localStorage.setItem("user", JSON.stringify(fullName));
-
+      localStorage.setItem("roles", JSON.stringify(roles[0]));
       // Lưu accessToken vào cookies
       Cookies.set("accessToken", accessToken, {
         expires: expired / (24 * 60 * 60 * 1000),
@@ -59,10 +57,8 @@ function HeaderUser() {
       closeFormLogin();
 
       // Xử lý chuyển hướng nếu cần
-      if (roles[0] === "ROLE_ADMIN") {
-        setTimeout(() => {
-          window.location.href = "/admin";
-        }, 2000);
+      if (roles[0] === import.meta.env.VITE_ADMIN_ROLE) {
+        window.location.href = "/admin";
       }
     } catch (error) {
       console.log(error);
@@ -79,7 +75,7 @@ function HeaderUser() {
   };
   // Hàm xử lý đăng xuất
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.clear();
     Cookies.remove("accessToken");
     setUser(null);
   };

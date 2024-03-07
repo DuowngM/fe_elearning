@@ -10,7 +10,7 @@ function IndexHome() {
   const dispatch = useDispatch();
   //#endregion
   useEffect(() => {
-    dispatch(getAllCoursesAPI({ page: 0, home: true }));
+    dispatch(getAllCoursesAPI({ page: 0, size: 6 }));
   }, []);
   return (
     <div className="max-w-[1500px] h-[5000px] mx-[90px]">

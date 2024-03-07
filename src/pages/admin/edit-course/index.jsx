@@ -1,16 +1,30 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { Collapse } from "antd";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import FormAddChapter from "../../../components/form/FormAddChapter";
 import FormAddLesson from "../../../components/form/FormAddLesson";
 import { addNewChapter } from "../../../api/chapterAPIs";
+import { useDispatch, useSelector } from "react-redux";
+import { getChaptersThunk } from "../../../redux/reducer/chapterSlice";
+import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { addNewLesson, editLesson } from "../../../api/lessonAPIs";
+import { useParams } from "react-router-dom";
 
 export default function DetailCourse() {
+  const chapters = useSelector((state) => state.chapterSlice.chapters);
+  const lesson = useSelector((state) => state.lessonSlice.lesson);
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [showFormAddChapter, setShowFormAddChapter] = useState(false);
   const [showFormAddLesson, setShowFormAddLesson] = useState(false);
-
+  const [idChapter, setIdChapter] = useState(null);
+  const { id } = useParams();
+  // Lấy dữ liệu chapter
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getChaptersThunk(id));
+    dispatch(getLessonsThunk());
+  }, []);
   //Hàm hiển thị form thêm mới khóa học
   const openForm = (type) => {
     if (type === "chapter") {
@@ -26,89 +40,61 @@ export default function DetailCourse() {
   };
   const closeFormLesson = () => {
     setShowFormAddLesson(false);
+    setSelectedLesson(null);
   };
-  const { id } = useParams();
-
-  const contentItems = [
-    {
-      id: 1,
-      name: "Bài 1: .................",
-      idChapter: 1,
-      description: "Mô tả 1",
-      linkVideo: "https://www.youtube.com/embed/OZoVp0cvGBQ",
-    },
-    {
-      id: 2,
-      name: "Bài 2: ...................",
-      idChapter: 1,
-      description: "Mô tả 2",
-      linkVideo: "https://www.youtube.com/watch?v=JGw....",
-    },
-    {
-      id: 3,
-      name: "Bài 1:......................",
-      idChapter: 2,
-      description: "Mô tả 3",
-      linkVideo: "https://www.youtube.com/watch?v=JGw....",
-    },
-    {
-      id: 4,
-      name: "Bài 2:......................",
-      idChapter: 2,
-      description: "Mô tả 4",
-      linkVideo: "https://www.youtube.com/watch?v=JGw....",
-    },
-    {
-      id: 5,
-      name: "Bài 1:......................",
-      idChapter: 3,
-      description: "Mô tả 21",
-      linkVideo: "https://www.youtube.com/watch?v=JGw....",
-    },
-    {
-      id: 6,
-      name: "Bài 2:......................",
-      idChapter: 3,
-      description: "Mô tả 22",
-      linkVideo: "https://www.youtube.com/watch?v=JGw....",
-    },
-  ];
-  const chapters = [
-    {
-      id: 1,
-      label: "Chương 1",
-    },
-    {
-      id: 2,
-      label: "Chương 2",
-    },
-    {
-      id: 3,
-      label: "Chương 3",
-    },
-  ];
 
   const groupedContentItems = chapters.map((chapter) => {
     return {
       ...chapter,
-      content: contentItems.filter((item) => item.idChapter === chapter.id),
+      lessons: lesson.filter((item) => item.chapterId === chapter.id),
     };
   });
-
   const handleLessonClick = (lesson) => {
     setSelectedLesson(lesson);
   };
-  const handleOpenFormLesson = () => {
+  const handleOpenFormLesson = (id) => {
     openForm("lesson");
+    setIdChapter(id);
   };
   const handleOpenFormChapter = () => {
     openForm("chapter");
   };
   const handleAddChapter = async (newChapter) => {
     await addNewChapter(newChapter);
+    dispatch(getChaptersThunk(id));
+    closeFormChapter();
   };
-  const handleAddLesson = () => {
-    console.log("Thêm bài học");
+  const handleSave = async (infoLesson) => {
+    const lesson = {
+      ...infoLesson,
+      chapterId: idChapter,
+    };
+    if (infoLesson.type === "edit") {
+      await editLesson(lesson);
+      dispatch(getLessonsThunk());
+      closeFormLesson();
+    } else {
+      await addNewLesson(lesson);
+      setSelectedLesson(null);
+      dispatch(getLessonsThunk());
+      closeFormLesson();
+    }
+  };
+  // Sửa bài học
+  const handleEditLesson = (lesson) => {
+    // Cập nhật trạng thái và mở form sửa với thông tin của bài học
+    setSelectedLesson(lesson);
+    setShowFormAddLesson(true);
+    setIdChapter(lesson.chapterId);
+  };
+  // Xóa bài học
+  const handleDeleteLesson = async (lessonId) => {
+    try {
+      // await callDeleteLessonAPI(lessonId);
+      dispatch(getLessonsThunk());
+    } catch (error) {
+      console.error("Lỗi khi xóa bài học: ", error);
+    }
   };
   return (
     <>
@@ -119,29 +105,43 @@ export default function DetailCourse() {
         />
       )}
       {showFormAddLesson && (
-        <FormAddLesson closeForm={closeFormLesson} handleOk={handleAddLesson} />
+        <FormAddLesson
+          closeForm={closeFormLesson}
+          handleOk={handleSave}
+          editLesson={selectedLesson}
+        />
       )}
       <div className="w-full flex justify-around">
         <div className="w-[50%]">
           {/* Danh sách các chương và bài học */}
-          {groupedContentItems.map((chapter) => (
+          {groupedContentItems?.map((chapter) => (
             <Collapse key={chapter.id} accordion size="large">
               <Collapse.Panel
-                header={<span className="font-bold">{chapter.label}</span>}
+                header={<span className="font-bold">{chapter.title}</span>}
                 key={chapter.id}
               >
                 <ul>
-                  {chapter.content.map((item) => (
+                  {chapter?.lessons?.map((item) => (
                     <li
                       key={item.id}
                       onClick={() => handleLessonClick(item)}
-                      className="cursor-pointer font-bold hover:text-blue-500"
+                      className="flex justify-between items-center cursor-pointer font-bold hover:text-blue-500"
                     >
-                      {item.name}
+                      <p>{item.title}</p>
+                      <div>
+                        <EditOutlined
+                          onClick={() => handleEditLesson(item)}
+                          style={{ color: "blue", marginRight: 10 }}
+                        />
+                        <DeleteOutlined
+                          onClick={() => handleDeleteLesson(item.id)}
+                          style={{ color: "red" }}
+                        />
+                      </div>
                     </li>
                   ))}
                   <li
-                    onClick={handleOpenFormLesson}
+                    onClick={() => handleOpenFormLesson(chapter.id)}
                     className="cursor-pointer font-bold text-blue-500"
                   >
                     <AddCircleIcon /> Thêm bài học...
@@ -162,13 +162,13 @@ export default function DetailCourse() {
           {selectedLesson && (
             <div>
               <h2 className="text-3xl font-semibold mb-4">
-                {selectedLesson.name}
+                {selectedLesson.title}
               </h2>
               <div className="aspect-w-16 aspect-h-9 mb-4">
                 <iframe
                   width="100%"
                   height="500px"
-                  src={selectedLesson.linkVideo}
+                  src={selectedLesson.video}
                   title="Video"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
