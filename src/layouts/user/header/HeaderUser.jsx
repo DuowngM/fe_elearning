@@ -10,13 +10,13 @@ function HeaderUser() {
   const [showFormLogin, setShowFormLogin] = useState(false);
   const [showFormRegister, setShowFormRegister] = useState(false);
   const [user, setUser] = useState(() => {
-    const savedUser = JSON.parse(localStorage.getItem("user"));
+    const savedUser = localStorage.getItem("user");
     return savedUser || null;
   });
   const navigate = useNavigate();
   useEffect(() => {
     // Check xem đã có đăng nhập hay chưa
-    const userInfo = JSON.parse(localStorage.getItem("user"));
+    const userInfo = localStorage.getItem("user");
     if (userInfo) {
       setUser(userInfo);
     }
@@ -45,7 +45,7 @@ function HeaderUser() {
       const response = await login(infoUser);
       const { accessToken, expired, roles, fullName } = response.data;
       setUser(fullName);
-      localStorage.setItem("user", JSON.stringify(fullName));
+      localStorage.setItem("user", fullName);
       localStorage.setItem("roles", JSON.stringify(roles[0]));
       // Lưu accessToken vào cookies
       Cookies.set("accessToken", accessToken, {

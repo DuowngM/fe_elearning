@@ -12,7 +12,7 @@ export default function CardCourse({ item }) {
   const getUserInfoFromLocalStorage = () => {
     const userInfoString = localStorage.getItem("user");
     if (userInfoString) {
-      return JSON.parse(userInfoString);
+      return userInfoString;
     }
     return null;
   };
