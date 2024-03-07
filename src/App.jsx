@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useLocation, Routes, Route } from "react-router-dom";
 import BackTop from "./components/backtop";
 import routesConfig from "./routes/routes.config";
-import CourseDetailMain from "./pages/user/detailCourse/CourseDetailMain";
 
 function App() {
   const location = useLocation();
