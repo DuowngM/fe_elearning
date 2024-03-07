@@ -11,6 +11,7 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState();
+  const [subDescription, setSubDescription] = useState("");
 
   // Gán giá trị cho các state từ props courseInfo khi component được render
   useEffect(() => {
@@ -18,6 +19,7 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
       setTitle(courseInfo.title);
       setDescription(courseInfo.description);
       setImageUrl("http://10.101.44.218:8080/img/" + courseInfo.image);
+      setSubDescription(courseInfo.subDescription);
     }
   }, [courseInfo]);
 
@@ -39,9 +41,10 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
       id: courseInfo.id,
       title,
       description,
-      imageFile: imageFile ? imageFile : courseInfo.image,
+      imageFile: imageFile ? imageFile : null,
+      subDescription,
     });
-    //     resetField();
+    resetField();
   };
 
   const resetField = () => {
@@ -70,6 +73,15 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
+            <div>
+              <label htmlFor="">Mô tả tổng quát:</label>
+              <Input
+                className="mt-2"
+                value={subDescription}
+                onChange={(e) => setSubDescription(e.target.value)}
+              />
+            </div>
+
             <div>
               <label htmlFor="courseImage">
                 Chọn ảnh: <UploadFileIcon />

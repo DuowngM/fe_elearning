@@ -1,8 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const baseURL = "http://10.101.44.218:8080";
-
+const baseURL = import.meta.env.VITE_API_URL;
 // Tạo một instance cho việc gửi dữ liệu dạng form
 export const formDataAxios = axios.create({
   baseURL,

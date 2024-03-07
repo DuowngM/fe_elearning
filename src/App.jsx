@@ -25,7 +25,6 @@ function App() {
   return (
     <>
       <Routes>{renderRoutes(routesConfig)}</Routes>
-      <CourseDetailMain />
       <BackTop />
     </>
   );

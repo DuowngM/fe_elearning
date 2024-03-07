@@ -6,7 +6,11 @@ import { Select } from "antd";
 import { Table } from "antd";
 import FormAddCourse from "../../../components/form/FormAddCourse";
 import { useNavigate } from "react-router-dom";
-import { addNewCourse, deleteCourse } from "../../../api/courseAPIs";
+import {
+  addNewCourse,
+  deleteCourse,
+  editCourse,
+} from "../../../api/courseAPIs";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import MyModal from "../../../components/modal/Modal";
@@ -30,14 +34,14 @@ export default function Course() {
   //#endregion
 
   useEffect(() => {
-    dispatch(getAllCoursesAPI({ page: 0 }));
+    dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
   }, [flag]);
 
   // Hàm tính toán số thứ tự cho mỗi dòng dữ l  iệu
   const calculateIndex = (index) => index + 1;
   // Click chuyển trang
   const handlePageChange = (page, value) => {
-    dispatch(getAllCoursesAPI({ page: value - 1 }));
+    dispatch(getAllCoursesAPI({ page: value - 1, size: 4 }));
     setPagination(value);
   };
 
@@ -145,7 +149,7 @@ export default function Course() {
 
   // Tìm kiếm khóa học
   const handleSearch = (searchValue) => {
-    dispatch(getAllCoursesAPI({ page: 0, searchValue }));
+    dispatch(getAllCoursesAPI({ page: 0, searchValue, size: 4 }));
   };
   // Hàm chỉnh sửa thông tin khóa học
   const handleEditCourse = (courseItem) => {
@@ -153,8 +157,14 @@ export default function Course() {
     openFormEdit();
   };
   // Hàm lưu thông tin khi sửa khóa học
-  const handleSave = (courseEdit) => {
-    console.log("======>", courseEdit);
+  const handleSave = async (courseEdit) => {
+    try {
+      await editCourse(courseEdit);
+      setFlag(!flag);
+      closeForm();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>

@@ -15,10 +15,16 @@ export default function LoginForm({ closeForm, handleLogin }) {
       closeForm(); // Đóng form nếu click bên ngoài form
     }
   };
+  // Hàm đăng nhập
   const login = () => {
     handleLogin({ phone, password });
   };
-
+  // Gọi hàm đăng nhập khi nhấn phím Enter
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      login();
+    }
+  };
   return (
     <>
       <div className="overlay" onClick={handleClickOutside}>
@@ -71,6 +77,7 @@ export default function LoginForm({ closeForm, handleLogin }) {
                   className="w-[310px] h-[50px] mt-2 focus:!border-[##f60d37] pl-[40px]"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={handleKeyPress}
                 />
               </div>
 

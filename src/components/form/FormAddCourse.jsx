@@ -11,6 +11,7 @@ export default function FormAddCourse({ closeForm, handleOk }) {
   const [title, setTitle] = useState("");
   const [description, setDiscription] = useState("");
   const [imageFile, setImageFile] = useState();
+  const [subDescription, setSubDescription] = useState("");
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -23,7 +24,7 @@ export default function FormAddCourse({ closeForm, handleOk }) {
     }
   };
   const handleAdd = () => {
-    handleOk({ title, description, imageFile });
+    handleOk({ title, description, imageFile, subDescription });
     resetField();
   };
   const resetField = () => {
@@ -50,6 +51,14 @@ export default function FormAddCourse({ closeForm, handleOk }) {
                 className="mt-2"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="">Mô tả tổng quát:</label>
+              <Input
+                className="mt-2"
+                value={subDescription}
+                onChange={(e) => setSubDescription(e.target.value)}
               />
             </div>
 
