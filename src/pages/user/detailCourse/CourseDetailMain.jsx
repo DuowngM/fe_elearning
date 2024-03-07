@@ -1,14 +1,24 @@
-import imgPlus from "../../../../public/images/plusImg.jpg";
-import imgMinus from "../../../../public/images/Vector_minus.jpg";
 import playBtn from "../../../../public/images/btnPlay.svg";
 import teacherImage from "../../../../public/images/teacherImage.jpg";
 import StartVector from "../../../../public/images/StartVector.svg";
 import playBorder from "../../../../public/images/playBorder.svg";
+import AddIcon from "@mui/icons-material/Add";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+
+import RemoveIcon from "@mui/icons-material/Remove";
+import Divider from "@mui/material/Divider";
+import { useState } from "react";
 
 const CourseDetailMain = () => {
+  const [expanded, setExpanded] = useState("panel2");
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
   return (
     <div className="w-full">
-      <div className="bg-[#EFEBF5] shadow-lg py-36 overflow-hidden rounded-3xl">
+      <div className="bg-[#f8f8f8] shadow-lg py-36 overflow-hidden rounded-3xl">
         <div className="my-0 mx-auto max-w-[1500px]  ">
           <div className="flex flex-wrap justify-between ">
             <div className="rounded-2xl overflow-hidden max-w-[850px] w-full relative">
@@ -21,56 +31,146 @@ const CourseDetailMain = () => {
                 <img src={playBtn} alt="" width={17} height={17} />
               </div>
             </div>
-            <div className="  max-w-[600px] w-full flex flex-col justify-between">
-              <div className="w-full h-24 bg-white rounded-lg flex items-center justify-center ">
-                <div className="flex items-center justify-between w-[90%] h-full ">
-                  <h1 className="text-2xl font-medium text-red-500">
-                    How to launch a Webflow website?
-                  </h1>
-                  <img src={imgPlus} alt="" width={20} height={20} />
-                </div>
-              </div>
-
-              <div className="w-full  bg-white rounded-lg flex items-center justify-center flex-col h-2/3">
-                <div className=" w-[90%] h-[90%] flex items-center justify-center">
-                  <div className=" flex items-center justify-between w-full">
-                    <h1 className="text-2xl font-medium text-[#170F49] w-2/3 ">
-                      What is Webflow and why is it the best website builder?
-                    </h1>
-                    <img src={imgMinus} alt="" width={20} height={20} />
-                  </div>
-                </div>
-                <div className=" w-[90%]  border border-solid border-[#D9DBE9]"></div>
-
-                <div className=" w-[90%] h-[90%] flex items-center justify-center">
-                  <div className=" flex items-center justify-between w-full">
-                    <h1 className="text-2xl font-medium text-[#170F49]">
+            <div className=" max-w-[600px] w-full flex flex-col justify-between ">
+              <Accordion
+                sx={{ maxHeight: "75%" }}
+                className=" text-xl font-medium text-[#170F49] "
+                expanded={expanded === "panel1"}
+                onChange={handleChange("panel1")}
+              >
+                <AccordionSummary
+                  expandIcon={
+                    expanded === "panel1" ? (
+                      <RemoveIcon fontSize="large" sx={{ color: "#BC2228" }} />
+                    ) : (
+                      <AddIcon fontSize="large" sx={{ color: "#BC2228" }} />
+                    )
+                  }
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                  sx={{ minHeight: "6rem", color: "#BC2228" }}
+                >
+                  How to launch a Webflow website?
+                </AccordionSummary>
+                <div className="overflow-auto max-h-64 bg-white rounded-[20px] pb-3">
+                  <Divider />
+                  <AccordionDetails
+                    sx={{
+                      padding: "12px 16px 0 24px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p className=" max-w-[80%] ">
                       What is your favorite template from BRIX Templates?
-                    </h1>
-                    <img
-                      src={imgPlus}
-                      alt=""
-                      width={20}
-                      height={20}
-                      className="ml-3"
+                    </p>
+                    <AddIcon
+                      fontSize="large"
+                      sx={{ color: "#BC2228", maxWidth: "15%" }}
                     />
-                  </div>
-                </div>
-                <div className=" w-[90%] h-[90%] flex items-center justify-center">
-                  <div className=" flex items-center justify-between w-full">
-                    <h1 className="text-2xl font-medium text-[#170F49]">
+                  </AccordionDetails>
+                  <AccordionDetails
+                    sx={{
+                      padding: "12px 16px 0 24px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p className=" max-w-[80%] ">
                       What is your favorite template from BRIX Templates?
-                    </h1>
-                    <img
-                      src={imgPlus}
-                      alt=""
-                      width={20}
-                      height={20}
-                      className="ml-3"
+                    </p>
+                    <AddIcon
+                      fontSize="large"
+                      sx={{ color: "#BC2228", maxWidth: "15%" }}
                     />
-                  </div>
+                  </AccordionDetails>
                 </div>
-              </div>
+              </Accordion>
+
+              <Accordion
+                sx={{ maxHeight: "75%" }}
+                className=" text-xl font-medium text-[#170F49] "
+                expanded={expanded === "panel2"}
+                onChange={handleChange("panel2")}
+              >
+                <AccordionSummary
+                  expandIcon={
+                    expanded === "panel2" ? (
+                      <RemoveIcon fontSize="large" sx={{ color: "#BC2228" }} />
+                    ) : (
+                      <AddIcon fontSize="large" sx={{ color: "#BC2228" }} />
+                    )
+                  }
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                  sx={{ minHeight: "6rem", color: "#BC2228" }}
+                >
+                  What is Webflow and why is it the best website builder?
+                </AccordionSummary>
+                <div className="overflow-auto max-h-64 bg-white rounded-[20px] pb-3">
+                  <Divider />
+                  <AccordionDetails
+                    sx={{
+                      padding: "12px 16px 0 24px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p className=" max-w-[80%] ">
+                      What is your favorite template from BRIX Templates?
+                    </p>
+                    <AddIcon
+                      fontSize="large"
+                      sx={{ color: "#BC2228", maxWidth: "15%" }}
+                    />
+                  </AccordionDetails>
+                  <AccordionDetails
+                    sx={{
+                      padding: "12px 16px 0 24px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p className=" max-w-[80%] ">
+                      What is your favorite template from BRIX Templates?
+                    </p>
+                    <AddIcon
+                      fontSize="large"
+                      sx={{ color: "#BC2228", maxWidth: "15%" }}
+                    />
+                  </AccordionDetails>
+                  <AccordionDetails
+                    sx={{
+                      padding: "12px 16px 0 24px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p className=" max-w-[80%] ">
+                      What is your favorite template from BRIX Templates?
+                    </p>
+                    <AddIcon
+                      fontSize="large"
+                      sx={{ color: "#BC2228", maxWidth: "15%" }}
+                    />
+                  </AccordionDetails>
+                  <AccordionDetails
+                    sx={{
+                      padding: "12px 16px 0 24px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p className=" max-w-[80%] ">
+                      What is your favorite template from BRIX Templates?
+                    </p>
+                    <AddIcon
+                      fontSize="large"
+                      sx={{ color: "#BC2228", maxWidth: "15%" }}
+                    />
+                  </AccordionDetails>
+                </div>
+              </Accordion>
             </div>
           </div>
         </div>
@@ -169,7 +269,7 @@ const CourseDetailMain = () => {
           </div>
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full mb-60">
         <div className="max-w-[1500px] mx-auto my-0">
           <h1 className="text-3xl mb-5 font-semibold ">Similar Courses</h1>
           <div className="flex flex-wrap w-full gap-10">
