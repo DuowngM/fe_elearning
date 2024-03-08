@@ -30,72 +30,79 @@ export default function LoginForm({ closeForm, handleLogin }) {
       <div className="overlay" onClick={handleClickOutside}>
         <form
           ref={formRef}
-          className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded pb-[100px]"
+          className="fade-down bg-white w-full sm:w-3/4 md:w-2/3 lg:w-1/2 px-6 py-5 rounded lg:pb-20 mx-auto"
         >
           <div className="flex justify-between items-center">
             <img
-              className="w-[200px]"
+              className="w-36 md:w-48"
               src="../../../public/images/logo-rikkei2.png"
               alt=""
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-5 mt-[40px]">
-            <div className="border-r-2  ">
-              <h1 className="text-[#0A033C] font-bold text-[30px] w-full h-[105px]  leading-[35px] mb-[40px]">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="md:border-r-2">
+              <h1 className="text-[#0A033C] font-bold text-lg md:text-2xl lg:text-3xl leading-tight mb-10">
                 Welcome to <br />
                 RikkeiEdu Online Learning Platform
               </h1>
-
               <img src="../../../public/images/Login-side-icon.png" alt="" />
             </div>
             <div className="my-auto">
+              {/* Phone number input */}
               <div className="mb-5 relative">
                 <label htmlFor="" className="text-[#0A033C]">
                   Phone Number
                 </label>
-                <LocalPhoneOutlinedIcon
-                  sx={{ fontSize: "small" }}
-                  className="absolute z-[999] top-2/4 transform translate-y-2.5 -translate-x-24"
-                />
+                <div className="absolute h-full top-[20%]">
+                  <LocalPhoneOutlinedIcon
+                    sx={{ fontSize: "small" }}
+                    className="absolute top-1/2 transform -translate-y-1/2 left-3 z-10"
+                  />
+                </div>
                 <Input
                   type="number"
-                  className="w-[310px] h-[50px] mt-2 focus:!border-[##f60d37] pl-[40px]"
+                  className="w-full h-12 mt-2 focus:border-[#f60d37] pl-10"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
 
+              {/* Password input */}
               <div className="relative">
                 <label htmlFor="">Password</label>
-                <HttpsOutlinedIcon
-                  sx={{ fontSize: "small" }}
-                  className="absolute z-[999] top-2/4 transform translate-y-2.5 -translate-x-14"
-                />
+                <div className="absolute h-full top-[20%]">
+                  <HttpsOutlinedIcon
+                    sx={{ fontSize: "small" }}
+                    className="absolute top-1/2 transform -translate-y-1/2 left-3 z-10"
+                  />
+                </div>
                 <Input
                   type="password"
-                  className="w-[310px] h-[50px] mt-2 focus:!border-[##f60d37] pl-[40px]"
+                  className="w-full h-12 mt-2 focus:border-[#f60d37] pl-10"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={handleKeyPress}
                 />
               </div>
 
-              <div className="mt-[15px] p-auto">
+              {/* Sign In button */}
+              <div className="mt-6 p-auto">
                 <Button
                   type="primary"
-                  className="w-[310px] h-[50px] bg-[#BC2228] hover:!bg-[#dc1313] text-[16px]"
+                  className="w-full h-12 bg-[#BC2228] hover:bg-[#dc1313] text-base"
                   onClick={login}
                 >
                   Sign In
                 </Button>
               </div>
 
+              {/* Additional links */}
               <div className="mt-4">
-                <p className="text-center text-[#5D5A6F] text-[14px] mb-1">
+                <p className="text-center text-[#5D5A6F] mb-1">
                   Quên mật khẩu?
                 </p>
-                <p className="text-center text-[#5D5A6F] text-[14px]">
+                <p className="text-center text-[#5D5A6F]">
                   Bạn không có tài khoản?{" "}
                   <a className="text-[#BC2228] cursor-pointer">
                     Tạo một tài khoản
