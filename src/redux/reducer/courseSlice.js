@@ -21,9 +21,9 @@ const courseSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllCoursesAPI.fulfilled, (state, action) => {
-      state.courses = action.payload.content;
-      state.totalPages = action.payload.totalPages;
-      state.current = action.payload.number;
+      state.courses = action.payload?.content;
+      state.totalPages = action.payload?.totalPages;
+      state.current = action.payload?.number;
     });
   },
 });

@@ -96,7 +96,7 @@ function HeaderUser() {
         <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
           <p>Khóa học</p>
           <img
-            src="../../../../public/images/Arrow-down 1.png"
+            src="/public/images/Arrow-down 1.png"
             alt=""
             className="w-[14px] h-[9px] "
           />
@@ -104,7 +104,7 @@ function HeaderUser() {
         <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
           <p>Tài nguyên</p>
           <img
-            src="../../../../public/images/Arrow-down 1.png"
+            src="/public/images/Arrow-down 1.png"
             alt=""
             className="w-[14px] h-[9px] "
           />
@@ -112,7 +112,7 @@ function HeaderUser() {
         <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
           <p>Học liệu</p>
           <img
-            src="../../../../public/images/Arrow-down 1.png"
+            src="/public/images/Arrow-down 1.png"
             alt=""
             className="w-[14px] h-[9px] "
           />

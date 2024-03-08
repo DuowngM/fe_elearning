@@ -24,10 +24,7 @@ function IndexHome() {
             <div>
               <div className="align-middle">
                 <div className="inline-block mr-[10px]">
-                  <img
-                    src="../../../../public/images/icon-check 1.png"
-                    alt=""
-                  />
+                  <img src="/public/images/icon-check 1.png" alt="" />
                 </div>
                 <span className="text-[14px] text-[#000] leading-12 w-full">
                   Chắc nền tảng, giỏi thực hành – Có ít nhất 2 Project sau khóa
@@ -37,10 +34,7 @@ function IndexHome() {
 
               <div>
                 <div className="inline-block mr-[10px]">
-                  <img
-                    src="../../../../public/images/icon-check 1.png"
-                    alt=""
-                  />
+                  <img src="/public/images/icon-check 1.png" alt="" />
                 </div>
                 <span className="text-[14px] text-[#000] leading-12">
                   Tốt nghiệp chinh phục công việc LƯƠNG 8 CHỮ SỐ
@@ -49,10 +43,7 @@ function IndexHome() {
 
               <div>
                 <div className="inline-block mr-[10px]">
-                  <img
-                    src="../../../../public/images/icon-check 1.png"
-                    alt=""
-                  />
+                  <img src="/public/images/icon-check 1.png" alt="" />
                 </div>
                 <span className="text-[14px] text-[#000] leading-12">
                   Nắm chắc vị trí việc làm tại Rikkeisoft với chứng chỉ tiếng
@@ -79,7 +70,7 @@ function IndexHome() {
         </div>
 
         <div className="w-1/2 flex justify-center ">
-          <img src="../../../../public/images/header-right1.png" alt="" />
+          <img src="/public/images/header-right1.png" alt="" />
         </div>
       </div>
 
@@ -110,20 +101,20 @@ function IndexHome() {
           <div className="w-full p-[20px] ">
             <img
               className="m-auto rounded-md"
-              src="../../../../public/images/background-video-course.jpg"
+              src="/public/images/background-video-course.jpg"
               alt=""
             />
           </div>
           <img
             className="absolute z-[-100] bottom-2/3 -top-10 left-[70%] "
-            src="../../../../public/images/pattern.png"
+            src="/public/images/pattern.png"
             alt=""
           />
 
           <div className="flex w-full px-[250px] justify-around mt-[30px]">
             <div className="flex items-center">
               <img
-                src="../../../../public/images/icon-audio.png"
+                src="/public/images/icon-audio.png"
                 alt=""
                 className="mr-[20px]"
               />
@@ -133,7 +124,7 @@ function IndexHome() {
             </div>
             <div className="flex items-center">
               <img
-                src="../../../../public/images/icon-live.png"
+                src="/public/images/icon-live.png"
                 alt=""
                 className="mr-[20px]"
               />
@@ -143,7 +134,7 @@ function IndexHome() {
             </div>
             <div className="flex items-center">
               <img
-                src="../../../../public/images/icon-record.png"
+                src="/public/images/icon-record.png"
                 alt=""
                 className="mr-[20px]"
               />
@@ -222,13 +213,13 @@ function IndexHome() {
         </div>
 
         <div className="w-1/2 flex justify-center ">
-          <img src="../../../../public/images/left-info.jpg" alt="" />
+          <img src="/public/images/left-info.jpg" alt="" />
         </div>
       </div>
 
       <div className="w-full flex items-center mt-[220px]">
         <div className="w-1/2 flex justify-center ">
-          <img src="../../../../public/images/personal-left.jpg" alt="" />
+          <img src="/public/images/personal-left.jpg" alt="" />
         </div>
 
         <div className="w-1/2 ">
