@@ -83,7 +83,7 @@ export default function RegisterForm({ closeForm, handleRegister }) {
                 RikkeiEdu Online Learning Platform
               </h1>
               <img
-                src="../../../public/images/Login-side-icon.png"
+                src="/public/images/Login-side-icon.png"
                 alt=""
                 className="hidden sm:block"
               />
