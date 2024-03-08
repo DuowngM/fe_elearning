@@ -35,7 +35,7 @@ export default function LoginForm({ closeForm, handleLogin }) {
           <div className="flex justify-between items-center">
             <img
               className="w-36 md:w-48"
-              src="/public/images/logo-rikkei2.png"
+              src="/images/logo-rikkei2.png"
               alt=""
             />
           </div>
@@ -46,7 +46,7 @@ export default function LoginForm({ closeForm, handleLogin }) {
                 Welcome to <br />
                 RikkeiEdu Online Learning Platform
               </h1>
-              <img src="../../../public/images/Login-side-icon.png" alt="" />
+              <img src="/images/Login-side-icon.png" alt="" />
             </div>
             <div className="my-auto">
               {/* Phone number input */}

@@ -6,6 +6,7 @@ import { Button, Input } from "antd";
 import "../../index.css";
 import { auth } from "../../config/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { notify } from "../../utils/notification";
 
 export default function RegisterForm({ closeForm, handleRegister }) {
   const [phone, setPhone] = useState("");
@@ -48,7 +49,7 @@ export default function RegisterForm({ closeForm, handleRegister }) {
       }
     } catch (error) {
       if (error) {
-        alert("Dang nhap that bai");
+        notify("error", "Đăng ký thất bại");
       }
     }
   };
@@ -71,7 +72,7 @@ export default function RegisterForm({ closeForm, handleRegister }) {
           <div className="flex justify-items-start items-center mb-5">
             <img
               className="w-32 sm:w-36 md:w-40 lg:w-48"
-              src="../../../public/images/logo-rikkei2.png"
+              src="/images/logo-rikkei2.png"
               alt=""
             />
           </div>
@@ -83,7 +84,7 @@ export default function RegisterForm({ closeForm, handleRegister }) {
                 RikkeiEdu Online Learning Platform
               </h1>
               <img
-                src="/public/images/Login-side-icon.png"
+                src="/images/Login-side-icon.png"
                 alt=""
                 className="hidden sm:block"
               />

@@ -113,10 +113,7 @@ const CourseDetailMain = () => {
                               {item?.title}
                             </p>
                             <div>
-                              <img
-                                src="../../../../public/images/Playbtn.png"
-                                alt=""
-                              />
+                              <img src="/images/Playbtn.png" alt="" />
                             </div>
                           </AccordionDetails>
                         ))

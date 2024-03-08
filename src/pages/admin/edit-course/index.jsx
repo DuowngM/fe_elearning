@@ -1,30 +1,52 @@
-import React, { useEffect, useState } from "react";
-import { Collapse } from "antd";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import FormAddChapter from "../../../components/form/FormAddChapter";
 import FormAddLesson from "../../../components/form/FormAddLesson";
 import { addNewChapter } from "../../../api/chapterAPIs";
-import { useDispatch, useSelector } from "react-redux";
-import { getChaptersThunk } from "../../../redux/reducer/chapterSlice";
-import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { addNewLesson, editLesson } from "../../../api/lessonAPIs";
+import AddIcon from "@mui/icons-material/Add";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import RemoveIcon from "@mui/icons-material/Remove";
+import Divider from "@mui/material/Divider";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import { getChaptersThunk } from "../../../redux/reducer/chapterSlice";
+import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
+import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
+import { notify } from "../../../utils/notification";
 export default function DetailCourse() {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
+  const [expanded, setExpanded] = useState("panel2");
+  const [sourceVideo, setSourceVideo] = useState(
+    "https://www.youtube.com/embed/vdKE_Tz8cy0"
+  );
+  const [selectedLessonId, setSelectedLessonId] = useState(null);
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [showFormAddChapter, setShowFormAddChapter] = useState(false);
   const [showFormAddLesson, setShowFormAddLesson] = useState(false);
   const [idChapter, setIdChapter] = useState(null);
   const { id } = useParams();
-  // Lấy dữ liệu chapter
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getChaptersThunk(id));
     dispatch(getLessonsThunk());
-  }, []);
+    dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
+  }, [dispatch, id]);
+
+  // Nhóm dữ liệu lại
+  const groupedContentItems = chapters.map((chapter) => {
+    return {
+      ...chapter,
+      lessons: lesson.filter((item) => item.chapterId === chapter.id),
+    };
+  });
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
   //Hàm hiển thị form thêm mới khóa học
   const openForm = (type) => {
     if (type === "chapter") {
@@ -43,15 +65,6 @@ export default function DetailCourse() {
     setSelectedLesson(null);
   };
 
-  const groupedContentItems = chapters.map((chapter) => {
-    return {
-      ...chapter,
-      lessons: lesson.filter((item) => item.chapterId === chapter.id),
-    };
-  });
-  const handleLessonClick = (lesson) => {
-    setSelectedLesson(lesson);
-  };
   const handleOpenFormLesson = (id) => {
     openForm("lesson");
     setIdChapter(id);
@@ -60,25 +73,42 @@ export default function DetailCourse() {
     openForm("chapter");
   };
   const handleAddChapter = async (newChapter) => {
-    await addNewChapter(newChapter);
-    dispatch(getChaptersThunk(id));
-    closeFormChapter();
+    // Validate các trường bắt buộc của newChapter
+    if (!newChapter.name || !newChapter.description) {
+      notify("error", "Vui lòng điền đầy đủ thông tin chương học");
+      return;
+    }
+    try {
+      await addNewChapter(newChapter);
+      dispatch(getChaptersThunk(id));
+      closeFormChapter();
+    } catch (error) {
+      console.log(error);
+      notify("error", "Có lỗi xảy ra khi thêm chương học");
+    }
   };
+
   const handleSave = async (infoLesson) => {
+    // Basic validation
+    if (!infoLesson.title || !idChapter) {
+      notify("error", "Vui lòng điền đầy đủ thông tin bài học ");
+      return;
+    }
     const lesson = {
       ...infoLesson,
       chapterId: idChapter,
     };
-    if (infoLesson.type === "edit") {
-      await editLesson(lesson);
-      setSelectedLesson(null);
+    try {
+      if (infoLesson.type === "edit") {
+        await editLesson(lesson);
+      } else {
+        await addNewLesson(lesson);
+      }
       dispatch(getLessonsThunk());
       closeFormLesson();
-    } else {
-      await addNewLesson(lesson);
-
-      dispatch(getLessonsThunk());
-      closeFormLesson();
+    } catch (error) {
+      console.log(error);
+      notify("error", "Có lỗi xảy ra khi thêm bài học");
     }
   };
   // Sửa bài học
@@ -88,15 +118,7 @@ export default function DetailCourse() {
     setShowFormAddLesson(true);
     setIdChapter(lesson.chapterId);
   };
-  // Xóa bài học
-  const handleDeleteLesson = async (lessonId) => {
-    try {
-      // await callDeleteLessonAPI(lessonId);
-      dispatch(getLessonsThunk());
-    } catch (error) {
-      console.error("Lỗi khi xóa bài học: ", error);
-    }
-  };
+
   return (
     <>
       {showFormAddChapter && (
@@ -112,73 +134,113 @@ export default function DetailCourse() {
           editLesson={selectedLesson}
         />
       )}
-      <div className="w-full flex justify-around">
-        <div className="w-[50%]">
-          {/* Danh sách các chương và bài học */}
-          {groupedContentItems?.map((chapter) => (
-            <Collapse key={chapter.id} accordion size="large">
-              <Collapse.Panel
-                header={<span className="font-bold">{chapter.title}</span>}
-                key={chapter.id}
-              >
-                <ul>
-                  {chapter?.lessons?.map((item) => (
-                    <li
-                      key={item.id}
-                      onClick={() => handleLessonClick(item)}
-                      className="flex justify-between items-center cursor-pointer font-bold hover:text-blue-500"
-                    >
-                      <p>{item.title}</p>
-                      <div>
-                        <EditOutlined
-                          onClick={() => handleEditLesson(item)}
-                          style={{ color: "blue", marginRight: 10 }}
-                        />
-                        <DeleteOutlined
-                          onClick={() => handleDeleteLesson(item.id)}
-                          style={{ color: "red" }}
-                        />
-                      </div>
-                    </li>
-                  ))}
-                  <li
-                    onClick={() => handleOpenFormLesson(chapter.id)}
-                    className="cursor-pointer font-bold text-blue-500"
-                  >
-                    <AddCircleIcon /> Thêm bài học...
-                  </li>
-                </ul>
-              </Collapse.Panel>
-            </Collapse>
-          ))}
-          <div
-            onClick={handleOpenFormChapter}
-            className="ml-5 text-2xl cursor-pointer font-bold text-blue-500"
-          >
-            <AddCircleIcon /> Thêm chương ở đây
-          </div>
-        </div>
-        <div className="w-[50%] mr-8">
-          {/* Phần hiển thị video và mô tả của bài học được chọn */}
-          {selectedLesson && (
-            <div>
-              <h2 className="text-3xl font-semibold mb-4">
-                {selectedLesson.title}
-              </h2>
-              <div className="aspect-w-16 aspect-h-9 mb-4">
+      <div className="w-full">
+        <div className="bg-[#f8f8f8] shadow-lg py-20 overflow-hidden rounded-3xl">
+          <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg ml-16 mb-10">
+            <span className="text-rikkei">Khóa học: </span>
+            {chapters[0]?.courseName}
+          </h1>
+
+          <div className="my-0 mx-auto max-w-[1500px]">
+            <div className="flex flex-wrap justify-between">
+              <div className="rounded-2xl overflow-hidden max-w-[850px] w-full relative">
                 <iframe
                   width="100%"
                   height="500px"
-                  src={selectedLesson.video}
+                  src={sourceVideo}
                   title="Video"
-                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
               </div>
-              {/* <p>{selectedLesson.description}</p> */}
+              <div className="max-w-[600px] w-full flex flex-col">
+                {groupedContentItems?.map((chapter) => (
+                  <Accordion
+                    sx={{ maxHeight: "50%" }}
+                    className="text-xl font-medium text-[#170F49] "
+                    expanded={expanded === `panel${chapter.id}`}
+                    onChange={handleChange(`panel${chapter.id}`)}
+                    key={chapter.id}
+                  >
+                    <AccordionSummary
+                      expandIcon={
+                        expanded === `panel${chapter.id}` ? (
+                          <RemoveIcon
+                            fontSize="large"
+                            sx={{ color: "#BC2228" }}
+                          />
+                        ) : (
+                          <AddIcon fontSize="large" sx={{ color: "#BC2228" }} />
+                        )
+                      }
+                      aria-controls={`panel${chapter.id}-content`}
+                      id={`panel${chapter.id}-header`}
+                      sx={{ minHeight: "4rem", color: "#BC2228" }}
+                    >
+                      {chapter?.title}
+                    </AccordionSummary>
+                    <div
+                      onClick={() => handleOpenFormLesson(chapter.id)}
+                      className="cursor-pointer font-bold text-blue-500 hover:bg-blue-100 transition duration-300 ease-in-out transform hover:scale-105 p-2 rounded-lg ml-5"
+                    >
+                      <AddCircleIcon /> Thêm bài học...
+                    </div>
+                    <div className="overflow-auto max-h-64 bg-white rounded-[20px] pb-3">
+                      <Divider />
+                      {chapter?.lessons?.length > 0 ? (
+                        chapter.lessons.map((item) => (
+                          <AccordionDetails
+                            sx={{
+                              padding: "12px 16px 0 24px",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              cursor: "pointer",
+                            }}
+                            key={item.id}
+                            onClick={() => {
+                              setSourceVideo(item.video);
+                              setSelectedLessonId(item.id);
+                            }}
+                          >
+                            <p
+                              className={`max-w-[80%] ${
+                                selectedLessonId === item.id
+                                  ? "text-red-500"
+                                  : ""
+                              }`}
+                            >
+                              {item?.title}
+                            </p>
+
+                            <div>
+                              <EditOutlined
+                                onClick={() => handleEditLesson(item)}
+                                style={{ color: "blue", marginRight: 10 }}
+                              />
+                              <DeleteOutlined
+                                onClick={() => handleDeleteLesson(item.id)}
+                                style={{ color: "red" }}
+                              />
+                            </div>
+                          </AccordionDetails>
+                        ))
+                      ) : (
+                        <div style={{ padding: "12px 16px" }}>
+                          Coming soon...
+                        </div>
+                      )}
+                    </div>
+                  </Accordion>
+                ))}
+                <div
+                  onClick={handleOpenFormChapter}
+                  className="ml-5 text-2xl cursor-pointer font-bold text-blue-500 hover:bg-blue-100 transition duration-300 ease-in-out transform hover:scale-105 p-2 rounded-lg flex items-center justify-center"
+                >
+                  <AddCircleIcon /> Thêm chương học mới
+                </div>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </>

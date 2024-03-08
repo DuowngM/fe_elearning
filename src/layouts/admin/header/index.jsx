@@ -57,11 +57,7 @@ export default function Header() {
       <header className="h-14 sticky top-0 z-40 bg-white w-full px-6 flex items-center justify-between shadow-md">
         <div className="flex items-center gap-3">
           {/* <AppsIcon /> */}
-          <img
-            className="h-8"
-            src="../../../public/images/favicon.ico"
-            alt=""
-          />
+          <img className="h-8" src="/images/favicon.ico" alt="" />
           <span className="text-[20px] font-bold text-[#1F1F20]">
             Quản trị viên
           </span>

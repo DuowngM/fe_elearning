@@ -24,7 +24,7 @@ function IndexHome() {
             <div>
               <div className="align-middle">
                 <div className="inline-block mr-[10px]">
-                  <img src="/public/images/icon-check 1.png" alt="" />
+                  <img src="/images/icon-check 1.png" alt="" />
                 </div>
                 <span className="text-[14px] text-[#000] leading-12 w-full">
                   Chắc nền tảng, giỏi thực hành – Có ít nhất 2 Project sau khóa
@@ -34,7 +34,7 @@ function IndexHome() {
 
               <div>
                 <div className="inline-block mr-[10px]">
-                  <img src="/public/images/icon-check 1.png" alt="" />
+                  <img src="/images/icon-check 1.png" alt="" />
                 </div>
                 <span className="text-[14px] text-[#000] leading-12">
                   Tốt nghiệp chinh phục công việc LƯƠNG 8 CHỮ SỐ
@@ -43,7 +43,7 @@ function IndexHome() {
 
               <div>
                 <div className="inline-block mr-[10px]">
-                  <img src="/public/images/icon-check 1.png" alt="" />
+                  <img src="/images/icon-check 1.png" alt="" />
                 </div>
                 <span className="text-[14px] text-[#000] leading-12">
                   Nắm chắc vị trí việc làm tại Rikkeisoft với chứng chỉ tiếng
@@ -70,7 +70,7 @@ function IndexHome() {
         </div>
 
         <div className="w-1/2 flex justify-center ">
-          <img src="/public/images/header-right1.png" alt="" />
+          <img src="/images/header-right1.png" alt="" />
         </div>
       </div>
 
@@ -101,43 +101,31 @@ function IndexHome() {
           <div className="w-full p-[20px] ">
             <img
               className="m-auto rounded-md"
-              src="/public/images/background-video-course.jpg"
+              src="/images/background-video-course.jpg"
               alt=""
             />
           </div>
           <img
             className="absolute z-[-100] bottom-2/3 -top-10 left-[70%] "
-            src="/public/images/pattern.png"
+            src="/images/pattern.png"
             alt=""
           />
 
           <div className="flex w-full px-[250px] justify-around mt-[30px]">
             <div className="flex items-center">
-              <img
-                src="/public/images/icon-audio.png"
-                alt=""
-                className="mr-[20px]"
-              />
+              <img src="/images/icon-audio.png" alt="" className="mr-[20px]" />
               <span className="ml-[10px] text-[18px] whitespace-nowrap text-[#0A033C] font-bold">
                 Audio Classes
               </span>
             </div>
             <div className="flex items-center">
-              <img
-                src="/public/images/icon-live.png"
-                alt=""
-                className="mr-[20px]"
-              />
+              <img src="/images/icon-live.png" alt="" className="mr-[20px]" />
               <span className="whitespace-nowrap text-[18px] text-[#0A033C] font-bold">
                 High Quality Classes
               </span>
             </div>
             <div className="flex items-center">
-              <img
-                src="/public/images/icon-record.png"
-                alt=""
-                className="mr-[20px]"
-              />
+              <img src="/images/icon-record.png" alt="" className="mr-[20px]" />
               <span className="whitespace-nowrap text-[18px] text-[#0A033C] font-bold">
                 Record Classes
               </span>
@@ -213,13 +201,13 @@ function IndexHome() {
         </div>
 
         <div className="w-1/2 flex justify-center ">
-          <img src="/public/images/left-info.jpg" alt="" />
+          <img src="/images/left-info.jpg" alt="" />
         </div>
       </div>
 
       <div className="w-full flex items-center mt-[220px]">
         <div className="w-1/2 flex justify-center ">
-          <img src="/public/images/personal-left.jpg" alt="" />
+          <img src="/images/personal-left.jpg" alt="" />
         </div>
 
         <div className="w-1/2 ">

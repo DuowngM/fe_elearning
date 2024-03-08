@@ -28,13 +28,13 @@ export default function Course() {
   const [flag, setFlag] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [pagination, setPagination] = useState(allCourses.current);
+  const [pagination, setPagination] = useState(1);
   const [editCourseInfo, setEditCourseInfo] = useState(null);
   const [showFormEdit, setShowFormEdit] = useState(false);
   //#endregion
-
   useEffect(() => {
     dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
+    setPagination(1);
   }, [flag]);
 
   // Hàm tính toán số thứ tự cho mỗi dòng dữ l  iệu
@@ -144,6 +144,7 @@ export default function Course() {
   // Xóa khóa học
   const handleDeleteCourse = async (id) => {
     await deleteCourse(id);
+    setPagination(1);
     setFlag(!flag);
   };
 

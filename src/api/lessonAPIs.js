@@ -28,7 +28,6 @@ export const addNewLesson = async (infoLesson) => {
   }
 };
 export const editLesson = async (infoLesson) => {
-  console.log(infoLesson);
   let lesson = {
     title: infoLesson.title,
     description: infoLesson.description,

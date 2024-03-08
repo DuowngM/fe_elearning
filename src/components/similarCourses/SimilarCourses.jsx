@@ -1,6 +1,6 @@
 import React from "react";
-import StartVector from "../../../public/images/StartVector.svg";
-import playBorder from "../../../public/images/playBorder.svg";
+import StartVector from "/images/StartVector.svg";
+import playBorder from "/images/playBorder.svg";
 import { useNavigate } from "react-router-dom";
 export default function SimilarCourses({ item }) {
   const navigate = useNavigate();
