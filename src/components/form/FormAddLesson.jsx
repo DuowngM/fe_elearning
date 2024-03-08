@@ -5,7 +5,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./index.css";
 import { toolbarOptions, formats } from "../../utils/toolbarOptions";
-import { useParams } from "react-router-dom";
 export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
   const [title, setTitle] = useState(editLesson?.title || "");
   const [description, setDiscription] = useState(editLesson?.description || "");

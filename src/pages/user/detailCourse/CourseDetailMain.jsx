@@ -1,6 +1,3 @@
-import teacherImage from "../../../../public/images/teacherImage.jpg";
-import StartVector from "../../../../public/images/StartVector.svg";
-import playBorder from "../../../../public/images/playBorder.svg";
 import AddIcon from "@mui/icons-material/Add";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -17,24 +14,18 @@ const CourseDetailMain = () => {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
   const similarCourses = useSelector((state) => state.courseSlice.courses);
-  const [nameCourse, setNameCourse] = useState(null);
-
   const [expanded, setExpanded] = useState("panel2");
   const [sourceVideo, setSourceVideo] = useState(
     "https://www.youtube.com/embed/vdKE_Tz8cy0"
   );
   const [selectedLessonId, setSelectedLessonId] = useState(null);
-  const location = useLocation();
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getChaptersThunk(id));
     dispatch(getLessonsThunk());
     dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
-    const queryParams = new URLSearchParams(location.search);
-    const nameFromUrl = queryParams.get("name");
-    setNameCourse(nameFromUrl);
-  }, [dispatch, id, location.search]);
+  }, [dispatch, id]);
 
   // Nhóm dữ liệu lại
   const groupedContentItems = chapters.map((chapter) => {
@@ -53,7 +44,7 @@ const CourseDetailMain = () => {
         <div className="bg-[#f8f8f8] shadow-lg py-20 overflow-hidden rounded-3xl">
           <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg ml-16 mb-10">
             <span className="text-rikkei">Khóa học: </span>
-            {nameCourse}
+            {chapters[0]?.courseName}
           </h1>
 
           <div className="my-0 mx-auto max-w-[1500px]">
@@ -64,7 +55,7 @@ const CourseDetailMain = () => {
                   height="500px"
                   src={sourceVideo}
                   title="Video"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>

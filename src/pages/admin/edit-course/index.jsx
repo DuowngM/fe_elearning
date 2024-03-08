@@ -171,7 +171,7 @@ export default function DetailCourse() {
                   height="500px"
                   src={selectedLesson.video}
                   title="Video"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
