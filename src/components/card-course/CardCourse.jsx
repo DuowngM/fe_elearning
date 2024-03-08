@@ -23,7 +23,7 @@ export default function CardCourse({ item }) {
 
     if (!accessToken || !userInfo)
       return notify("error", "Đăng nhập để học khóa này");
-    navigate(`/detailCourse/${item.id}?name=${item.title}`);
+    navigate(`/detailCourse/${item.id}`);
   };
 
   return (

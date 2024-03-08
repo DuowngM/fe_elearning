@@ -60,111 +60,112 @@ export default function RegisterForm({ closeForm, handleRegister }) {
   };
   return (
     <>
-      <div className="overlay" onClick={handleClickOutside}>
+      <div
+        className="overlay fixed inset-0 flex items-center justify-center"
+        onClick={handleClickOutside}
+      >
         <form
           ref={formRef}
-          className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded pb-[90px]"
+          className="fade-down bg-white max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl px-4 py-5 rounded lg:pb-10 mx-2 my-4 overflow-auto"
         >
-          <div className="flex justify-between items-center">
+          <div className="flex justify-items-start items-center mb-5">
             <img
-              className="w-[200px]"
+              className="w-32 sm:w-36 md:w-40 lg:w-48"
               src="../../../public/images/logo-rikkei2.png"
               alt=""
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-5 mt-[40px]">
-            <div className="border-r-2  ">
-              <h1 className="text-[#0A033C] font-bold text-[30px] w-full h-[105px] leading-[35px] mb-[40px]">
+          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="md:border-r-2 pr-4">
+              <h1 className="text-[#0A033C] font-bold text-xl md:text-2xl lg:text-3xl mb-4">
                 Welcome to <br />
                 RikkeiEdu Online Learning Platform
               </h1>
-              <img src="../../../public/images/Login-side-icon.png" alt="" />
+              <img
+                src="../../../public/images/Login-side-icon.png"
+                alt=""
+                className="hidden sm:block"
+              />
             </div>
-            <div className="my-auto">
-              <div className="mb-5 relative">
-                <label htmlFor="" className="text-[#0A033C]">
+            <div className="flex flex-col justify-center space-y-4">
+              <div className="relative">
+                <label htmlFor="fullName" className="text-[#0A033C] block">
                   Full name
                 </label>
-                <PermIdentityOutlinedIcon
-                  sx={{ fontSize: "small" }}
-                  className="absolute z-[999] top-2/4 transform translate-y-2.5 -translate-x-14"
-                />
-                <Input
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none h-full top-[17%]">
+                  <PermIdentityOutlinedIcon sx={{ fontSize: "small" }} />
+                </div>
+                <input
+                  id="fullName"
                   type="text"
-                  className="w-[310px] h-[50px] mt-2 focus:!border-[##f60d37] pl-[40px]"
+                  className="form-input w-full pl-10 pr-3 py-2 border rounded-md focus:border-[#f60d37] focus:ring-[#f60d37]"
                   onChange={(e) => setFullName(e.target.value)}
                   value={fullName}
                 />
               </div>
 
-              <div className="mb-5 relative">
-                <label htmlFor="" className="text-[#0A033C]">
+              <div className="relative">
+                <label htmlFor="phone" className="text-[#0A033C] block">
                   Phone Number
                 </label>
-                <LocalPhoneOutlinedIcon
-                  sx={{ fontSize: "small" }}
-                  className="absolute z-[999] top-2/4 transform translate-y-2.5 -translate-x-24"
-                />
-                <Input
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none h-full top-[17%]">
+                  <LocalPhoneOutlinedIcon sx={{ fontSize: "small" }} />
+                </div>
+                <input
+                  id="phone"
                   type="number"
-                  className="w-[310px] h-[50px] mt-2 focus:!border-[##f60d37] pl-[40px]"
+                  className="form-input w-full pl-10 pr-3 py-2 border rounded-md focus:border-[#f60d37] focus:ring-[#f60d37]"
                   onChange={(e) => setPhone(e.target.value)}
                   value={phone}
                 />
               </div>
 
-              <div className="mb-5 relative">
-                <label htmlFor="">Password</label>
-                <HttpsOutlinedIcon
-                  sx={{ fontSize: "small" }}
-                  className="absolute z-[999] top-2/4 transform translate-y-2.5 -translate-x-14"
-                />
-                <Input
+              <div className="relative">
+                <label htmlFor="password" className="text-[#0A033C] block">
+                  Password
+                </label>
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none h-full top-[17%]">
+                  <HttpsOutlinedIcon sx={{ fontSize: "small" }} />
+                </div>
+                <input
+                  id="password"
                   type="password"
-                  className="w-[310px] h-[50px] mt-2 focus:!border-[##f60d37] pl-[40px]"
+                  className="form-input w-full pl-10 pr-3 py-2 border rounded-md focus:border-[#f60d37] focus:ring-[#f60d37]"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                 />
               </div>
 
-              <div className="mb-5">
-                <label className="block" htmlFor="">
-                  OTP Code
-                </label>
-                <Input
+              <div className="flex items-center space-x-2 justify-between">
+                <input
                   type="number"
-                  className="w-3/5 h-[50px] mt-2 focus:!border-[##f60d37]"
+                  className="form-input w-2/3 pl-4 pr-3 py-2 border rounded-md focus:border-[#f60d37] focus:ring-[#f60d37]"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   onKeyDown={handleKeyPress}
                 />
-
-                <Button
-                  type="secondary"
-                  className="border-[#BC2228] h-[50px] ml-2 text-[#BC2228]"
+                <button
+                  type="button"
+                  className="border-[#BC2228] bg-transparent hover:bg-[#BC2228] hover:text-white text-[#BC2228] font-medium py-2 px-4 rounded"
                   onClick={handleSendOTP}
                 >
-                  Send OTP
-                </Button>
+                  Send
+                </button>
               </div>
               <div id="recaptcha"></div>
-              <div className="mt-[15px] p-auto">
-                <Button
-                  type="primary"
-                  className="w-[310px] h-[50px] bg-[#BC2228] hover:!bg-[#dc1313] text-[16px]"
-                  onClick={verifyOTP}
-                >
-                  Sign Up
-                </Button>
-              </div>
+              <button
+                type="submit"
+                className="w-full bg-[#BC2228] hover:bg-[#dc1313] text-white py-2 rounded-md transition-colors duration-200"
+                onClick={verifyOTP}
+              >
+                Sign Up
+              </button>
 
-              <div className="mt-4">
-                <p className="text-center text-[#5D5A6F] text-[14px]">
-                  Bạn đã có tài khoản?{" "}
-                  <a className="text-[#BC2228] cursor-pointer">Đăng nhập</a>
-                </p>
-              </div>
+              <p className="text-center text-[#5D5A6F]">
+                Bạn đã có tài khoản?{" "}
+                <span className="text-[#BC2228] cursor-pointer">Đăng nhập</span>
+              </p>
             </div>
           </div>
         </form>
