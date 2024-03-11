@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Divider, Button, Input } from "antd";
 import ReactQuill from "react-quill";
@@ -12,6 +12,12 @@ export default function FormAddCourse({ closeForm, handleOk }) {
   const [description, setDiscription] = useState("");
   const [imageFile, setImageFile] = useState();
   const [subDescription, setSubDescription] = useState("");
+  const formRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (formRef.current && !formRef.current.contains(event.target)) {
+      closeForm(); // Đóng form nếu click bên ngoài form
+    }
+  };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -35,8 +41,11 @@ export default function FormAddCourse({ closeForm, handleOk }) {
   };
   return (
     <>
-      <div className="overlay">
-        <form className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded">
+      <div className="overlay" onClick={handleClickOutside}>
+        <form
+          ref={formRef}
+          className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded"
+        >
           <div className="flex justify-between items-center">
             <h3 className="text-[20px] font-semibold">Thêm mới khóa học</h3>
             <CloseIcon

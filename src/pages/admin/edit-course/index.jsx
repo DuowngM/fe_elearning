@@ -74,7 +74,7 @@ export default function DetailCourse() {
   };
   const handleAddChapter = async (newChapter) => {
     // Validate các trường bắt buộc của newChapter
-    if (!newChapter.name || !newChapter.description) {
+    if (!newChapter.title || !newChapter.description) {
       notify("error", "Vui lòng điền đầy đủ thông tin chương học");
       return;
     }

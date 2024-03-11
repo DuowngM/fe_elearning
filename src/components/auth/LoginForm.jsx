@@ -5,7 +5,7 @@ import { Button, Input } from "antd";
 import "react-quill/dist/quill.snow.css";
 import "../../index.css";
 
-export default function LoginForm({ closeForm, handleLogin }) {
+export default function LoginForm({ closeForm, handleLogin, toggleForms }) {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   // Xử lý sự kiện tắt form khi click ra ngoài
@@ -104,7 +104,10 @@ export default function LoginForm({ closeForm, handleLogin }) {
                 </p>
                 <p className="text-center text-[#5D5A6F]">
                   Bạn không có tài khoản?{" "}
-                  <a className="text-[#BC2228] cursor-pointer">
+                  <a
+                    className="text-[#BC2228] cursor-pointer"
+                    onClick={toggleForms}
+                  >
                     Tạo một tài khoản
                   </a>
                 </p>

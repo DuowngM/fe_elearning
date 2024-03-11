@@ -70,6 +70,8 @@ function HeaderUser() {
     try {
       await getPhone({ phone: newUser.phone, fullName: newUser.fullName });
       await register(newUser);
+      closeFormRegister();
+      openFormLogin();
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +83,11 @@ function HeaderUser() {
     setUser(null);
     navigate("/");
   };
-
+  // Hàm chuyển đổi giữa form đăng nhập và đăng ký
+  const toggleForms = () => {
+    setShowFormLogin(!showFormLogin);
+    setShowFormRegister(!showFormRegister);
+  };
   return (
     <div className="max-w-[1500px] h-[70px] mx-auto flex justify-between items-center  ">
       <div className="logo">
@@ -153,12 +159,17 @@ function HeaderUser() {
       </div>
       {/* Form thêm mới khóa học */}
       {showFormLogin && (
-        <LoginForm closeForm={closeFormLogin} handleLogin={handleLogin} />
+        <LoginForm
+          closeForm={closeFormLogin}
+          handleLogin={handleLogin}
+          toggleForms={toggleForms}
+        />
       )}
       {showFormRegister && (
         <RegisterForm
           closeForm={closeFormRegister}
           handleRegister={handleRegister}
+          toggleForms={toggleForms}
         />
       )}
     </div>
