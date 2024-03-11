@@ -28,7 +28,7 @@ const CourseDetailMain = () => {
   }, [dispatch, id]);
 
   // Nhóm dữ liệu lại
-  const groupedContentItems = chapters.map((chapter) => {
+  const groupedContentItems = chapters?.map((chapter) => {
     return {
       ...chapter,
       lessons: lesson.filter((item) => item.chapterId === chapter.id),
@@ -44,7 +44,7 @@ const CourseDetailMain = () => {
         <div className="bg-[#f8f8f8] shadow-lg py-20 overflow-hidden rounded-3xl">
           <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg ml-16 mb-10">
             <span className="text-rikkei">Khóa học: </span>
-            {chapters[0]?.courseName}
+            {chapters && chapters[0]?.courseName}
           </h1>
 
           <div className="my-0 mx-auto max-w-[1500px]">
@@ -89,7 +89,7 @@ const CourseDetailMain = () => {
                     <div className="overflow-auto max-h-64 bg-white rounded-[20px] pb-3">
                       <Divider />
                       {chapter?.lessons?.length > 0 ? (
-                        chapter.lessons.map((item) => (
+                        chapter.lessons?.map((item) => (
                           <AccordionDetails
                             sx={{
                               padding: "12px 16px 0 24px",
