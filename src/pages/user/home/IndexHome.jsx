@@ -23,6 +23,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import CardCourse from "../../../components/card-course/CardCourse";
 
 function IndexHome() {
   //#region redux
@@ -30,7 +31,7 @@ function IndexHome() {
   const dispatch = useDispatch();
   //#endregion
   useEffect(() => {
-    dispatch(getAllCoursesAPI({ page: 0, size: 6 }));
+    dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
   }, []);
   // component Phương pháp đào tạo lập trình ưu việt
   const dataStaticTranding = [
@@ -466,53 +467,23 @@ function IndexHome() {
               intended to occur. It involves one or more students being taught
               by a teacher or instructor.
             </Typography>
-            <Grid container spacing={8}>
-              {allCourses?.map((item, index) => (
-                <Fragment key={index}>
-                  <Grid item xs={6}>
-                    <div className="w-full h-96 bg-[#D9D9D9]">
-                      <img
-                        src={import.meta.env.VITE_API_URL_IMG + item.image}
-                      />
-                    </div>
-                    <Stack direction={"row"} spacing={2} alignItems={"center"}>
-                      <Typography
-                        component="h4"
-                        variant="h6"
-                        sx={{
-                          fontWeight: "medium",
-                          color: "#231651",
-                          marginY: 1,
-                          lineHeight: 3,
-                        }}
-                      >
-                        {item.title}
-                      </Typography>
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          fontSize: "0,5rem",
-                          fontWeight: "500",
-                          color: "#BC2228",
-                          borderColor: "#BC2228",
-                          padding: "0.3rem",
-                        }}
-                      >
-                        Truy cập ngay
-                      </Button>
-                    </Stack>
-                    <Typography
-                      sx={{
-                        color: "#231651",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {item.subDescription}
-                    </Typography>
-                  </Grid>
-                </Fragment>
-              ))}
-            </Grid>
+            <Box
+              sx={{
+                maxWidth: "1600px",
+                width: "100%",
+                marginX: "auto",
+                marginY: 0,
+              }}
+            >
+              <Grid container spacing={8}>
+                {allCourses?.map((item, index) => (
+                  <Fragment key={index}>
+                    <CardCourse item={item} />
+                  </Fragment>
+                ))}
+              </Grid>
+            </Box>
+
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 1, sm: 2, md: 4 }}
@@ -620,7 +591,7 @@ function IndexHome() {
               Đội ngũ giảng viên, cố vấn chuyên môn cao
             </Typography>
             <Grid container spacing={8}>
-              {listTeacher.map((item, index) => (
+              {listTeacher?.map((item, index) => (
                 <Fragment key={index}>
                   <Grid item xs={3} sx={{ minHeight: "800px" }}>
                     <Paper
