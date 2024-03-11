@@ -8,5 +8,9 @@ export default {
       },
     },
   },
+  corePlugins: {
+    // Bỏ qua việc ghi đè lên các thuộc tính mặc định của các thẻ HTML
+    preflight: false,
+  },
   plugins: [],
 };

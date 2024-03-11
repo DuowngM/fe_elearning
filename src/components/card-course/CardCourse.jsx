@@ -1,9 +1,8 @@
-import React from "react";
-import { Button } from "antd";
+import React, { Fragment } from "react";
 import Cookies from "js-cookie";
 import { notify } from "../../utils/notification";
 import { useNavigate } from "react-router";
-
+import { Button, Grid, Stack, Typography } from "@mui/material";
 export default function CardCourse({ item }) {
   const navigate = useNavigate();
   const getAccessTokenFromCookies = () => {
@@ -27,23 +26,48 @@ export default function CardCourse({ item }) {
   };
 
   return (
-    <div className="text-center">
-      <div className="ml-auto flex justify-center">
-        <img className="" src={import.meta.env.VITE_API_URL_IMG + item.image} />
+    <Grid item xs={6}>
+      <div className="w-full h-96 bg-[#D9D9D9]">
+        <img
+          src={import.meta.env.VITE_API_URL_IMG + item.image}
+          className="w-full h-full"
+        />
       </div>
-      <h4 className="mt-[12px] font-semibold text-[#0A033C] ">{item.title}</h4>
-      <p className="mt-[10px] text-[#5D5A6F] text-[16px]">
-        Standard 1 is a foundation Standard <br /> that reflects 7 important
-        concepts...
-      </p>
-      <div className="mt-[55px]">
+      <Stack direction={"row"} spacing={2} alignItems={"center"}>
+        <Typography
+          component="h4"
+          variant="h6"
+          sx={{
+            fontWeight: "medium",
+            color: "#231651",
+            marginY: 1,
+            lineHeight: 3,
+          }}
+        >
+          {item.title}
+        </Typography>
         <Button
-          className="w-[162px] h-[44px] text-[16px] font-medium"
+          variant="outlined"
+          sx={{
+            fontSize: "0,5rem",
+            fontWeight: "500",
+            color: "#BC2228",
+            borderColor: "#BC2228",
+            padding: "0.3rem",
+          }}
           onClick={handleLearn}
         >
-          Class Detail
+          Truy cập ngay
         </Button>
-      </div>
-    </div>
+      </Stack>
+      <Typography
+        sx={{
+          color: "#231651",
+          fontWeight: 600,
+        }}
+      >
+        {item.subDescription}
+      </Typography>
+    </Grid>
   );
 }

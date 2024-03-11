@@ -3,7 +3,11 @@ import FormAddChapter from "../../../components/form/FormAddChapter";
 import FormAddLesson from "../../../components/form/FormAddLesson";
 import { addNewChapter } from "../../../api/chapterAPIs";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { addNewLesson, editLesson } from "../../../api/lessonAPIs";
+import {
+  addNewLesson,
+  deleteLesson,
+  editLesson,
+} from "../../../api/lessonAPIs";
 import AddIcon from "@mui/icons-material/Add";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -118,7 +122,9 @@ export default function DetailCourse() {
     setShowFormAddLesson(true);
     setIdChapter(lesson.chapterId);
   };
-
+  const handleDeleteLesson = async (id) => {
+    await deleteLesson(id);
+  };
   return (
     <>
       {showFormAddChapter && (
@@ -214,11 +220,17 @@ export default function DetailCourse() {
 
                             <div>
                               <EditOutlined
-                                onClick={() => handleEditLesson(item)}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  handleEditLesson(item);
+                                }}
                                 style={{ color: "blue", marginRight: 10 }}
                               />
                               <DeleteOutlined
-                                onClick={() => handleDeleteLesson(item.id)}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  handleDeleteLesson(item.id);
+                                }}
                                 style={{ color: "red" }}
                               />
                             </div>

@@ -4,17 +4,19 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import Divider from "@mui/material/Divider";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getChaptersThunk } from "../../../redux/reducer/chapterSlice";
 import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
 import SimilarCourses from "../../../components/similarCourses/SimilarCourses";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
+import VideoComponent from "../../../components/video/VideoComponent";
 
 const CourseDetailMain = () => {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
   const similarCourses = useSelector((state) => state.courseSlice.courses);
   const [expanded, setExpanded] = useState("panel2");
+  const [description, setDiscription] = useState("");
   const [sourceVideo, setSourceVideo] = useState(
     "https://www.youtube.com/embed/vdKE_Tz8cy0"
   );
@@ -38,6 +40,7 @@ const CourseDetailMain = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
+  console.log(description);
   return (
     <>
       <div className="w-full">
@@ -49,16 +52,14 @@ const CourseDetailMain = () => {
 
           <div className="my-0 mx-auto max-w-[1500px]">
             <div className="flex flex-wrap justify-between">
-              <div className="rounded-2xl overflow-hidden max-w-[850px] w-full relative">
-                <iframe
-                  width="100%"
-                  height="500px"
-                  src={sourceVideo}
-                  title="Video"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                ></iframe>
+              <div className="rounded-2xl overflow-auto max-w-[850px] w-full relative">
+                {sourceVideo ? (
+                  <VideoComponent sourceVideo={sourceVideo} />
+                ) : (
+                  <>
+                    <div dangerouslySetInnerHTML={{ __html: description }} />
+                  </>
+                )}
               </div>
               <div className="max-w-[600px] w-full flex flex-col">
                 {groupedContentItems?.map((chapter) => (
@@ -101,6 +102,7 @@ const CourseDetailMain = () => {
                             onClick={() => {
                               setSourceVideo(item.video);
                               setSelectedLessonId(item.id);
+                              setDiscription(item.description);
                             }}
                           >
                             <p
