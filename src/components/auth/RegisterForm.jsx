@@ -2,13 +2,16 @@ import React, { useRef, useState } from "react";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
-import { Button, Input } from "antd";
 import "../../index.css";
 import { auth } from "../../config/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { notify } from "../../utils/notification";
 
-export default function RegisterForm({ closeForm, handleRegister }) {
+export default function RegisterForm({
+  closeForm,
+  handleRegister,
+  toggleForms,
+}) {
   const [phone, setPhone] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
@@ -163,7 +166,7 @@ export default function RegisterForm({ closeForm, handleRegister }) {
                 Sign Up
               </button>
 
-              <p className="text-center text-[#5D5A6F]">
+              <p className="text-center text-[#5D5A6F]" onClick={toggleForms}>
                 Bạn đã có tài khoản?{" "}
                 <span className="text-[#BC2228] cursor-pointer">Đăng nhập</span>
               </p>

@@ -24,7 +24,8 @@ export const addNewLesson = async (infoLesson) => {
     notify("success", "Thêm bài học thành công");
     return response;
   } catch (error) {
-    console.log(error);
+    console.log("Có lỗi khi thêm bài học", error);
+    notify("error", "Có lỗi khi thêm bài học");
   }
 };
 export const editLesson = async (infoLesson) => {
@@ -46,5 +47,15 @@ export const editLesson = async (infoLesson) => {
     return response;
   } catch (error) {
     console.log(error);
+    notify("error", "Có lỗi khi sửa bài học");
+  }
+};
+export const deleteLesson = async (id) => {
+  try {
+    await jsonAxios.delete(`api/v1/lesson/${id}`);
+    notify("success", "Xóa bài học thành công");
+  } catch (error) {
+    console.log("Có lỗi khi xóa bài học", error);
+    notify("error", "Có lỗi khi xóa bài học");
   }
 };

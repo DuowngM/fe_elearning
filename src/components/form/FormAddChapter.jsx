@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Divider, Button, Input, Radio } from "antd";
 import ReactQuill from "react-quill";
@@ -10,11 +10,19 @@ export default function FormAddChapter({ closeForm, handleOk }) {
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDiscription] = useState("");
-
+  const formRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (formRef.current && !formRef.current.contains(event.target)) {
+      closeForm(); // Đóng form nếu click bên ngoài form
+    }
+  };
   return (
     <>
-      <div className="overlay">
-        <form className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded">
+      <div className="overlay" onClick={handleClickOutside}>
+        <form
+          ref={formRef}
+          className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded"
+        >
           <div className="flex justify-between items-center">
             <h3 className="text-[20px] font-semibold">Thêm mới chương học</h3>
             <CloseIcon
@@ -31,18 +39,6 @@ export default function FormAddChapter({ closeForm, handleOk }) {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
-
-            {/* <div className="flex flex-col">
-              <label htmlFor="">Trạng thái</label>
-              <Radio.Group className="mt-2">
-                <Radio className="border px-2 py-1 rounded" value={1}>
-                  Hoạt động
-                </Radio>
-                <Radio className="border px-2 py-1 rounded" value={0}>
-                  Ngừng hoạt động
-                </Radio>
-              </Radio.Group>
-            </div> */}
           </div>
           <div className="mt-[20px]">
             <label htmlFor="">Mô tả</label>

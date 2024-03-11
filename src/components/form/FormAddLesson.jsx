@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Divider, Button, Input, Radio } from "antd";
 import ReactQuill from "react-quill";
@@ -10,12 +10,21 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
   const [description, setDiscription] = useState(editLesson?.description || "");
   const [linkVideo, setLinkVideo] = useState(editLesson?.video || "");
   const [source, setSource] = useState(editLesson?.resources || "");
+  const formRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (formRef.current && !formRef.current.contains(event.target)) {
+      closeForm(); // Đóng form nếu click bên ngoài form
+    }
+  };
   return (
     <>
       {editLesson ? (
         <>
-          <div className="overlay">
-            <form className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded">
+          <div className="overlay" onClick={handleClickOutside}>
+            <form
+              ref={formRef}
+              className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded"
+            >
               <div className="flex justify-between items-center">
                 <h3 className="text-[20px] font-semibold">Sửa bài học</h3>
                 <CloseIcon
@@ -89,8 +98,11 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
         </>
       ) : (
         <>
-          <div className="overlay">
-            <form className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded">
+          <div className="overlay" onClick={handleClickOutside}>
+            <form
+              ref={formRef}
+              className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded"
+            >
               <div className="flex justify-between items-center">
                 <h3 className="text-[20px] font-semibold">Thêm mới bài học</h3>
                 <CloseIcon

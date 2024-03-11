@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useRef } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { Divider, Button, Input } from "antd";
 import ReactQuill from "react-quill";
@@ -12,7 +12,12 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState();
   const [subDescription, setSubDescription] = useState("");
-
+  const formRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (formRef.current && !formRef.current.contains(event.target)) {
+      closeForm(); // Đóng form nếu click bên ngoài form
+    }
+  };
   // Gán giá trị cho các state từ props courseInfo khi component được render
   useEffect(() => {
     if (courseInfo) {
@@ -55,8 +60,11 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
 
   return (
     <>
-      <div className="overlay">
-        <form className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded">
+      <div className="overlay" onClick={handleClickOutside}>
+        <form
+          ref={formRef}
+          className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded"
+        >
           <div className="flex justify-between items-center">
             <h3 className="text-[20px] font-semibold">Sửa khóa học</h3>
             <CloseIcon
