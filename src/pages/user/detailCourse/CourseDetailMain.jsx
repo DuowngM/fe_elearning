@@ -1,5 +1,14 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Breadcrumbs,
+  Grid,
+  Link,
+  Stack,
+} from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Divider from "@mui/material/Divider";
 import React, { useEffect, useState } from "react";
@@ -10,6 +19,8 @@ import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
 import SimilarCourses from "../../../components/similarCourses/SimilarCourses";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import VideoComponent from "../../../components/video/VideoComponent";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { Typography } from "antd";
 
 const CourseDetailMain = () => {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
@@ -40,19 +51,69 @@ const CourseDetailMain = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  console.log(description);
+  // Breadcrumbs
+  function handleClickNav(event) {
+    event.preventDefault();
+    console.info("You clicked a breadcrumb.");
+  }
   return (
     <>
-      <div className="w-full">
-        <div className="bg-[#f8f8f8] shadow-lg py-20 overflow-hidden rounded-3xl">
-          <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg ml-16 mb-10">
-            <span className="text-rikkei">Khóa học: </span>
-            {chapters && chapters[0]?.courseName}
-          </h1>
-
-          <div className="my-0 mx-auto max-w-[1500px]">
-            <div className="flex flex-wrap justify-between">
-              <div className="rounded-2xl overflow-auto max-w-[850px] w-full relative">
+      <Box sx={{ width: "100%" }}>
+        <Box
+          className="shadow-lg"
+          sx={{
+            backgroundColor: "#f8f8f8",
+            paddingY: "5rem",
+            overflow: "hidden",
+            borderRadius: "1.5rem",
+          }}
+        >
+          <Box className="my-0 mx-auto max-w-[1500px]">
+            <Stack spacing={2} sx={{ padding: "1rem" }}>
+              <Breadcrumbs
+                separator={
+                  <NavigateNextIcon
+                    fontSize="small"
+                    sx={{ color: "#BC2228" }}
+                  />
+                }
+                aria-label="breadcrumb"
+              >
+                <Link
+                  underline="hover"
+                  key="1"
+                  color="#BC2228"
+                  onClick={handleClickNav}
+                  fontWeight={700}
+                  fontSize={"1.5rem"}
+                >
+                  Home
+                </Link>
+                <Link
+                  underline="hover"
+                  key="2"
+                  color="#BC2228"
+                  onClick={handleClickNav}
+                  fontWeight={700}
+                  fontSize={"1.5rem"}
+                >
+                  Courses
+                </Link>
+                <p key="3" className="text-[#BC2228] font-semibold text-2xl">
+                  Courses A
+                </p>
+              </Breadcrumbs>
+            </Stack>
+            <Stack direction="row" justifyContent="between">
+              <Box
+                sx={{
+                  borderRadius: "1rem",
+                  overflow: "auto",
+                  width: "100%",
+                  position: "relative",
+                  maxWidth: "850px",
+                }}
+              >
                 {sourceVideo ? (
                   <VideoComponent sourceVideo={sourceVideo} />
                 ) : (
@@ -60,12 +121,16 @@ const CourseDetailMain = () => {
                     <div dangerouslySetInnerHTML={{ __html: description }} />
                   </>
                 )}
-              </div>
-              <div className="max-w-[600px] w-full flex flex-col">
+              </Box>
+
+              <Stack
+                direction="column"
+                sx={{ maxWidth: "600px", width: "100%" }}
+              >
                 {groupedContentItems?.map((chapter) => (
                   <Accordion
                     sx={{ maxHeight: "50%" }}
-                    className="text-xl font-medium text-[#170F49] "
+                    className="text-xl font-medium text-[#170F49] px-6"
                     expanded={expanded === `panel${chapter.id}`}
                     onChange={handleChange(`panel${chapter.id}`)}
                     key={chapter.id}
@@ -97,6 +162,7 @@ const CourseDetailMain = () => {
                               display: "flex",
                               justifyContent: "space-between",
                               cursor: "pointer",
+                              alignItems: "center",
                             }}
                             key={item.id}
                             onClick={() => {
@@ -114,8 +180,12 @@ const CourseDetailMain = () => {
                             >
                               {item?.title}
                             </p>
-                            <div>
-                              <img src="/images/Playbtn.png" alt="" />
+                            <div className="">
+                              <img
+                                src="/images/Playbtn.png"
+                                alt=""
+                                className="w-7 h-7"
+                              />
                             </div>
                           </AccordionDetails>
                         ))
@@ -127,106 +197,101 @@ const CourseDetailMain = () => {
                     </div>
                   </Accordion>
                 ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="w-full">
-          <div className="max-w-[1500px] mx-auto my-0">
-            <div className="py-32 px-10">
-              <div className="">
-                <div className=" text-[#0A033C] ">
-                  <h1 className="text-2xl mb-5 font-semibold ">
-                    Course Details
-                  </h1>
-                  <p className="leading-9 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Quis ipsum suspendisse ultrices gravida. Risus
-                    commodo viverra maecenas accumsan lacus vel facilisis
-                    consectetur adipiscing elit.
-                  </p>
-                  <p className="leading-9 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Quis ipsum suspendisse ultrices gravida. Risus
-                    commodo viverra maecenas accumsan.
-                  </p>
-                </div>
-                <div className=" text-[#0A033C] mt-14">
-                  <h1 className="text-2xl font-semibold mb-5">
-                    Who this course is for
-                  </h1>
-                  <p className="leading-9 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Quis ipsum suspendisse ultrices gravida. Risus
-                    commodo viverra maecenas accumsan lacus vel facilisis
-                    consectetur adipiscing elit.
-                  </p>
-                </div>
-              </div>
-              <div className="text-[#0A033C] mt-32">
-                <h1 className="text-2xl font-semibold mb-6">
-                  What you'll learn in this course:
-                </h1>
-                <div className="flex ">
-                  <div className="mr-10 w-1/2 flex flex-col gap-4">
-                    <div className="flex items-center ">
-                      <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                      <p className="text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      </p>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                      <p className="text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      </p>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                      <p className="text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mr-10 w-1/2 flex flex-col gap-4">
-                    <div className="flex items-center ">
-                      <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                      <p className="text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      </p>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                      <p className="text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      </p>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                      <p className="text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </Stack>
+            </Stack>
+          </Box>
+        </Box>
+        <Box sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              maxWidth: "1500px",
+              marginX: "auto",
+              marginY: "auto",
+              paddingY: "4rem",
+            }}
+          >
+            <Stack direction="column">
+              <Box sx={{ color: "#0A033C" }}>
+                <Typography component="h2" variant="h4">
+                  Course Details
+                </Typography>
+                <Typography component="p" className="text-base">
+                  Cập nhật tháng 3/2024
+                </Typography>
+                <Typography component="p" className="text-base leading-10">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
+                  maecenas accumsan.
+                </Typography>
+              </Box>
+              <Box sx={{ color: "#0A033C" }}>
+                <Typography component="h2" variant="h4">
+                  Who this course is for
+                </Typography>
+                <Typography component="p" className="text-base leading-10">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
+                  maecenas accumsan lacus vel facilisis consectetur adipiscing
+                  elit.
+                </Typography>
+              </Box>
+            </Stack>
+            <Box sx={{ color: "#0A033C", marginTop: "8rem" }}>
+              <Typography component="h2" variant="h4">
+                What you'll learn in this course:
+              </Typography>
+              <Box>
+                <Stack
+                  sx={{ marginTop: "2rem", width: "100%", gap: "6rem" }}
+                  direction={"row"}
+                >
+                  <Stack direction="row" alignItems={"center"}>
+                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
+                    <Typography className="text-base">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    </Typography>
+                  </Stack>
+                  <Stack direction="row" alignItems={"center"}>
+                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
+                    <Typography className="text-base">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    </Typography>
+                  </Stack>
+                </Stack>
+                <Stack
+                  sx={{ marginTop: "2rem", width: "100%", gap: "6rem" }}
+                  direction={"row"}
+                >
+                  <Stack direction="row" alignItems={"center"}>
+                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
+                    <Typography className="text-base">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    </Typography>
+                  </Stack>
+                  <Stack direction="row" alignItems={"center"}>
+                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
+                    <Typography className="text-base">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                    </Typography>
+                  </Stack>
+                </Stack>
+              </Box>
+            </Box>
+
+            <div className="">
+              <h1 className=""></h1>
 
               <div className="">
-                <h1 className=""></h1>
-
                 <div className="">
-                  <div className="">
-                    <div className=""></div>
-                    <p className=""></p>
-                  </div>
+                  <div className=""></div>
+                  <p className=""></p>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </Box>
+        </Box>
         <div className="w-full mb-60">
           <div className="max-w-[1500px] mx-auto my-0">
             <h1 className="text-3xl mb-5 font-semibold ">Similar Courses</h1>
@@ -240,7 +305,7 @@ const CourseDetailMain = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Box>
     </>
   );
 };
