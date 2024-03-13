@@ -24,11 +24,13 @@ import {
   Typography,
 } from "@mui/material";
 import CardCourse from "../../../components/card-course/CardCourse";
+import { useNavigate } from "react-router-dom";
 
 function IndexHome() {
   //#region redux
   const allCourses = useSelector((state) => state.courseSlice.courses);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //#endregion
   useEffect(() => {
     dispatch(getAllCoursesAPI({ page: 0, size: 4, home: "home" }));
@@ -498,6 +500,7 @@ function IndexHome() {
                   backgroundColor: "#BC2228",
                   fontSize: "0,5rem",
                 }}
+                onClick={() => navigate("/course")}
               >
                 Hiện tất cả khóa học
               </Button>

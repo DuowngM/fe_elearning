@@ -12,7 +12,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import Divider from "@mui/material/Divider";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getChaptersThunk } from "../../../redux/reducer/chapterSlice";
 import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
 import SimilarCourses from "../../../components/similarCourses/SimilarCourses";
@@ -31,6 +31,7 @@ const CourseDetailMain = () => {
     "https://www.youtube.com/embed/vdKE_Tz8cy0"
   );
   const [selectedLessonId, setSelectedLessonId] = useState(null);
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -77,9 +78,9 @@ const CourseDetailMain = () => {
                   underline="hover"
                   key="1"
                   color="#BC2228"
-                  onClick={handleClickNav}
                   fontWeight={700}
                   fontSize={"1.5rem"}
+                  onClick={() => navigate("/")}
                 >
                   Home
                 </Link>
@@ -87,14 +88,14 @@ const CourseDetailMain = () => {
                   underline="hover"
                   key="2"
                   color="#BC2228"
-                  onClick={handleClickNav}
                   fontWeight={700}
                   fontSize={"1.5rem"}
+                  onClick={() => navigate("/course")}
                 >
                   Courses
                 </Link>
                 <p key="3" className="text-[#BC2228] font-semibold text-2xl">
-                  Courses A
+                  {chapters[0]?.courseName}
                 </p>
               </Breadcrumbs>
             </Stack>
