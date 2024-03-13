@@ -1,7 +1,7 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import FormAddChapter from "../../../components/form/FormAddChapter";
 import FormAddLesson from "../../../components/form/FormAddLesson";
-import { addNewChapter } from "../../../api/chapterAPIs";
+import { addNewChapter, editChapterAPIs } from "../../../api/chapterAPIs";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import {
   addNewLesson,
@@ -31,6 +31,7 @@ export default function DetailCourse() {
   const [showFormAddChapter, setShowFormAddChapter] = useState(false);
   const [showFormAddLesson, setShowFormAddLesson] = useState(false);
   const [idChapter, setIdChapter] = useState(null);
+  const [editChapter, setEditChapter] = useState(null);
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -76,23 +77,29 @@ export default function DetailCourse() {
   const handleOpenFormChapter = () => {
     openForm("chapter");
   };
-  const handleAddChapter = async (newChapter) => {
-    // Validate các trường bắt buộc của newChapter
-    if (!newChapter.title || !newChapter.description) {
+  const handleSaveChapter = async (infoChapter) => {
+    // Validate các trường bắt buộc của infoChapter
+    if (!infoChapter.title || !infoChapter.description) {
       notify("error", "Vui lòng điền đầy đủ thông tin chương học");
       return;
     }
+
     try {
-      await addNewChapter(newChapter);
+      if (infoChapter.type === "edit") {
+        await editChapterAPIs(infoChapter);
+      } else {
+        await addNewChapter(infoChapter);
+      }
       dispatch(getChaptersThunk(id));
+      // Đóng form thêm/chỉnh sửa chương học
       closeFormChapter();
     } catch (error) {
       console.log(error);
-      notify("error", "Có lỗi xảy ra khi thêm chương học");
+      notify("error", "Có lỗi xảy ra khi lưu chương học");
     }
   };
 
-  const handleSave = async (infoLesson) => {
+  const handleSaveLesson = async (infoLesson) => {
     // Basic validation
     if (!infoLesson.title || !idChapter) {
       notify("error", "Vui lòng điền đầy đủ thông tin bài học ");
@@ -122,21 +129,28 @@ export default function DetailCourse() {
     setShowFormAddLesson(true);
     setIdChapter(lesson.chapterId);
   };
+  // Xóa bài học
   const handleDeleteLesson = async (id) => {
     await deleteLesson(id);
+  };
+  // Sửa chương học
+  const handleEditChapter = (chapter) => {
+    openForm("chapter");
+    setEditChapter(chapter);
   };
   return (
     <>
       {showFormAddChapter && (
         <FormAddChapter
           closeForm={closeFormChapter}
-          handleOk={handleAddChapter}
+          handleOk={handleSaveChapter}
+          editChapter={editChapter}
         />
       )}
       {showFormAddLesson && (
         <FormAddLesson
           closeForm={closeFormLesson}
-          handleOk={handleSave}
+          handleOk={handleSaveLesson}
           editLesson={selectedLesson}
         />
       )}
@@ -144,7 +158,7 @@ export default function DetailCourse() {
         <div className="bg-[#f8f8f8] shadow-lg py-20 overflow-hidden rounded-3xl">
           <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg ml-16 mb-10">
             <span className="text-rikkei">Khóa học: </span>
-            {chapters[0]?.courseName}
+            {chapters[0]?.courseName}{" "}
           </h1>
 
           <div className="my-0 mx-auto max-w-[1500px]">
@@ -183,7 +197,14 @@ export default function DetailCourse() {
                       id={`panel${chapter.id}-header`}
                       sx={{ minHeight: "4rem", color: "#BC2228" }}
                     >
-                      {chapter?.title}
+                      {chapter?.title}{" "}
+                      <EditOutlined
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleEditChapter(chapter);
+                        }}
+                        style={{ color: "blue", marginLeft: 10 }}
+                      />
                     </AccordionSummary>
                     <div
                       onClick={() => handleOpenFormLesson(chapter.id)}
@@ -218,7 +239,7 @@ export default function DetailCourse() {
                               {item?.title}
                             </p>
 
-                            <div>
+                            <div className="flex items-center">
                               <EditOutlined
                                 onClick={(event) => {
                                   event.stopPropagation();
@@ -246,7 +267,7 @@ export default function DetailCourse() {
                 ))}
                 <div
                   onClick={handleOpenFormChapter}
-                  className="ml-5 text-2xl cursor-pointer font-bold text-blue-500 hover:bg-blue-100 transition duration-300 ease-in-out transform hover:scale-105 p-2 rounded-lg flex items-center justify-center"
+                  className="ml-5 text-2xl cursor-pointer font-bold mt-10 text-blue-500 hover:bg-blue-100 transition duration-300 ease-in-out transform hover:scale-105 p-2 rounded-lg flex items-center justify-center"
                 >
                   <AddCircleIcon /> Thêm chương học mới
                 </div>
