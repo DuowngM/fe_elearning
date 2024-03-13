@@ -5,6 +5,7 @@ import IndexUser from "../pages/user/IndexUser";
 import CourseDetailMain from "../pages/user/detailCourse/CourseDetailMain";
 import IndexHome from "../pages/user/home/IndexHome";
 import PrivateRouter from "./PrivateRouter";
+import CoursePage from "../pages/user/coursepPage/CoursePage";
 
 const routesConfig = [
   {
@@ -22,6 +23,7 @@ const routesConfig = [
     children: [
       { path: "detailCourse/:id", element: <CourseDetailMain /> },
       { path: "/", element: <IndexHome /> },
+      { path: "course", element: <CoursePage /> },
     ],
   },
   //thêm các routes khác ở đây

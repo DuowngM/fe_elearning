@@ -3,15 +3,15 @@ import { Fragment, useEffect } from "react";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import studensBanner from "/images/studens_banner.jpg";
 import contract from "/images/Contract.jpg";
-import bootcamIcon from "/images/Contract.jpg";
+import bootcamIcon from "/images/BootcamIcon.jpg";
 import people from "/images/people.jpg";
 import verify from "/images/verify.jpg";
 import teacher from "/images/teacher.jpg";
+import book from "/images/book.jpg";
 import teacherQuang from "/images/teacher_quang.png";
 import teacherTung from "/images/teacher_tung.png";
 import teacherDung from "/images/teacher_dung.png";
 import teacherLam from "/images/teacher_lam.png";
-import book from "/images/book.jpg";
 import personBg from "/images/person_bg.png";
 import IconDone from "/images/IconDone.svg";
 import {
@@ -24,11 +24,13 @@ import {
   Typography,
 } from "@mui/material";
 import CardCourse from "../../../components/card-course/CardCourse";
+import { useNavigate } from "react-router-dom";
 
 function IndexHome() {
   //#region redux
   const allCourses = useSelector((state) => state.courseSlice.courses);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //#endregion
   useEffect(() => {
     dispatch(getAllCoursesAPI({ page: 0, size: 4, home: "home" }));
@@ -498,6 +500,7 @@ function IndexHome() {
                   backgroundColor: "#BC2228",
                   fontSize: "0,5rem",
                 }}
+                onClick={() => navigate("/course")}
               >
                 Hiện tất cả khóa học
               </Button>
