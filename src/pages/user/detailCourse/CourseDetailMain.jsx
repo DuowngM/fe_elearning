@@ -50,11 +50,6 @@ const CourseDetailMain = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  // Breadcrumbs
-  function handleClickNav(event) {
-    event.preventDefault();
-    console.info("You clicked a breadcrumb.");
-  }
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -120,9 +115,9 @@ const CourseDetailMain = () => {
                 {sourceVideo ? (
                   <VideoComponent sourceVideo={sourceVideo} />
                 ) : (
-                  <>
+                  <div className="bg-slate-50">
                     <div dangerouslySetInnerHTML={{ __html: description }} />
-                  </>
+                  </div>
                 )}
               </Box>
 
@@ -187,12 +182,8 @@ const CourseDetailMain = () => {
                             >
                               {item?.title}
                             </p>
-                            <div className="">
-                              <img
-                                src="/images/Playbtn.png"
-                                alt=""
-                                className="w-7 h-7"
-                              />
+                            <div className="flex items-center">
+                              <img src="/images/Playbtn.png" alt="" />
                             </div>
                           </AccordionDetails>
                         ))

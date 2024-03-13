@@ -31,7 +31,7 @@ export default function CourseIndex() {
             <div key={index}>
               <li
                 onClick={() => handleChangeTab(tab.id)}
-                className={`px-3 py-2 cursor-pointer hover:bg-[#F5F5F5] rounded ${
+                className={`px-3 py-2 cursor-pointer list-none hover:bg-[#F5F5F5] rounded ${
                   tabIndex === tab.id ? "active" : ""
                 }`}
                 key={tab.id}

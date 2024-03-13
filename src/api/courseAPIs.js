@@ -1,10 +1,15 @@
 import { notify } from "../utils/notification";
 import { formDataAxios, jsonAxios } from "./api.base.url";
-export const getAllCourses = async (page, searchValue, size) => {
+export const getAllCourses = async (page, searchValue, size, home) => {
   try {
     if (searchValue) {
       const response = await jsonAxios.get(
         `/api/v1/course/paging?page=${page}&size=${size}&title=${searchValue}`
+      );
+      return response.data;
+    } else if (home) {
+      const response = await jsonAxios.get(
+        `/api/v1/course/paging?page=${page}&size=${size}&home=${home}`
       );
       return response.data;
     } else {
@@ -28,7 +33,11 @@ export const addNewCourse = async (newCourse) => {
     notify("success", "Thêm khóa học thành công");
     return response;
   } catch (error) {
-    notify("error", "Có lỗi xảy ra khi thêm");
+    if (error.response.status === 401) {
+      notify("error", "Bạn không có quyền");
+    } else {
+      notify("error", "Có lỗi xảy ra khi thêm");
+    }
   }
 };
 export const editCourse = async (course) => {
@@ -39,6 +48,7 @@ export const editCourse = async (course) => {
   formData.append("title", course.title);
   formData.append("description", course.description);
   formData.append("subDescription", course.subDescription);
+  formData.append("voided", course.voided);
   try {
     const response = await formDataAxios.put(
       `/api/v1/course/update/${course.id}`,
@@ -47,8 +57,11 @@ export const editCourse = async (course) => {
     notify("success", "Sửa khóa học thành công");
     return response;
   } catch (error) {
-    console.log(error);
-    notify("error", "Có lỗi xảy ra khi sửa");
+    if (error.response.status === 401) {
+      notify("error", "Bạn không có quyền");
+    } else {
+      notify("error", "Có lỗi xảy ra khi sửa");
+    }
   }
 };
 export const deleteCourse = async (id) => {

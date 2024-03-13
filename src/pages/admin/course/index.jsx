@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import MyModal from "../../../components/modal/Modal";
 import FormEditCourse from "../../../components/form/FormEditCourse";
+import useDebounce from "../../../hooks/useDebounce";
 
 export default function Course() {
   //#region redux
@@ -31,6 +32,9 @@ export default function Course() {
   const [pagination, setPagination] = useState(1);
   const [editCourseInfo, setEditCourseInfo] = useState(null);
   const [showFormEdit, setShowFormEdit] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const debouncedSearchTerm = useDebounce(searchTerm, 2000);
   //#endregion
   useEffect(() => {
     dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
@@ -44,7 +48,11 @@ export default function Course() {
     dispatch(getAllCoursesAPI({ page: value - 1, size: 4 }));
     setPagination(value);
   };
-
+  // Thêm key khi map
+  const dataSource = allCourses?.courses.map((course) => ({
+    ...course,
+    key: course.id,
+  }));
   const columns = [
     {
       title: "STT",
@@ -56,7 +64,7 @@ export default function Course() {
       title: "Tên khóa học",
       dataIndex: "title",
       align: "center",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <p>{text}</p>,
     },
     {
       title: "Hình ảnh",
@@ -82,6 +90,20 @@ export default function Course() {
       ),
     },
     {
+      title: "Trạng thái",
+      dataIndex: "voided",
+      align: "center",
+      render: (text) => (
+        <p>
+          {text ? (
+            <span className="text-red-500 font-bold">Bị Khóa</span>
+          ) : (
+            <span className="text-green-500 font-bold">Đang hoạt động</span>
+          )}
+        </p>
+      ),
+    },
+    {
       title: "Chức năng",
       align: "center",
       render: (item) => {
@@ -90,12 +112,7 @@ export default function Course() {
             <Button onClick={() => navigate(`/admin/course/${item.id}`)}>
               Chi tiết khóa học
             </Button>
-            <Button primary onClick={() => handleEditCourse(item)}>
-              Chỉnh sửa
-            </Button>
-            <Button danger onClick={() => handleDeleteCourse(item.id)}>
-              Xóa
-            </Button>
+            <Button onClick={() => handleEditCourse(item)}>Chỉnh sửa</Button>
           </div>
         );
       },
@@ -141,17 +158,24 @@ export default function Course() {
       console.log(error);
     }
   };
-  // Xóa khóa học
-  const handleDeleteCourse = async (id) => {
-    await deleteCourse(id);
-    setPagination(1);
-    setFlag(!flag);
-  };
 
   // Tìm kiếm khóa học
   const handleSearch = (searchValue) => {
-    dispatch(getAllCoursesAPI({ page: 0, searchValue, size: 4 }));
+    setSearchTerm(searchValue);
   };
+  const fetchCourses = () => {
+    try {
+      setIsLoading(true);
+      dispatch(getAllCoursesAPI({ page: 0, searchValue: searchTerm, size: 4 }));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [debouncedSearchTerm, dispatch]);
   // Hàm chỉnh sửa thông tin khóa học
   const handleEditCourse = (courseItem) => {
     setEditCourseInfo(courseItem);
@@ -161,6 +185,7 @@ export default function Course() {
   const handleSave = async (courseEdit) => {
     try {
       await editCourse(courseEdit);
+      setPagination(1);
       setFlag(!flag);
       closeFormEdit();
     } catch (error) {
@@ -219,11 +244,15 @@ export default function Course() {
         </div>
         <div className="table-container relative">
           <div className="mb-8">
-            <Table
-              columns={columns}
-              dataSource={allCourses?.courses}
-              pagination={false}
-            />
+            {isLoading ? (
+              <>Loading</>
+            ) : (
+              <Table
+                columns={columns}
+                dataSource={dataSource}
+                pagination={false}
+              />
+            )}
           </div>
           <div className="flex justify-center">
             <Pagination

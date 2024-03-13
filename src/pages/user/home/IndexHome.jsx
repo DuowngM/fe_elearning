@@ -31,7 +31,7 @@ function IndexHome() {
   const dispatch = useDispatch();
   //#endregion
   useEffect(() => {
-    dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
+    dispatch(getAllCoursesAPI({ page: 0, size: 4, home: "home" }));
   }, []);
   // component Phương pháp đào tạo lập trình ưu việt
   const dataStaticTranding = [
