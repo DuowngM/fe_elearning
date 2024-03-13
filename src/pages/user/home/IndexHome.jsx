@@ -7,11 +7,11 @@ import bootcamIcon from "/images/BootcamIcon.jpg";
 import people from "/images/people.jpg";
 import verify from "/images/verify.jpg";
 import teacher from "/images/teacher.jpg";
+import book from "/images/book.jpg";
 import teacherQuang from "/images/teacher_quang.png";
 import teacherTung from "/images/teacher_tung.png";
 import teacherDung from "/images/teacher_dung.png";
 import teacherLam from "/images/teacher_lam.png";
-import book from "/images/book.jpg";
 import personBg from "/images/person_bg.png";
 import IconDone from "/images/IconDone.svg";
 import {
