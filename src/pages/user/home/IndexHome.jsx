@@ -3,7 +3,7 @@ import { Fragment, useEffect } from "react";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import studensBanner from "/images/studens_banner.jpg";
 import contract from "/images/Contract.jpg";
-import bootcamIcon from "/images/Contract.jpg";
+import bootcamIcon from "/images/BootcamIcon.jpg";
 import people from "/images/people.jpg";
 import verify from "/images/verify.jpg";
 import teacher from "/images/teacher.jpg";

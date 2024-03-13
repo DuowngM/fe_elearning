@@ -5,7 +5,6 @@ import {
   AccordionSummary,
   Box,
   Breadcrumbs,
-  Grid,
   Link,
   Stack,
 } from "@mui/material";
@@ -104,12 +103,16 @@ const CourseDetailMain = () => {
                 </p>
               </Breadcrumbs>
             </Stack>
-            <Stack direction="row" justifyContent="between">
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              sx={{ height: "30rem" }}
+            >
               <Box
                 sx={{
                   borderRadius: "1rem",
-                  overflow: "auto",
-                  width: "100%",
+                  overflow: `${sourceVideo ? "hidden" : "auto"}`,
+                  width: "80%",
                   position: "relative",
                   maxWidth: "850px",
                 }}
@@ -148,7 +151,11 @@ const CourseDetailMain = () => {
                       }
                       aria-controls={`panel${chapter.id}-content`}
                       id={`panel${chapter.id}-header`}
-                      sx={{ minHeight: "4rem", color: "#BC2228" }}
+                      sx={{
+                        minHeight: "4rem",
+                        color: "#BC2228",
+                        borderRadius: "20px",
+                      }}
                     >
                       {chapter?.title}
                     </AccordionSummary>
