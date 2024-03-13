@@ -10,7 +10,6 @@ function IndexUser() {
       {/* body */}
       <Outlet />
 
-      
       {/* footer */}
       <FooterUser />
     </div>

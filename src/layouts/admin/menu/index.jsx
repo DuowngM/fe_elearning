@@ -8,11 +8,11 @@ export default function Menu() {
     <>
       <menu className="w-[200px] bg-[#041434] px-3 text-white h-[100vh] pt-6">
         <div className="flex flex-col gap-1" id="admin-menu">
-          <NavLink to="/admin" end>
+          <NavLink to="/admin" end className="no-underline">
             <DashboardIcon />
             <span className="menu-text">Tổng quan</span>
           </NavLink>
-          <NavLink to="course">
+          <NavLink to="management" className="no-underline">
             <ManageAccountsIcon />
             <span className="menu-text">Quản lý</span>
           </NavLink>

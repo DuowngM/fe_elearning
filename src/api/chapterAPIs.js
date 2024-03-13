@@ -28,3 +28,22 @@ export const addNewChapter = async (newChapter) => {
     console.log(error);
   }
 };
+export const editChapterAPIs = async (infoChapter) => {
+  let chapter = {
+    title: infoChapter.title,
+    description: infoChapter.description,
+    course: {
+      id: infoChapter.id,
+    },
+  };
+  try {
+    const response = await jsonAxios.put(
+      `api/v1/chapter/update/${infoChapter.chapterId}`,
+      chapter
+    );
+    notify("success", "Sửa chương học thành công");
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

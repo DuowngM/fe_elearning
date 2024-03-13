@@ -13,9 +13,12 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
   const [imageFile, setImageFile] = useState();
   const [subDescription, setSubDescription] = useState("");
   const formRef = useRef(null);
+  const [courseStatus, setCourseStatus] = useState(
+    courseInfo?.voided ? "inactive" : "active"
+  );
   const handleClickOutside = (event) => {
     if (formRef.current && !formRef.current.contains(event.target)) {
-      closeForm(); // Đóng form nếu click bên ngoài form
+      closeFormEdit(); // Đóng form nếu click bên ngoài form
     }
   };
   // Gán giá trị cho các state từ props courseInfo khi component được render
@@ -48,6 +51,7 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
       description,
       imageFile: imageFile ? imageFile : null,
       subDescription,
+      voided: courseStatus === "active" ? false : true,
     });
     resetField();
   };
@@ -113,6 +117,31 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
                   }}
                 />
               )}
+            </div>
+            <div>
+              <label htmlFor="">Trạng thái: </label>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    value="active"
+                    checked={courseStatus === "active"}
+                    onChange={() => setCourseStatus("active")}
+                  />
+                  <span className="text-green-600 font-bold">
+                    Đang hoạt động
+                  </span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="inactive"
+                    checked={courseStatus === "inactive"}
+                    onChange={() => setCourseStatus("inactive")}
+                  />
+                  <span className="text-red-600 font-bold">Bị khóa</span>
+                </label>
+              </div>
             </div>
           </div>
           <div className="mt-[20px]">

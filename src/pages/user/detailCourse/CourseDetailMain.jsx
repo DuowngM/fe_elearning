@@ -40,7 +40,6 @@ const CourseDetailMain = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  console.log(description);
   return (
     <>
       <div className="w-full">
@@ -56,9 +55,9 @@ const CourseDetailMain = () => {
                 {sourceVideo ? (
                   <VideoComponent sourceVideo={sourceVideo} />
                 ) : (
-                  <>
+                  <div className="bg-slate-50">
                     <div dangerouslySetInnerHTML={{ __html: description }} />
-                  </>
+                  </div>
                 )}
               </div>
               <div className="max-w-[600px] w-full flex flex-col">
@@ -114,7 +113,7 @@ const CourseDetailMain = () => {
                             >
                               {item?.title}
                             </p>
-                            <div>
+                            <div className="flex items-center">
                               <img src="/images/Playbtn.png" alt="" />
                             </div>
                           </AccordionDetails>

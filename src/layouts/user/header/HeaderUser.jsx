@@ -5,6 +5,7 @@ import LoginForm from "../../../components/auth/LoginForm";
 import RegisterForm from "../../../components/auth/RegisterForm";
 import { getPhone, login, register } from "../../../api/userAPIs";
 import Cookies from "js-cookie";
+import { notify } from "../../../utils/notification";
 
 function HeaderUser() {
   const [showFormLogin, setShowFormLogin] = useState(false);
@@ -41,40 +42,31 @@ function HeaderUser() {
   };
   //Hàm xử lý đăng nhập
   const handleLogin = async (infoUser) => {
-    try {
-      const response = await login(infoUser);
-      const { accessToken, expired, roles, fullName } = response.data;
-      setUser(fullName);
-      localStorage.setItem("user", fullName);
-      localStorage.setItem("roles", JSON.stringify(roles[0]));
-      // Lưu accessToken vào cookies
-      Cookies.set("accessToken", accessToken, {
-        expires: expired / (24 * 60 * 60 * 1000),
-        secure: true,
-        sameSite: "strict",
-      });
+    const response = await login(infoUser);
+    const { accessToken, expired, roles, fullName } = response.data;
+    setUser(fullName);
+    localStorage.setItem("user", fullName);
+    localStorage.setItem("roles", JSON.stringify(roles[0]));
+    // Lưu accessToken vào cookies
+    Cookies.set("accessToken", accessToken, {
+      expires: expired / (24 * 60 * 60 * 1000),
+      secure: true,
+      sameSite: "strict",
+    });
 
-      closeFormLogin();
+    closeFormLogin();
 
-      // Xử lý chuyển hướng nếu cần
-      if (roles[0] === import.meta.env.VITE_ADMIN_ROLE) {
-        console.log("zo");
-        window.location.href = "/admin";
-      }
-    } catch (error) {
-      console.log(error);
+    // Xử lý chuyển hướng nếu cần
+    if (roles[0] === import.meta.env.VITE_ADMIN_ROLE) {
+      window.location.href = "/admin";
     }
   };
   // hàm xử lý đăng ký
   const handleRegister = async (newUser) => {
-    try {
-      await getPhone({ phone: newUser.phone, fullName: newUser.fullName });
-      await register(newUser);
-      closeFormRegister();
-      openFormLogin();
-    } catch (error) {
-      console.log(error);
-    }
+    await getPhone({ phone: newUser.phone, fullName: newUser.fullName });
+    await register(newUser);
+    closeFormRegister();
+    openFormLogin();
   };
   // Hàm xử lý đăng xuất
   const handleLogout = () => {
@@ -99,7 +91,7 @@ function HeaderUser() {
           />
         </Link>
       </div>
-      <div className="flex ">
+      {/* <div className="flex ">
         <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
           <p>Khóa học</p>
           <img
@@ -124,7 +116,7 @@ function HeaderUser() {
             className="w-[14px] h-[9px] "
           />
         </div>
-      </div>
+      </div> */}
       <div className="actions flex gap-3 items-center">
         {user ? (
           <>

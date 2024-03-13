@@ -12,7 +12,7 @@ export default function LoginForm({ closeForm, handleLogin, toggleForms }) {
   const formRef = useRef(null);
   const handleClickOutside = (event) => {
     if (formRef.current && !formRef.current.contains(event.target)) {
-      closeForm(); // Đóng form nếu click bên ngoài form
+      closeForm();
     }
   };
   // Hàm đăng nhập
