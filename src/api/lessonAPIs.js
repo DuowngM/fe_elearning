@@ -32,7 +32,7 @@ export const editLesson = async (infoLesson) => {
   let lesson = {
     title: infoLesson.title,
     description: infoLesson.description,
-    video: infoLesson.linkVideo,
+    video: infoLesson.video,
     resources: infoLesson.source,
     chapterDto: {
       id: infoLesson.chapterId,

@@ -46,7 +46,7 @@ function HeaderUser() {
     const { accessToken, expired, roles, fullName } = response.data;
     setUser(fullName);
     localStorage.setItem("user", fullName);
-    localStorage.setItem("roles", JSON.stringify(roles[0]));
+    localStorage.setItem("roles", JSON.stringify(roles));
     // Lưu accessToken vào cookies
     Cookies.set("accessToken", accessToken, {
       expires: expired / (24 * 60 * 60 * 1000),
@@ -55,9 +55,12 @@ function HeaderUser() {
     });
 
     closeFormLogin();
+    const check = roles.some(
+      (item) => item === import.meta.env.VITE_ADMIN_ROLE
+    );
 
     // Xử lý chuyển hướng nếu cần
-    if (roles[0] === import.meta.env.VITE_ADMIN_ROLE) {
+    if (check) {
       window.location.href = "/admin";
     }
   };

@@ -33,7 +33,7 @@ function IndexHome() {
   const navigate = useNavigate();
   //#endregion
   useEffect(() => {
-    dispatch(getAllCoursesAPI({ page: 0, size: 4, home: "home" }));
+    dispatch(getAllCoursesAPI({ page: 0, size: 6, home: "home" }));
   }, []);
   // component Phương pháp đào tạo lập trình ưu việt
   const dataStaticTranding = [
@@ -235,8 +235,9 @@ function IndexHome() {
                     color: "white",
                     borderColor: "white",
                   }}
+                  onClick={() => navigate("/course")}
                 >
-                  Kiểm tra độ phù hợp
+                  Các khóa học
                 </Button>
               </Stack>
             </Box>
@@ -286,8 +287,12 @@ function IndexHome() {
                       Nhận tư vấn 1:1
                     </Button>
 
-                    <Button variant="outlined" sx={{ fontSize: "1rem" }}>
-                      Kiểm tra độ phù hợp
+                    <Button
+                      variant="outlined"
+                      sx={{ fontSize: "1rem" }}
+                      onClick={() => navigate("/course")}
+                    >
+                      Các khóa học
                     </Button>
                   </Stack>
                 </div>
