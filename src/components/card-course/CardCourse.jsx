@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { notify } from "../../utils/notification";
 import { useNavigate } from "react-router";
 import { Button, Grid, Stack, Typography } from "@mui/material";
+
 export default function CardCourse({ item }) {
   const navigate = useNavigate();
   const getAccessTokenFromCookies = () => {
@@ -26,46 +27,31 @@ export default function CardCourse({ item }) {
   };
 
   return (
-    <Grid item xs={6}>
-      <div className="w-full h-96 bg-[#D9D9D9]">
+    <Grid item xs={4}>
+      <div className="rounded-lg shadow-md overflow-hidden w-full h-80">
         <img
           src={import.meta.env.VITE_API_URL_IMG + item.image}
-          className="w-full h-full"
+          alt={item.title}
+          className="w-full h-full object-cover"
         />
       </div>
-      <Stack direction={"row"} spacing={2} alignItems={"center"}>
+      <Stack direction="row" spacing={2} alignItems="center" mt={2}>
         <Typography
           component="h4"
           variant="h6"
-          sx={{
-            fontWeight: "medium",
-            color: "#231651",
-            marginY: 1,
-            lineHeight: 3,
-          }}
+          className="text-lg font-medium text-gray-800"
         >
           {item.title}
         </Typography>
         <Button
           variant="outlined"
-          sx={{
-            fontSize: "0,5rem",
-            fontWeight: "500",
-            color: "#BC2228",
-            borderColor: "#BC2228",
-            padding: "0.3rem",
-          }}
+          className="text-base font-medium text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded-md shadow focus:outline-none"
           onClick={handleLearn}
         >
           Truy cập ngay
         </Button>
       </Stack>
-      <Typography
-        sx={{
-          color: "#231651",
-          fontWeight: 600,
-        }}
-      >
+      <Typography className="text-gray-600 mt-1">
         {item.subDescription}
       </Typography>
     </Grid>
