@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function SimilarCourses({ item }) {
   const navigate = useNavigate();
   const navigateDetail = () => {
-    navigate(`/detailCourse/${item.id}`);
+    navigate(`/detailcourse/${item.id}`);
   };
   return (
     <div className="p-2  bg-white flex justify-between w-[calc(50%-40px)]  hover:shadow-md overflow-hidden rounded-lg">

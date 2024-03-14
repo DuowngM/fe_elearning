@@ -31,7 +31,7 @@ function IndexHome() {
   const dispatch = useDispatch();
   //#endregion
   useEffect(() => {
-    dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
+    dispatch(getAllCoursesAPI({ page: 0, size: 6 }));
   }, []);
   // component Phương pháp đào tạo lập trình ưu việt
   const dataStaticTranding = [
@@ -442,7 +442,7 @@ function IndexHome() {
 
         {/* ----------------------------------------------------------- Khóa học và bài giảng chất lượng cao ------------------------------------------ */}
         <Box className="w-full bg-[#F8F7FA]">
-          <div className="max-w-[1800px] mx-auto  py-32">
+          <div className="max-w-[1500px] mx-auto  py-32">
             <Typography
               component="h1"
               variant="h3"
@@ -469,7 +469,7 @@ function IndexHome() {
             </Typography>
             <Box
               sx={{
-                maxWidth: "1600px",
+                maxWidth: "1500px",
                 width: "100%",
                 marginX: "auto",
                 marginY: 0,
@@ -577,7 +577,7 @@ function IndexHome() {
             </div>
           </Box> */}
         <Box className="w-full  my-32">
-          <div className="max-w-[1800px] mx-auto  py-32">
+          <div className="max-w-[1500px] mx-auto  py-32">
             <Typography
               component="h1"
               variant="h3"

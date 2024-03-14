@@ -26,7 +26,7 @@ const routesConfig = [
     path: "/",
     element: <IndexUser />,
     children: [
-      { path: "detailCourse/:id", element: <CourseDetailMain /> },
+      { path: "detailcourse/:id", element: <CourseDetailMain /> },
       { path: "/", element: <IndexHome /> },
       { path: "course", element: <CoursePage /> },
     ],

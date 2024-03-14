@@ -36,7 +36,7 @@ const CourseDetailMain = () => {
   useEffect(() => {
     dispatch(getChaptersThunk(id));
     dispatch(getLessonsThunk());
-    dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
+    dispatch(getAllCoursesAPI({ page: 0, size: 4}));
   }, [dispatch, id]);
 
   // Nhóm dữ liệu lại
@@ -103,18 +103,15 @@ const CourseDetailMain = () => {
                 </p>
               </Breadcrumbs>
             </Stack>
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              sx={{ height: "30rem" }}
-            >
+            <Stack direction="row" justifyContent="space-between" space={4}>
               <Box
                 sx={{
                   borderRadius: "1rem",
                   overflow: `${sourceVideo ? "hidden" : "auto"}`,
-                  width: "80%",
+                  width: "75%",
                   position: "relative",
-                  maxWidth: "850px",
+                  maxWidth: "100%",
+                  height: "610px",
                 }}
               >
                 {sourceVideo ? (
@@ -125,15 +122,11 @@ const CourseDetailMain = () => {
                   </>
                 )}
               </Box>
-
-              <Stack
-                direction="column"
-                sx={{ maxWidth: "600px", width: "100%" }}
-              >
+              <Stack direction="column" sx={{ maxWidth: "20%", width: "100%" }}>
                 {groupedContentItems?.map((chapter) => (
                   <Accordion
                     sx={{ maxHeight: "50%" }}
-                    className="text-xl font-medium text-[#170F49] px-6"
+                    className=" font-medium text-[#170F49]"
                     expanded={expanded === `panel${chapter.id}`}
                     onChange={handleChange(`panel${chapter.id}`)}
                     key={chapter.id}
@@ -142,34 +135,39 @@ const CourseDetailMain = () => {
                       expandIcon={
                         expanded === `panel${chapter.id}` ? (
                           <RemoveIcon
-                            fontSize="large"
+                            fontSize="medium"
                             sx={{ color: "#BC2228" }}
                           />
                         ) : (
-                          <AddIcon fontSize="large" sx={{ color: "#BC2228" }} />
+                          <AddIcon
+                            fontSize="medium"
+                            sx={{ color: "#BC2228" }}
+                          />
                         )
                       }
                       aria-controls={`panel${chapter.id}-content`}
                       id={`panel${chapter.id}-header`}
                       sx={{
-                        minHeight: "4rem",
+                        minHeight: "2rem",
                         color: "#BC2228",
                         borderRadius: "20px",
+                        fontSize: "16px",
                       }}
                     >
                       {chapter?.title}
                     </AccordionSummary>
-                    <div className="overflow-auto max-h-64 bg-white rounded-[20px] pb-3">
+                    <div className="overflow-auto max-h-64 bg-white rounded-[20px] ">
                       <Divider />
                       {chapter?.lessons?.length > 0 ? (
                         chapter.lessons?.map((item) => (
                           <AccordionDetails
                             sx={{
-                              padding: "12px 16px 0 24px",
+                              height: "60px",
                               display: "flex",
                               justifyContent: "space-between",
                               cursor: "pointer",
                               alignItems: "center",
+                              fontSize: "16px",
                             }}
                             key={item.id}
                             onClick={() => {
@@ -191,7 +189,7 @@ const CourseDetailMain = () => {
                               <img
                                 src="/images/Playbtn.png"
                                 alt=""
-                                className="w-7 h-7"
+                                className="w-5 h-5"
                               />
                             </div>
                           </AccordionDetails>
