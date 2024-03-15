@@ -14,6 +14,7 @@ import teacherDung from "/images/teacher_dung.png";
 import teacherLam from "/images/teacher_lam.png";
 import personBg from "/images/person_bg.png";
 import IconDone from "/images/IconDone.svg";
+import Introducing from "/images/introducing.jpg";
 import {
   Box,
   Button,
@@ -249,7 +250,9 @@ function IndexHome() {
           <div className="  max-h-[550px] h-full bg-[#F2F2F2] py-40  flex items-center justify-center">
             <div className="max-w-[1500px] h-full flex items-center justify-center">
               <div className="mr-[100px] w-1/2 ">
-                <div className="w-full h-[400px] bg-[#B4B4B4]"></div>
+                <div className="w-full h-[400px] bg-[#B4B4B4]">
+                  <img src={Introducing} className="w-full h-full" alt="" />
+                </div>
               </div>
               <div className="w-1/2">
                 <div className="w-3/4">
@@ -288,10 +291,14 @@ function IndexHome() {
 
                     <Button
                       variant="outlined"
-                      sx={{ fontSize: "1rem" }}
-                      onClick={() => navigate("/course")}
+                      sx={{
+                        fontSize: "1rem",
+                        borderColor: "#fff",
+                        color: "#BC2228",
+                        bgcolor: "#fff",
+                      }}
                     >
-                      Các khóa học
+                      Kiểm tra độ phù hợp
                     </Button>
                   </Stack>
                 </div>
