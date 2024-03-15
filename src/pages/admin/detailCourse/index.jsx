@@ -3,13 +3,21 @@ import FormAddChapter from "../../../components/form/FormAddChapter";
 import FormAddLesson from "../../../components/form/FormAddLesson";
 import { addNewChapter, editChapterAPIs } from "../../../api/chapterAPIs";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import {
   addNewLesson,
   deleteLesson,
   editLesson,
 } from "../../../api/lessonAPIs";
 import AddIcon from "@mui/icons-material/Add";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Avatar,
+  IconButton,
+} from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Divider from "@mui/material/Divider";
 import React, { useEffect, useState } from "react";
@@ -209,140 +217,165 @@ export default function DetailCourse() {
         />
       )}
       <div className="w-full">
-        <div className="bg-[#f8f8f8] shadow-lg py-20 overflow-hidden rounded-3xl">
-          <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg ml-16 mb-10">
-            <span className="text-rikkei">Khóa học: </span>
-            {chapters[0]?.courseName}{" "}
-          </h1>
-
+        <div className="bg-[#f8f8f8]  py-20 overflow-hidden h-full">
           <div className="my-0 mx-auto max-w-[1500px]">
-            <button onClick={() => setChoice("video")}>video</button>
-            <button onClick={() => setChoice("lesson")}>Bài học</button>
-            <button onClick={handleSaveDescription}>Lưu</button>
-            <div className="flex flex-wrap justify-between min-h-[500px]">
-              <div className="rounded-2xl overflow-hidden max-w-[850px] w-full relative">
-                {choice === "video" ? (
-                  <VideoComponent sourceVideo={sourceVideo} />
-                ) : (
-                  <div className="bg-slate-50">
-                    <CKEditor
-                      config={{
-                        extraPlugins: [uploadPlugins],
-                        styles: {
-                          content: {
-                            height: "fit-content",
-                            overflowY: "hidden",
+            <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg mb-10">
+              <span className="text-rikkei">Khóa học: </span>
+              {chapters[0]?.courseName}{" "}
+            </h1>
+            <div className="my-0 mx-auto max-w-[1500px]">
+              <button onClick={() => setChoice("video")}>video</button>
+              <button onClick={() => setChoice("lesson")}>Bài học</button>
+              <button onClick={handleSaveDescription}>Lưu</button>
+              <div className="flex flex-wrap justify-between">
+                <div className="rounded-2xl overflow-hidden max-w-[850px] w-full relative h-[610px] ">
+                  {choice === "video" ? (
+                    <VideoComponent sourceVideo={sourceVideo} />
+                  ) : (
+                    <div className="bg-slate-50">
+                      <CKEditor
+                        config={{
+                          extraPlugins: [uploadPlugins],
+                          styles: {
+                            content: {
+                              height: "fit-content",
+                              overflowY: "hidden",
+                            },
                           },
-                        },
-                      }}
-                      editor={ClassicEditor}
-                      data={description}
-                      onReady={(editor) => {}}
-                      onChange={handleEditorChange}
-                      style={{ maxHeight: "500px", overflowY: "auto" }}
-                    />
-                  </div>
-                )}
-              </div>
-              <div className="max-w-[600px] w-full flex flex-col">
-                {groupedContentItems?.map((chapter) => (
-                  <Accordion
-                    sx={{ maxHeight: "50%" }}
-                    className="text-xl font-medium text-[#170F49] "
-                    expanded={expanded === `panel${chapter.id}`}
-                    onChange={handleChange(`panel${chapter.id}`)}
-                    key={chapter.id}
-                    onClick={() => setIdChapter(chapter.id)}
-                  >
-                    <AccordionSummary
-                      expandIcon={
-                        expanded === `panel${chapter.id}` ? (
-                          <RemoveIcon
-                            fontSize="large"
-                            sx={{ color: "#BC2228" }}
-                          />
-                        ) : (
-                          <AddIcon fontSize="large" sx={{ color: "#BC2228" }} />
-                        )
-                      }
-                      aria-controls={`panel${chapter.id}-content`}
-                      id={`panel${chapter.id}-header`}
-                      sx={{ minHeight: "4rem", color: "#BC2228" }}
-                    >
-                      {chapter?.title}{" "}
-                      <EditOutlined
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          handleEditChapter(chapter);
                         }}
-                        style={{ color: "blue", marginLeft: 10 }}
+                        editor={ClassicEditor}
+                        data={description}
+                        onReady={(editor) => {}}
+                        onChange={handleEditorChange}
+                        style={{ maxHeight: "500px", overflowY: "auto" }}
                       />
-                    </AccordionSummary>
-                    <div
-                      onClick={() => handleOpenFormLesson(chapter.id)}
-                      className="cursor-pointer font-bold text-blue-500 hover:bg-blue-100 transition duration-300 ease-in-out transform hover:scale-105 p-2 rounded-lg ml-5"
+                    </div>
+                  )}
+                </div>
+                <div className="max-w-[600px] w-full flex flex-col bg-white max-h-[610px] p-2 overflow-y-auto">
+                  {groupedContentItems?.map((chapter) => (
+                    <Accordion
+                      sx={{ maxHeight: "50%" }}
+                      className="text-xl font-medium text-[#170F49] "
+                      expanded={expanded === `panel${chapter.id}`}
+                      onChange={handleChange(`panel${chapter.id}`)}
+                      key={chapter.id}
+                      onClick={() => setIdChapter(chapter.id)}
                     >
-                      <AddCircleIcon /> Thêm bài học...
-                    </div>
-                    <div className="overflow-auto max-h-64 bg-white rounded-[20px] pb-3">
-                      <Divider />
-                      {chapter?.lessons?.length > 0 ? (
-                        chapter.lessons.map((item) => (
-                          <AccordionDetails
-                            sx={{
-                              padding: "12px 16px 0 24px",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              cursor: "pointer",
-                            }}
-                            key={item.id}
-                            onClick={() => {
-                              setSourceVideo(item.video);
-                              setSelectedLesson(item);
-                              setDescription(item.description);
-                            }}
-                          >
-                            <p
-                              className={`max-w-[80%] ${
-                                selectedLesson?.id === item.id
-                                  ? "text-red-500"
-                                  : ""
-                              }`}
+                      <AccordionSummary
+                        expandIcon={
+                          expanded === `panel${chapter.id}` ? (
+                            <RemoveIcon
+                              fontSize="small"
+                              sx={{ color: "#BC2228" }}
+                            />
+                          ) : (
+                            <AddIcon
+                              fontSize="small"
+                              sx={{ color: "#BC2228" }}
+                            />
+                          )
+                        }
+                        aria-controls={`panel${chapter.id}-content`}
+                        id={`panel${chapter.id}-header`}
+                        sx={{
+                          minHeight: "2rem",
+                          color: "#BC2228",
+                          borderRadius: "20px",
+                          fontSize: "16px",
+                        }}
+                      >
+                        <p className="m-0">{chapter?.title}</p>
+                        <IconButton
+                          color="primary"
+                          aria-label="add source"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            handleEditChapter(chapter);
+                          }}
+                          sx={{
+                            width: "2rem",
+                            height: "2rem",
+                            ml: "10px",
+                          }}
+                        >
+                          <EditIcon fontSize="small" />
+                        </IconButton>
+                      </AccordionSummary>
+                      <div
+                        onClick={() => handleOpenFormLesson(chapter.id)}
+                        className="cursor-pointer font-medium text-blue-500 hover:bg-blue-100 transition duration-300 ease-in-out transform p-2 rounded-lg mx-5 flex items-center gap-2"
+                      >
+                        <AddCircleIcon /> <span> Thêm bài học...</span>
+                      </div>
+                      <div className="overflow-y-auto max-h-40 bg-white rounded-[20px] ">
+                        {chapter?.lessons?.length > 0 ? (
+                          chapter.lessons.map((item) => (
+                            <AccordionDetails
+                              sx={{
+                                height: "60px",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                cursor: "pointer",
+                                alignItems: "center",
+                                fontSize: "16px",
+                              }}
+                              key={item.id}
+                              onClick={() => {
+                                setSourceVideo(item.video);
+                                setSelectedLesson(item);
+                                setDescription(item.description);
+                              }}
                             >
-                              {item?.title}
-                            </p>
+                              <p
+                                className={`max-w-[80%] ${
+                                  selectedLesson?.id === item.id
+                                    ? "text-red-500"
+                                    : ""
+                                }`}
+                              >
+                                {item?.title}
+                              </p>
 
-                            <div className="flex items-center">
-                              <EditOutlined
-                                onClick={(event) => {
-                                  event.stopPropagation();
-                                  handleEditLesson(item);
-                                }}
-                                style={{ color: "blue", marginRight: 10 }}
-                              />
-                              <DeleteOutlined
-                                onClick={(event) => {
-                                  event.stopPropagation();
-                                  handleDeleteLesson(item.id);
-                                }}
-                                style={{ color: "red" }}
-                              />
-                            </div>
-                          </AccordionDetails>
-                        ))
-                      ) : (
-                        <div style={{ padding: "12px 16px" }}>
-                          Coming soon...
-                        </div>
-                      )}
-                    </div>
-                  </Accordion>
-                ))}
-                <div
-                  onClick={handleOpenFormChapter}
-                  className="ml-5 text-2xl cursor-pointer font-bold mt-10 text-blue-500 hover:bg-blue-100 transition duration-300 ease-in-out transform hover:scale-105 p-2 rounded-lg flex items-center justify-center"
-                >
-                  <AddCircleIcon /> Thêm chương học mới
+                              <div className="flex items-center ">
+                                <IconButton
+                                  color="primary"
+                                  aria-label="add to shopping cart"
+                                  onClick={(event) => {
+                                    event.stopPropagation();
+                                    handleEditLesson(item);
+                                  }}
+                                >
+                                  <EditIcon fontSize="small" />
+                                </IconButton>
+                                <IconButton
+                                  aria-label="delete"
+                                  color="error"
+                                  onClick={(event) => {
+                                    event.stopPropagation();
+                                    handleDeleteLesson(item.id);
+                                  }}
+                                >
+                                  <DeleteIcon fontSize="small" />
+                                </IconButton>
+                              </div>
+                            </AccordionDetails>
+                          ))
+                        ) : (
+                          <div style={{ padding: "12px 16px" }}>
+                            Coming soon...
+                          </div>
+                        )}
+                      </div>
+                    </Accordion>
+                  ))}
+
+                  <div
+                    onClick={handleOpenFormChapter}
+                    className="text-xl cursor-pointer font-semibold mt-5 text-blue-500 gap-2 hover:bg-blue-100 transition duration-300 ease-in-out transform p-2 rounded-lg flex items-center justify-center"
+                  >
+                    <AddCircleIcon /> Thêm chương học mới
+                  </div>
                 </div>
               </div>
             </div>
