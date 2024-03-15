@@ -101,7 +101,10 @@ const CourseDetailMain = () => {
                 >
                   Khóa học
                 </Link>
-                <p key="3" className="text-[#BC2228] font-semibold text-2xl">
+                <p
+                  key="3"
+                  className="text-[#BC2228] font-semibold text-2xl cursor-pointer"
+                >
                   {chapters[0]?.courseName}
                 </p>
               </Breadcrumbs>
