@@ -65,7 +65,12 @@ export default function CardCourse({ item }) {
           </CardContent>
         </Box>
         <CardActions>
-          <Button color="error" size="large"  variant="outlined" onClick={handleLearn} >
+          <Button
+            color="error"
+            size="large"
+            variant="outlined"
+            onClick={handleLearn}
+          >
             Học ngay
           </Button>
         </CardActions>

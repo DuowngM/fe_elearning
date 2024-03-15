@@ -51,6 +51,11 @@ const CourseDetailMain = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
+  // Breadcrumbs
+  function handleClickNav(event) {
+    event.preventDefault();
+    console.info("You clicked a breadcrumb.");
+  }
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -78,23 +83,28 @@ const CourseDetailMain = () => {
                   underline="hover"
                   key="1"
                   color="#BC2228"
+                  onClick={() => navigate("/")}
                   fontWeight={700}
                   fontSize={"1.5rem"}
-                  onClick={() => navigate("/")}
+                  className="cursor-pointer"
                 >
-                  Home
+                  Trang chủ
                 </Link>
                 <Link
                   underline="hover"
                   key="2"
                   color="#BC2228"
+                  onClick={() => navigate("/course")}
                   fontWeight={700}
                   fontSize={"1.5rem"}
-                  onClick={() => navigate("/course")}
+                  className="cursor-pointer"
                 >
                   Courses
                 </Link>
-                <p key="3" className="text-[#BC2228] font-semibold text-2xl">
+                <p
+                  key="3"
+                  className="text-[#BC2228] font-semibold text-2xl cursor-pointer"
+                >
                   {chapters[0]?.courseName}
                 </p>
               </Breadcrumbs>
@@ -113,9 +123,9 @@ const CourseDetailMain = () => {
                 {sourceVideo ? (
                   <VideoComponent sourceVideo={sourceVideo} />
                 ) : (
-                  <div className="bg-slate-50">
+                  <>
                     <div dangerouslySetInnerHTML={{ __html: description }} />
-                  </div>
+                  </>
                 )}
               </Box>
               <Stack direction="column" sx={{ maxWidth: "20%", width: "100%" }}>
@@ -181,8 +191,12 @@ const CourseDetailMain = () => {
                             >
                               {item?.title}
                             </p>
-                            <div className="flex items-center">
-                              <img src="/images/Playbtn.png" alt="" />
+                            <div className="">
+                              <img
+                                src="/images/Playbtn.png"
+                                alt=""
+                                className="w-5 h-5"
+                              />
                             </div>
                           </AccordionDetails>
                         ))
