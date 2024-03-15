@@ -10,9 +10,9 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Stack,
   Typography,
 } from "@mui/material";
+import { object } from "prop-types";
 export default function CardCourse({ item }) {
   const navigate = useNavigate();
   const getAccessTokenFromCookies = () => {
@@ -35,17 +35,12 @@ export default function CardCourse({ item }) {
     navigate(`/detailcourse/${item.id}`);
   };
 
-  console.log(import.meta.env.VITE_API_URL_IMG + item.image);
-
   return (
     <Grid item xs={4}>
       <Card
         sx={{
           maxWidth: "100%",
           minHeight: "300px",
-          // display: "flex",
-          // flexDirection: "column",
-          // justifyContent: "space-between",
         }}
       >
         <Box>
@@ -54,6 +49,7 @@ export default function CardCourse({ item }) {
             alt="green iguana"
             height="280"
             image={import.meta.env.VITE_API_URL_IMG + item.image}
+            sx={{ objectFit: "fill" }}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">

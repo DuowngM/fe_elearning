@@ -6,7 +6,7 @@ export const getAllLessons = async () => {
     const response = await jsonAxios.get("api/v1/lesson/get-all");
     return response.data;
   } catch (error) {
-    notify("error", "Có lỗi khi lấy dữ liệu bài học");
+    notify("error", "Bạn không có quyền xem trang này");
   }
 };
 export const addNewLesson = async (infoLesson) => {

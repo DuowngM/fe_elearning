@@ -1,8 +1,6 @@
 import { notify } from "../utils/notification";
 import { formDataAxios } from "./api.base.url";
-export const uploadImg = async (file) => {
-  const formData = new FormData();
-  formData.append("file", file);
+export const uploadImg = async (formData) => {
   try {
     const response = await formDataAxios.post(
       "api/v1/file/upload-file",

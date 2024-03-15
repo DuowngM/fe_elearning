@@ -485,7 +485,7 @@ function IndexHome() {
             </Typography>
             <Box
               sx={{
-                maxWidth: "1600px",
+                maxWidth: "1500px",
                 width: "100%",
                 marginX: "auto",
                 marginY: 0,
