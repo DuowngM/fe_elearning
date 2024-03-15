@@ -12,7 +12,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import Divider from "@mui/material/Divider";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getChaptersThunk } from "../../../redux/reducer/chapterSlice";
 import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
 import SimilarCourses from "../../../components/similarCourses/SimilarCourses";
@@ -31,6 +31,7 @@ const CourseDetailMain = () => {
     "https://www.youtube.com/embed/vdKE_Tz8cy0"
   );
   const [selectedLessonId, setSelectedLessonId] = useState(null);
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -50,11 +51,6 @@ const CourseDetailMain = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  // Breadcrumbs
-  function handleClickNav(event) {
-    event.preventDefault();
-    console.info("You clicked a breadcrumb.");
-  }
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -82,9 +78,9 @@ const CourseDetailMain = () => {
                   underline="hover"
                   key="1"
                   color="#BC2228"
-                  onClick={handleClickNav}
                   fontWeight={700}
                   fontSize={"1.5rem"}
+                  onClick={() => navigate("/")}
                 >
                   Home
                 </Link>
@@ -92,14 +88,14 @@ const CourseDetailMain = () => {
                   underline="hover"
                   key="2"
                   color="#BC2228"
-                  onClick={handleClickNav}
                   fontWeight={700}
                   fontSize={"1.5rem"}
+                  onClick={() => navigate("/course")}
                 >
                   Courses
                 </Link>
                 <p key="3" className="text-[#BC2228] font-semibold text-2xl">
-                  Courses A
+                  {chapters[0]?.courseName}
                 </p>
               </Breadcrumbs>
             </Stack>
@@ -117,9 +113,9 @@ const CourseDetailMain = () => {
                 {sourceVideo ? (
                   <VideoComponent sourceVideo={sourceVideo} />
                 ) : (
-                  <>
+                  <div className="bg-slate-50">
                     <div dangerouslySetInnerHTML={{ __html: description }} />
-                  </>
+                  </div>
                 )}
               </Box>
               <Stack direction="column" sx={{ maxWidth: "20%", width: "100%" }}>
@@ -185,12 +181,8 @@ const CourseDetailMain = () => {
                             >
                               {item?.title}
                             </p>
-                            <div className="">
-                              <img
-                                src="/images/Playbtn.png"
-                                alt=""
-                                className="w-5 h-5"
-                              />
+                            <div className="flex items-center">
+                              <img src="/images/Playbtn.png" alt="" />
                             </div>
                           </AccordionDetails>
                         ))

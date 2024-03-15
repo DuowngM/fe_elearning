@@ -6,6 +6,8 @@ import "../../index.css";
 import { auth } from "../../config/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { notify } from "../../utils/notification";
+import { getPhone } from "../../api/userAPIs";
+import { Button, Input } from "antd";
 
 export default function RegisterForm({
   closeForm,
@@ -34,16 +36,20 @@ export default function RegisterForm({
         formattedPhone,
         recaptcha
       );
+      // await getPhone({ phone: formattedPhone, fullName });
       setConfirmation(response);
     } catch (error) {
       console.log(error);
     }
   };
-  const verifyOTP = async () => {
+  const verifyOTP = async (event) => {
+    event.preventDefault();
+    if (!fullName || !phone || !password) {
+      return notify("error", "Vui lý điền đầy đủ thông tin");
+    }
     try {
       const data = await confirmation.confirm(otp);
       if (data) {
-        console.log("verify OTP thanh cong");
         handleRegister({
           phone,
           fullName,
@@ -98,9 +104,11 @@ export default function RegisterForm({
                   Full name
                 </label>
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none h-full top-[17%]">
-                  <PermIdentityOutlinedIcon sx={{ fontSize: "small" }} />
+                  <PermIdentityOutlinedIcon
+                    sx={{ fontSize: "small", zIndex: 100 }}
+                  />
                 </div>
-                <input
+                <Input
                   id="fullName"
                   type="text"
                   className="form-input w-full pl-10 pr-3 py-2 border rounded-md focus:border-[#f60d37] focus:ring-[#f60d37]"
@@ -114,9 +122,11 @@ export default function RegisterForm({
                   Phone Number
                 </label>
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none h-full top-[17%]">
-                  <LocalPhoneOutlinedIcon sx={{ fontSize: "small" }} />
+                  <LocalPhoneOutlinedIcon
+                    sx={{ fontSize: "small", zIndex: 100 }}
+                  />
                 </div>
-                <input
+                <Input
                   id="phone"
                   type="number"
                   className="form-input w-full pl-10 pr-3 py-2 border rounded-md focus:border-[#f60d37] focus:ring-[#f60d37]"
@@ -130,9 +140,9 @@ export default function RegisterForm({
                   Password
                 </label>
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none h-full top-[17%]">
-                  <HttpsOutlinedIcon sx={{ fontSize: "small" }} />
+                  <HttpsOutlinedIcon sx={{ fontSize: "small", zIndex: 100 }} />
                 </div>
-                <input
+                <Input
                   id="password"
                   type="password"
                   className="form-input w-full pl-10 pr-3 py-2 border rounded-md focus:border-[#f60d37] focus:ring-[#f60d37]"
@@ -142,10 +152,11 @@ export default function RegisterForm({
               </div>
 
               <div className="flex items-center space-x-2 justify-between">
-                <input
+                <Input
                   type="number"
                   className="form-input w-2/3 pl-4 pr-3 py-2 border rounded-md focus:border-[#f60d37] focus:ring-[#f60d37]"
                   value={otp}
+                  placeholder="OTP"
                   onChange={(e) => setOtp(e.target.value)}
                   onKeyDown={handleKeyPress}
                 />
@@ -158,13 +169,13 @@ export default function RegisterForm({
                 </button>
               </div>
               <div id="recaptcha"></div>
-              <button
+              <Button
                 type="submit"
-                className="w-full bg-[#BC2228] hover:bg-[#dc1313] text-white py-2 rounded-md transition-colors duration-200"
+                className="w-full bg-[#BC2228] h-12 hover:bg-[#dc1313] text-white py-2 rounded-md transition-colors duration-200"
                 onClick={verifyOTP}
               >
                 Sign Up
-              </button>
+              </Button>
 
               <p className="text-center text-[#5D5A6F]" onClick={toggleForms}>
                 Bạn đã có tài khoản?{" "}

@@ -8,19 +8,18 @@ import LogoTeacher from "/images/LogoTeacher.jpg";
 import LogoBag from "/images/LogoBag.jpg";
 import LogoBook from "/images/LogoBook.jpg";
 import LogoMessager from "/images/LogoMessager.jpg";
+import CardCourse from "../../../components/card-course/CardCourse";
+import { useNavigate } from "react-router-dom";
 
 const CoursePage = () => {
   const allCourses = useSelector((state) => state.courseSlice.courses);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   //#endregion
   useEffect(() => {
     dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
   }, []);
 
-  function handleClickNav(event) {
-    event.preventDefault();
-    console.info("You clicked a breadcrumb.");
-  }
   const dataAdvantage = [
     {
       icon: LogoTeacher,
@@ -68,9 +67,9 @@ const CoursePage = () => {
                 underline="hover"
                 key="1"
                 color="#BC2228"
-                onClick={handleClickNav}
                 fontWeight={700}
                 fontSize={"1.5rem"}
+                onClick={() => navigate("/")}
               >
                 Home
               </Link>
@@ -78,9 +77,9 @@ const CoursePage = () => {
                 underline="hover"
                 key="2"
                 color="#BC2228"
-                onClick={handleClickNav}
                 fontWeight={700}
                 fontSize={"1.5rem"}
+                onClick={() => navigate("/course")}
               >
                 Courses
               </Link>
@@ -97,48 +96,7 @@ const CoursePage = () => {
             <Grid container spacing={8}>
               {allCourses?.map((item, index) => (
                 <Fragment key={index}>
-                  <Grid item xs={6}>
-                    <div className="w-full h-96 bg-[#D9D9D9]">
-                      <img
-                        src={import.meta.env.VITE_API_URL_IMG + item.image}
-                        className="w-full h-full"
-                      />
-                    </div>
-
-                    <Typography
-                      component="h4"
-                      variant="h5"
-                      sx={{
-                        fontWeight: 700,
-                        color: "#231651",
-                        lineHeight: 3,
-                      }}
-                    >
-                      {item.title}
-                    </Typography>
-                    <Typography
-                      component="p"
-                      sx={{
-                        color: "#231651",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {item.title}Lorem ipsum dolor sit amet consectetur. Sapien
-                      rutrum non viverra magna at aliquam.
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        color: "#231651",
-                        fontWeight: 600,
-                      }}
-                    >
-                      <span className="text-[#BC2228]">Giảng viên: </span>{" "}
-                      <span className="text-[#231651] font-semibold">
-                        {item.subDescription}
-                      </span>
-                    </Typography>
-                  </Grid>
+                  <CardCourse item={item} />
                 </Fragment>
               ))}
             </Grid>
