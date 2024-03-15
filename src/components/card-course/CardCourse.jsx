@@ -10,7 +10,6 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Stack,
   Typography,
 } from "@mui/material";
 export default function CardCourse({ item }) {
@@ -34,8 +33,6 @@ export default function CardCourse({ item }) {
       return notify("error", "Đăng nhập để học khóa này");
     navigate(`/detailcourse/${item.id}`);
   };
-
-  console.log(import.meta.env.VITE_API_URL_IMG + item.image);
 
   return (
     <Grid item xs={4}>

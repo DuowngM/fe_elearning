@@ -2,7 +2,7 @@ import React from "react";
 
 export default function VideoComponent({ sourceVideo }) {
   return (
-    <>
+    <div className="w-full h-full">
       {" "}
       <iframe
         width="100%"
@@ -13,6 +13,6 @@ export default function VideoComponent({ sourceVideo }) {
         allowFullScreen
         style={{ border: 0 }}
       ></iframe>
-    </>
+    </div>
   );
 }

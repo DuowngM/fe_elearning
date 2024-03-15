@@ -19,6 +19,11 @@ import { getChaptersThunk } from "../../../redux/reducer/chapterSlice";
 import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import { notify } from "../../../utils/notification";
+import VideoComponent from "../../../components/video/VideoComponent";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import axios from "axios";
+import Cookies from "js-cookie";
 export default function DetailCourse() {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
@@ -26,12 +31,14 @@ export default function DetailCourse() {
   const [sourceVideo, setSourceVideo] = useState(
     "https://www.youtube.com/embed/vdKE_Tz8cy0"
   );
-  const [selectedLessonId, setSelectedLessonId] = useState(null);
+  const [description, setDescription] = useState(null);
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [showFormAddChapter, setShowFormAddChapter] = useState(false);
   const [showFormAddLesson, setShowFormAddLesson] = useState(false);
   const [idChapter, setIdChapter] = useState(null);
   const [editChapter, setEditChapter] = useState(null);
+  const [choice, setChoice] = useState("video");
+  const getAuthToken = () => Cookies.get("accessToken");
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -83,20 +90,14 @@ export default function DetailCourse() {
       notify("error", "Vui lòng điền đầy đủ thông tin chương học");
       return;
     }
-
-    try {
-      if (infoChapter.type === "edit") {
-        await editChapterAPIs(infoChapter);
-      } else {
-        await addNewChapter(infoChapter);
-      }
-      dispatch(getChaptersThunk(id));
-      // Đóng form thêm/chỉnh sửa chương học
-      closeFormChapter();
-    } catch (error) {
-      console.log(error);
-      notify("error", "Có lỗi xảy ra khi lưu chương học");
+    if (infoChapter.type === "edit") {
+      await editChapterAPIs(infoChapter);
+    } else {
+      await addNewChapter(infoChapter);
     }
+    dispatch(getChaptersThunk(id));
+    // Đóng form thêm/chỉnh sửa chương học
+    closeFormChapter();
   };
 
   const handleSaveLesson = async (infoLesson) => {
@@ -138,6 +139,59 @@ export default function DetailCourse() {
     openForm("chapter");
     setEditChapter(chapter);
   };
+  // Ck Editor
+  function uploadAdapter(loader) {
+    return {
+      upload: () => {
+        return new Promise((resolve, reject) => {
+          loader.file.then((file) => {
+            const token = getAuthToken();
+            const formData = new FormData();
+            formData.append("file", file);
+            axios
+              .post(
+                `${import.meta.env.VITE_API_URL}/api/v1/file/upload-file`,
+                formData,
+                {
+                  headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              )
+              .then((response) => {
+                resolve({
+                  default: `${import.meta.env.VITE_API_URL}` + response.data,
+                });
+              })
+              .catch((error) => {
+                reject(error);
+              });
+          });
+        });
+      },
+    };
+  }
+  function uploadPlugins(editor) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return uploadAdapter(loader);
+    };
+  }
+  const handleEditorChange = (event, editor) => {
+    const data = editor.getData();
+    setDescription(data);
+  };
+  // Sửa bài học
+  const handleSaveDescription = async () => {
+    const lesson = {
+      ...selectedLesson,
+      description: description,
+      chapterId: idChapter,
+    };
+    await editLesson(lesson);
+    dispatch(getLessonsThunk());
+    closeFormLesson();
+  };
   return (
     <>
       {showFormAddChapter && (
@@ -162,16 +216,33 @@ export default function DetailCourse() {
           </h1>
 
           <div className="my-0 mx-auto max-w-[1500px]">
-            <div className="flex flex-wrap justify-between">
+            <button onClick={() => setChoice("video")}>video</button>
+            <button onClick={() => setChoice("lesson")}>Bài học</button>
+            <button onClick={handleSaveDescription}>Lưu</button>
+            <div className="flex flex-wrap justify-between min-h-[500px]">
               <div className="rounded-2xl overflow-hidden max-w-[850px] w-full relative">
-                <iframe
-                  width="100%"
-                  height="500px"
-                  src={sourceVideo}
-                  title="Video"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                ></iframe>
+                {choice === "video" ? (
+                  <VideoComponent sourceVideo={sourceVideo} />
+                ) : (
+                  <div className="bg-slate-50">
+                    <CKEditor
+                      config={{
+                        extraPlugins: [uploadPlugins],
+                        styles: {
+                          content: {
+                            height: "fit-content",
+                            overflowY: "hidden",
+                          },
+                        },
+                      }}
+                      editor={ClassicEditor}
+                      data={description}
+                      onReady={(editor) => {}}
+                      onChange={handleEditorChange}
+                      style={{ maxHeight: "500px", overflowY: "auto" }}
+                    />
+                  </div>
+                )}
               </div>
               <div className="max-w-[600px] w-full flex flex-col">
                 {groupedContentItems?.map((chapter) => (
@@ -181,6 +252,7 @@ export default function DetailCourse() {
                     expanded={expanded === `panel${chapter.id}`}
                     onChange={handleChange(`panel${chapter.id}`)}
                     key={chapter.id}
+                    onClick={() => setIdChapter(chapter.id)}
                   >
                     <AccordionSummary
                       expandIcon={
@@ -226,12 +298,13 @@ export default function DetailCourse() {
                             key={item.id}
                             onClick={() => {
                               setSourceVideo(item.video);
-                              setSelectedLessonId(item.id);
+                              setSelectedLesson(item);
+                              setDescription(item.description);
                             }}
                           >
                             <p
                               className={`max-w-[80%] ${
-                                selectedLessonId === item.id
+                                selectedLesson?.id === item.id
                                   ? "text-red-500"
                                   : ""
                               }`}

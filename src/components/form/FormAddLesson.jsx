@@ -1,13 +1,13 @@
 import React, { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { Divider, Button, Input, Radio } from "antd";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { Divider, Button, Input } from "antd";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./index.css";
-import { toolbarOptions, formats } from "../../utils/toolbarOptions";
+import axios from "axios";
 export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
   const [title, setTitle] = useState(editLesson?.title || "");
-  const [description, setDiscription] = useState(editLesson?.description || "");
+  const [description, setDescription] = useState(editLesson?.description || "");
   const [linkVideo, setLinkVideo] = useState(editLesson?.video || "");
   const [source, setSource] = useState(editLesson?.resources || "");
   const formRef = useRef(null);
@@ -15,6 +15,48 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
     if (formRef.current && !formRef.current.contains(event.target)) {
       closeForm(); // Đóng form nếu click bên ngoài form
     }
+  };
+  // Upload ảnh CkEditor
+
+  function uploadAdapter(loader) {
+    return {
+      upload: () => {
+        return new Promise((resolve, reject) => {
+          loader.file.then((file) => {
+            const formData = new FormData();
+            formData.append("file", file);
+            axios
+              .post(
+                "http://10.101.44.212:8080/api/v1/file/upload-file",
+                formData,
+                {
+                  headers: {
+                    "Content-Type": "multipart/form-data",
+                  },
+                }
+              )
+              .then((response) => {
+                resolve({
+                  default: "http://10.101.44.212:8080" + response.data,
+                });
+              })
+              .catch((error) => {
+                reject(error);
+              });
+          });
+        });
+      },
+    };
+  }
+  function uploadPlugins(editor) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return uploadAdapter(loader);
+    };
+  }
+
+  const handleEditorChange = (event, editor) => {
+    const data = editor.getData();
+    setDescription(data);
   };
   return (
     <>
@@ -62,17 +104,7 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
                   />
                 </div>
               </div>
-              <div className="mt-[20px]">
-                <label htmlFor="">Mô tả</label>
-                <ReactQuill
-                  className="mt-2"
-                  modules={toolbarOptions}
-                  theme="snow"
-                  value={description}
-                  onChange={setDiscription}
-                  formats={formats}
-                />
-              </div>
+
               <Divider />
               <div className="flex justify-end gap-2">
                 <Button onClick={closeForm}>Hủy</Button>
@@ -140,17 +172,7 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
                   />
                 </div>
               </div>
-              <div className="mt-[20px]">
-                <label htmlFor="">Mô tả</label>
-                <ReactQuill
-                  className="mt-2"
-                  modules={toolbarOptions}
-                  theme="snow"
-                  value={description}
-                  onChange={setDiscription}
-                  formats={formats}
-                />
-              </div>
+
               <Divider />
               <div className="flex justify-end gap-2">
                 <Button onClick={closeForm}>Hủy</Button>

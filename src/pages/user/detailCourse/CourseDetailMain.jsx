@@ -21,6 +21,7 @@ import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import VideoComponent from "../../../components/video/VideoComponent";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Typography } from "antd";
+import Cookies from "js-cookie";
 
 const CourseDetailMain = () => {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
@@ -36,11 +37,14 @@ const CourseDetailMain = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
+    const getAuthToken = () => Cookies.get("accessToken");
+    if (!getAuthToken()) {
+      navigate("/");
+    }
     dispatch(getChaptersThunk(id));
     dispatch(getLessonsThunk());
     dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
   }, [dispatch, id]);
-
   // Nhóm dữ liệu lại
   const groupedContentItems = chapters?.map((chapter) => {
     return {
@@ -57,6 +61,7 @@ const CourseDetailMain = () => {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
   }
+  console.log(description);
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -100,7 +105,7 @@ const CourseDetailMain = () => {
                   fontSize={"1.5rem"}
                   className="cursor-pointer"
                 >
-                  Courses
+                  Khóa học
                 </Link>
                 <p
                   key="3"
@@ -122,7 +127,9 @@ const CourseDetailMain = () => {
                 }}
               >
                 {sourceVideo ? (
-                  <VideoComponent sourceVideo={sourceVideo} />
+                  <>
+                    <VideoComponent sourceVideo={sourceVideo} />
+                  </>
                 ) : (
                   <>
                     <div dangerouslySetInnerHTML={{ __html: description }} />
@@ -225,72 +232,25 @@ const CourseDetailMain = () => {
             <Stack direction="column">
               <Box sx={{ color: "#0A033C" }}>
                 <Typography component="h2" variant="h4">
-                  Course Details
+                  Bài đọc
                 </Typography>
                 <Typography component="p" className="text-base">
                   Cập nhật tháng 3/2024
                 </Typography>
-                <Typography component="p" className="text-base leading-10">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                  maecenas accumsan.
-                </Typography>
-              </Box>
-              <Box sx={{ color: "#0A033C" }}>
-                <Typography component="h2" variant="h4">
-                  Who this course is for
-                </Typography>
-                <Typography component="p" className="text-base leading-10">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                  maecenas accumsan lacus vel facilisis consectetur adipiscing
-                  elit.
+                <Typography
+                  component="p"
+                  className="text-base leading-10 max-h-[800px] overflow-y-auto"
+                >
+                  {description ? (
+                    <>
+                      <div dangerouslySetInnerHTML={{ __html: description }} />
+                    </>
+                  ) : (
+                    <>Coming soon...</>
+                  )}
                 </Typography>
               </Box>
             </Stack>
-            <Box sx={{ color: "#0A033C", marginTop: "8rem" }}>
-              <Typography component="h2" variant="h4">
-                What you'll learn in this course:
-              </Typography>
-              <Box>
-                <Stack
-                  sx={{ marginTop: "2rem", width: "100%", gap: "6rem" }}
-                  direction={"row"}
-                >
-                  <Stack direction="row" alignItems={"center"}>
-                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                    <Typography className="text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" alignItems={"center"}>
-                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                    <Typography className="text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </Typography>
-                  </Stack>
-                </Stack>
-                <Stack
-                  sx={{ marginTop: "2rem", width: "100%", gap: "6rem" }}
-                  direction={"row"}
-                >
-                  <Stack direction="row" alignItems={"center"}>
-                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                    <Typography className="text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" alignItems={"center"}>
-                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                    <Typography className="text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </Typography>
-                  </Stack>
-                </Stack>
-              </Box>
-            </Box>
 
             <div className="">
               <h1 className=""></h1>

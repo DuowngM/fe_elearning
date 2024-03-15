@@ -17,7 +17,7 @@ const CoursePage = () => {
   const dispatch = useDispatch();
   //#endregion
   useEffect(() => {
-    dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
+    dispatch(getAllCoursesAPI({ page: 0, size: 6 }));
   }, []);
 
   const dataAdvantage = [

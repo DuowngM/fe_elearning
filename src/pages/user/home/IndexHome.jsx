@@ -236,8 +236,9 @@ function IndexHome() {
                     color: "white",
                     borderColor: "white",
                   }}
+                  onClick={() => navigate("/course")}
                 >
-                  Kiểm tra độ phù hợp
+                  Các khóa học
                 </Button>
               </Stack>
             </Box>
@@ -310,7 +311,10 @@ function IndexHome() {
         <div className="max-w-[1500px] mx-auto">
           <div className="pb-40">
             <div className="text-center">
-              <h2 className="text-[#BC2228] text-5xl mb-[40px] font-bold">
+              <h2
+                id="courses"
+                className="text-[#BC2228] text-5xl mb-[40px] font-bold"
+              >
                 Video bài giảng chất lượng cao
               </h2>
               <p className="text-[#231651]  leading-7">
