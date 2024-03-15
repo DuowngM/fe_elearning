@@ -53,6 +53,7 @@ export const getAllUsers = async (searchQuery) => {
       return response;
     }
   } catch (error) {
+    console.log(error);
     if (error.response.status === 401) {
       notify("error", "Bạn không có quyền");
     } else {

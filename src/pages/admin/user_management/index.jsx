@@ -100,7 +100,7 @@ export default function UserMangagement() {
   ];
   useEffect(() => {
     dispatch(getUsersThunk());
-  }, [flag]);
+  }, [flag, dispatch]);
   const handleSave = async (userData) => {
     if (userData.type === "add") {
       await createUser(userData);
@@ -108,7 +108,7 @@ export default function UserMangagement() {
       closeForm();
     } else {
       await editUserApi(userData);
-      dispatch(getUsersThunk());
+      setFlag(!flag);
       closeForm();
     }
   };
@@ -116,9 +116,9 @@ export default function UserMangagement() {
   const handleSearch = (searchValue) => {
     setSearchTerm(searchValue);
   };
-  const fetchCourses = () => {
+  const fetchUsers = () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       dispatch(getUsersThunk({ searchValue: searchTerm }));
     } catch (error) {
       console.error(error);
@@ -127,7 +127,7 @@ export default function UserMangagement() {
     }
   };
   useEffect(() => {
-    fetchCourses();
+    fetchUsers();
   }, [debouncedSearchTerm]);
   return (
     <>
@@ -171,11 +171,15 @@ export default function UserMangagement() {
         </div>
         <div className="table-container relative">
           <div className="mb-8">
-            <Table
-              columns={columns}
-              dataSource={currentItems}
-              pagination={false}
-            />
+            {isLoading ? (
+              <>Loading...</>
+            ) : (
+              <Table
+                columns={columns}
+                dataSource={currentItems}
+                pagination={false}
+              />
+            )}
           </div>
           <div className="flex justify-center">
             <Pagination
