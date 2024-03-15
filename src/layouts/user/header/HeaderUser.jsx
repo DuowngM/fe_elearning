@@ -113,7 +113,7 @@ function HeaderUser() {
         <Typography className="text-lg font-medium">{user}</Typography>
         {user ? (
           <>
-            <Avatar onClick={handleClick}>
+            <Avatar onClick={handleClick} className="cursor-pointer">
               <PersonIcon fontSize="large" />
             </Avatar>
             <Menu
@@ -151,19 +151,6 @@ function HeaderUser() {
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              {/* <MenuItem onClick={handleClose}>
-                <Avatar /> Profile
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Avatar /> My account
-              </MenuItem>
-              <Divider />
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <PersonAdd fontSize="small" />
-                </ListItemIcon>
-                Add another account
-              </MenuItem> */}
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
                   <Logout fontSize="small" />
@@ -171,7 +158,6 @@ function HeaderUser() {
                 Đăng xuất
               </MenuItem>
             </Menu>
-            {/* Hiển thị tên người dùng */}
           </>
         ) : (
           <>
