@@ -7,7 +7,7 @@ import { auth } from "../../config/firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { notify } from "../../utils/notification";
 import { getPhone } from "../../api/userAPIs";
-import { Button, Input } from "antd";
+import { Button, Input, Spin } from "antd";
 
 export default function RegisterForm({
   closeForm,
@@ -19,6 +19,8 @@ export default function RegisterForm({
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [confirmation, setConfirmation] = useState(null);
+  const [isSendingOTP, setIsSendingOTP] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
   // Xử lý sự kiện tắt form khi click ra ngoài
   const formRef = useRef(null);
   const handleClickOutside = (event) => {
@@ -27,8 +29,8 @@ export default function RegisterForm({
     }
   };
   const handleSendOTP = async () => {
+    setIsSendingOTP(true);
     try {
-      // Kiểm tra nếu số điện thoại không bắt đầu bằng "+84" thì thêm "+84" vào trước số điện thoại
       const formattedPhone = phone.startsWith("+84") ? phone : `+84${phone}`;
       const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
       const response = await signInWithPhoneNumber(
@@ -36,16 +38,22 @@ export default function RegisterForm({
         formattedPhone,
         recaptcha
       );
-      // await getPhone({ phone: formattedPhone, fullName });
       setConfirmation(response);
+      notify("success", "Đã gửi OTP");
     } catch (error) {
       console.log(error);
+      notify("error", "Gửi OTP thất bại");
+    } finally {
+      setIsSendingOTP(false);
     }
   };
   const verifyOTP = async (event) => {
     event.preventDefault();
+    setIsRegistering(true);
     if (!fullName || !phone || !password) {
-      return notify("error", "Vui lý điền đầy đủ thông tin");
+      notify("error", "Điền đủ thông tin khi đăng ký");
+      setIsRegistering(false);
+      return;
     }
     try {
       const data = await confirmation.confirm(otp);
@@ -57,9 +65,9 @@ export default function RegisterForm({
         });
       }
     } catch (error) {
-      if (error) {
-        notify("error", "Đăng ký thất bại");
-      }
+      console.log(error);
+    } finally {
+      setIsRegistering(false);
     }
   };
   // Gọi hàm đăng ký
@@ -86,7 +94,7 @@ export default function RegisterForm({
             />
           </div>
 
-          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="md:border-r-2 pr-4">
               <h1 className="text-[#0A033C] font-bold text-xl md:text-2xl lg:text-3xl mb-4">
                 Welcome to <br />
@@ -101,7 +109,7 @@ export default function RegisterForm({
             <div className="flex flex-col justify-center space-y-4">
               <div className="relative">
                 <label htmlFor="fullName" className="text-[#0A033C] block">
-                  Full name
+                  Tên
                 </label>
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none h-full top-[17%]">
                   <PermIdentityOutlinedIcon
@@ -119,7 +127,7 @@ export default function RegisterForm({
 
               <div className="relative">
                 <label htmlFor="phone" className="text-[#0A033C] block">
-                  Phone Number
+                  Số điện thoại
                 </label>
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none h-full top-[17%]">
                   <LocalPhoneOutlinedIcon
@@ -137,7 +145,7 @@ export default function RegisterForm({
 
               <div className="relative">
                 <label htmlFor="password" className="text-[#0A033C] block">
-                  Password
+                  Mật khẩu
                 </label>
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none h-full top-[17%]">
                   <HttpsOutlinedIcon sx={{ fontSize: "small", zIndex: 100 }} />
@@ -165,7 +173,7 @@ export default function RegisterForm({
                   className="border-[#BC2228] bg-transparent hover:bg-[#BC2228] hover:text-white text-[#BC2228] font-medium py-2 px-4 rounded"
                   onClick={handleSendOTP}
                 >
-                  Send
+                  {isSendingOTP ? <Spin /> : "Gửi mã"}
                 </button>
               </div>
               <div id="recaptcha"></div>
@@ -174,7 +182,7 @@ export default function RegisterForm({
                 className="w-full bg-[#BC2228] h-12 hover:bg-[#dc1313] text-white py-2 rounded-md transition-colors duration-200"
                 onClick={verifyOTP}
               >
-                Sign Up
+                {isRegistering ? <Spin /> : "Đăng ký"}
               </Button>
 
               <p className="text-center text-[#5D5A6F]" onClick={toggleForms}>

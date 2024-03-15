@@ -12,6 +12,7 @@ import useDebounce from "../../../hooks/useDebounce";
 
 export default function UserMangagement() {
   const allUsers = useSelector((state) => state.userSlice.users);
+  console.log(allUsers);
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);

@@ -1,6 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Ẩn các nút tăng giảm trong trình duyệt WebKit/Blink */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Tùy chọn cho Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 
 .overlay {
   position: fixed;

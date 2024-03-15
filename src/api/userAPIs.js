@@ -9,7 +9,7 @@ export const getPhone = async (user) => {
     const response = await jsonAxios.post("/api/v1/user-clipboard", infoUser);
     return response;
   } catch (error) {
-    notify("error", "Đã có lỗi xảy ra");
+    console.log(error);
   }
 };
 export const register = async (infoUser) => {
@@ -23,7 +23,7 @@ export const register = async (infoUser) => {
     notify("success", "Đăng ký thành công");
     return response;
   } catch (error) {
-    notify("error", error.response.data);
+    notify("error", "Số điện thoại đã được đăng ký");
   }
 };
 export const login = async (user) => {
@@ -36,6 +36,7 @@ export const login = async (user) => {
     notify("success", "Đăng nhập thành công");
     return response;
   } catch (error) {
+    console.log(error);
     notify("error", "Sai tài khoản hoặc mật khẩu");
   }
 };
