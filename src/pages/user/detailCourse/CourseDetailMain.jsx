@@ -20,6 +20,7 @@ import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import VideoComponent from "../../../components/video/VideoComponent";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Typography } from "antd";
+import Cookies from "js-cookie";
 
 const CourseDetailMain = () => {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
@@ -35,11 +36,14 @@ const CourseDetailMain = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
+    const getAuthToken = () => Cookies.get("accessToken");
+    if (!getAuthToken()) {
+      navigate("/");
+    }
     dispatch(getChaptersThunk(id));
     dispatch(getLessonsThunk());
     dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
   }, [dispatch, id]);
-
   // Nhóm dữ liệu lại
   const groupedContentItems = chapters?.map((chapter) => {
     return {
@@ -121,7 +125,9 @@ const CourseDetailMain = () => {
                 }}
               >
                 {sourceVideo ? (
-                  <VideoComponent sourceVideo={sourceVideo} />
+                  <>
+                    <VideoComponent sourceVideo={sourceVideo} />
+                  </>
                 ) : (
                   <>
                     <div dangerouslySetInnerHTML={{ __html: description }} />

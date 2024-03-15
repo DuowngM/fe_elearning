@@ -94,37 +94,13 @@ function HeaderUser() {
           />
         </Link>
       </div>
-      {/* <div className="flex ">
-        <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
-          <p>Khóa học</p>
-          <img
-            src="/images/Arrow-down 1.png"
-            alt=""
-            className="w-[14px] h-[9px] "
-          />
-        </div>
-        <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
-          <p>Tài nguyên</p>
-          <img
-            src="/images/Arrow-down 1.png"
-            alt=""
-            className="w-[14px] h-[9px] "
-          />
-        </div>
-        <div className="mr-[24px] font-bold text-[#231651] text-[18px] flex items-center">
-          <p>Học liệu</p>
-          <img
-            src="/images/Arrow-down 1.png"
-            alt=""
-            className="w-[14px] h-[9px] "
-          />
-        </div>
-      </div> */}
+
       <div className="actions flex gap-3 items-center">
         {user ? (
           <>
-            <span className="font-bold text-[#231651]">{user}</span>{" "}
-            {/* Hiển thị tên người dùng */}
+            <span className="font-bold text-[#231651] cursor-pointer">
+              {user}
+            </span>{" "}
             <Button
               variant="outlined"
               sx={{ color: "#bc2228" }}
