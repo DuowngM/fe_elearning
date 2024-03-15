@@ -6,6 +6,7 @@ export const getAllLessons = async () => {
     const response = await jsonAxios.get("api/v1/lesson/get-all");
     return response.data;
   } catch (error) {
+    console.log(error);
     notify("error", "Bạn không có quyền xem trang này");
   }
 };

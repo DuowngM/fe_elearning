@@ -19,6 +19,7 @@ export const getAllCourses = async (page, searchValue, size, home) => {
       return response.data;
     }
   } catch (error) {
+    console.log(error);
     notify("error", "Có lỗi xảy ra khi lấy dữ liệu");
   }
 };
@@ -34,8 +35,10 @@ export const addNewCourse = async (newCourse) => {
     return response;
   } catch (error) {
     if (error.response.status === 401) {
+      console.log(error);
       notify("error", "Bạn không có quyền");
     } else {
+      console.log(error);
       notify("error", "Có lỗi xảy ra khi thêm");
     }
   }
@@ -58,8 +61,10 @@ export const editCourse = async (course) => {
     return response;
   } catch (error) {
     if (error.response.status === 401) {
+      console.log(error);
       notify("error", "Bạn không có quyền");
     } else {
+      console.log(error);
       notify("error", "Có lỗi xảy ra khi sửa");
     }
   }
@@ -70,6 +75,7 @@ export const deleteCourse = async (id) => {
     notify("success", "Xóa khóa học thành công");
     return response;
   } catch (error) {
+    console.log(error);
     notify("error", error.response.data);
   }
 };

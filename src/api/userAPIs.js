@@ -81,6 +81,7 @@ export const editUserApi = async (userData) => {
     );
     notify("success", "Sửa thông tin người dùng thành công");
   } catch (error) {
+    console.log(error);
     if (error.response.status === 401) {
       notify("error", "Bạn không có quyền");
     } else if (error.response.status === 400) {
