@@ -83,16 +83,18 @@ export default function FormAddCourse({ closeForm, handleOk }) {
                 style={{ display: "none" }}
               />
               {imageUrl && (
-                <img
-                  src={imageUrl}
-                  style={{
-                    width: "200px",
-                    height: "200px",
-                    marginTop: "10px",
-                    overflow: "hidden",
-                    objectFit: "cover",
-                  }}
-                />
+                <div>
+                  <img
+                    src={imageUrl}
+                    style={{
+                      width: "200px",
+                      height: "100px",
+                      marginTop: "10px",
+                      overflow: "hidden",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
               )}{" "}
             </div>
           </div>

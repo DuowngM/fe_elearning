@@ -61,7 +61,6 @@ const CourseDetailMain = () => {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
   }
-
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -232,7 +231,7 @@ const CourseDetailMain = () => {
             <Stack direction="column">
               <Box sx={{ color: "#0A033C" }}>
                 <Typography component="h2" variant="h4">
-                  Bài đọc
+                  {sourceVideo ? <p> Bài đọc </p> : <p> Video </p>}
                 </Typography>
                 <Typography component="p" className="text-base">
                   Cập nhật tháng 3/2024
@@ -241,7 +240,7 @@ const CourseDetailMain = () => {
                   component="p"
                   className="text-base leading-10 max-h-[800px] overflow-y-auto"
                 >
-                  {description ? (
+                  {sourceVideo ? (
                     <>
                       <div dangerouslySetInnerHTML={{ __html: description }} />
                     </>
