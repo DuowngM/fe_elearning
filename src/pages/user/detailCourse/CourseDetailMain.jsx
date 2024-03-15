@@ -61,7 +61,7 @@ const CourseDetailMain = () => {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
   }
-  console.log(description);
+
   return (
     <>
       <Box sx={{ width: "100%" }}>

@@ -2,9 +2,11 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import FormAddChapter from "../../../components/form/FormAddChapter";
 import FormAddLesson from "../../../components/form/FormAddLesson";
 import { addNewChapter, editChapterAPIs } from "../../../api/chapterAPIs";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import SourceIcon from "@mui/icons-material/Source";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import {
   addNewLesson,
   deleteLesson,
@@ -16,6 +18,9 @@ import {
   AccordionDetails,
   AccordionSummary,
   Avatar,
+  Box,
+  Button,
+  ButtonGroup,
   IconButton,
 } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -224,11 +229,38 @@ export default function DetailCourse() {
               {chapters[0]?.courseName}{" "}
             </h1>
             <div className="my-0 mx-auto max-w-[1500px]">
-              <button onClick={() => setChoice("video")}>video</button>
-              <button onClick={() => setChoice("lesson")}>Bài học</button>
-              <button onClick={handleSaveDescription}>Lưu</button>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  "& > *": {
+                    m: 1,
+                  },
+                }}
+              >
+                <ButtonGroup variant="outlined" aria-label="Basic button group">
+                  <Button
+                    onClick={() => setChoice("video")}
+                    startIcon={<YouTubeIcon />}
+                  >
+                    video
+                  </Button>
+                  <Button
+                    onClick={() => setChoice("lesson")}
+                    startIcon={<SourceIcon />}
+                  >
+                    Bài học
+                  </Button>
+                  <Button
+                    onClick={handleSaveDescription}
+                    startIcon={<SaveAltIcon />}
+                  >
+                    Lưu
+                  </Button>
+                </ButtonGroup>
+              </Box>
               <div className="flex flex-wrap justify-between">
-                <div className="rounded-2xl overflow-hidden max-w-[850px] w-full relative h-[610px] ">
+                <div className="rounded-2xl overflow-hidden max-w-[70%] w-full relative h-[610px] ">
                   {choice === "video" ? (
                     <VideoComponent sourceVideo={sourceVideo} />
                   ) : (
@@ -252,7 +284,7 @@ export default function DetailCourse() {
                     </div>
                   )}
                 </div>
-                <div className="max-w-[600px] w-full flex flex-col bg-white max-h-[610px] p-2 overflow-y-auto">
+                <div className="max-w-[28%] w-full flex flex-col bg-white max-h-[610px] p-2 overflow-y-auto">
                   {groupedContentItems?.map((chapter) => (
                     <Accordion
                       sx={{ maxHeight: "50%" }}
