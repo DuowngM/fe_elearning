@@ -14,6 +14,7 @@ import teacherDung from "/images/teacher_dung.png";
 import teacherLam from "/images/teacher_lam.png";
 import personBg from "/images/person_bg.png";
 import IconDone from "/images/IconDone.svg";
+import Introducing from "/images/introducing.jpg";
 import {
   Box,
   Button,
@@ -33,7 +34,7 @@ function IndexHome() {
   const navigate = useNavigate();
   //#endregion
   useEffect(() => {
-    dispatch(getAllCoursesAPI({ page: 0, size: 4, home: "home" }));
+    dispatch(getAllCoursesAPI({ page: 0, size: 6, home: "home" }));
   }, []);
   // component Phương pháp đào tạo lập trình ưu việt
   const dataStaticTranding = [
@@ -248,7 +249,9 @@ function IndexHome() {
           <div className="  max-h-[550px] h-full bg-[#F2F2F2] py-40  flex items-center justify-center">
             <div className="max-w-[1500px] h-full flex items-center justify-center">
               <div className="mr-[100px] w-1/2 ">
-                <div className="w-full h-[400px] bg-[#B4B4B4]"></div>
+                <div className="w-full h-[400px] bg-[#B4B4B4]">
+                  <img src={Introducing} className="w-full h-full" alt="" />
+                </div>
               </div>
               <div className="w-1/2">
                 <div className="w-3/4">
@@ -286,7 +289,15 @@ function IndexHome() {
                       Nhận tư vấn 1:1
                     </Button>
 
-                    <Button variant="outlined" sx={{ fontSize: "1rem" }}>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        fontSize: "1rem",
+                        borderColor: "#fff",
+                        color: "#BC2228",
+                        bgcolor: "#fff",
+                      }}
+                    >
                       Kiểm tra độ phù hợp
                     </Button>
                   </Stack>
