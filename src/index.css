@@ -12,7 +12,11 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-
+.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+  border-color: var(--ck-color-base-border);
+  max-height: 700px;
+  overflow: auto;
+}
 .overlay {
   position: fixed;
   top: 0;

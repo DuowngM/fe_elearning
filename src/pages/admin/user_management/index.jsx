@@ -12,12 +12,11 @@ import useDebounce from "../../../hooks/useDebounce";
 
 export default function UserMangagement() {
   const allUsers = useSelector((state) => state.userSlice.users);
-  console.log(allUsers);
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [editUser, setEditUser] = useState(null);
-  const [flag, setFlag] = useState(true);
+  const [flag, setFlag] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   // Sử dụng useDebounce
@@ -67,7 +66,7 @@ export default function UserMangagement() {
     },
     {
       title: "Trạng thái",
-      dataIndex: "void",
+      dataIndex: "voided",
       align: "center",
       render: (text) => (
         <p>
@@ -109,7 +108,7 @@ export default function UserMangagement() {
       closeForm();
     } else {
       await editUserApi(userData);
-      setFlag(!flag);
+      dispatch(getUsersThunk());
       closeForm();
     }
   };
