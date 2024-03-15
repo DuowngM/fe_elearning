@@ -22,6 +22,8 @@ import { notify } from "../../../utils/notification";
 import VideoComponent from "../../../components/video/VideoComponent";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import axios from "axios";
+import Cookies from "js-cookie";
 export default function DetailCourse() {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
@@ -36,6 +38,7 @@ export default function DetailCourse() {
   const [idChapter, setIdChapter] = useState(null);
   const [editChapter, setEditChapter] = useState(null);
   const [choice, setChoice] = useState("video");
+  const getAuthToken = () => Cookies.get("accessToken");
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -142,21 +145,23 @@ export default function DetailCourse() {
       upload: () => {
         return new Promise((resolve, reject) => {
           loader.file.then((file) => {
+            const token = getAuthToken();
             const formData = new FormData();
             formData.append("file", file);
             axios
               .post(
-                "http://10.101.44.212:8080/api/v1/file/upload-file",
+                `${import.meta.env.VITE_API_URL}/api/v1/file/upload-file`,
                 formData,
                 {
                   headers: {
                     "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`,
                   },
                 }
               )
               .then((response) => {
                 resolve({
-                  default: "http://10.101.44.212:8080" + response.data,
+                  default: `${import.meta.env.VITE_API_URL}` + response.data,
                 });
               })
               .catch((error) => {

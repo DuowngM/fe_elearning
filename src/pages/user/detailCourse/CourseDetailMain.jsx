@@ -60,6 +60,7 @@ const CourseDetailMain = () => {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
   }
+  console.log(description);
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -230,72 +231,25 @@ const CourseDetailMain = () => {
             <Stack direction="column">
               <Box sx={{ color: "#0A033C" }}>
                 <Typography component="h2" variant="h4">
-                  Course Details
+                  Bài đọc
                 </Typography>
                 <Typography component="p" className="text-base">
                   Cập nhật tháng 3/2024
                 </Typography>
-                <Typography component="p" className="text-base leading-10">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                  maecenas accumsan.
-                </Typography>
-              </Box>
-              <Box sx={{ color: "#0A033C" }}>
-                <Typography component="h2" variant="h4">
-                  Who this course is for
-                </Typography>
-                <Typography component="p" className="text-base leading-10">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                  maecenas accumsan lacus vel facilisis consectetur adipiscing
-                  elit.
+                <Typography
+                  component="p"
+                  className="text-base leading-10 max-h-[800px] overflow-y-auto"
+                >
+                  {description ? (
+                    <>
+                      <div dangerouslySetInnerHTML={{ __html: description }} />
+                    </>
+                  ) : (
+                    <>Coming soon...</>
+                  )}
                 </Typography>
               </Box>
             </Stack>
-            <Box sx={{ color: "#0A033C", marginTop: "8rem" }}>
-              <Typography component="h2" variant="h4">
-                What you'll learn in this course:
-              </Typography>
-              <Box>
-                <Stack
-                  sx={{ marginTop: "2rem", width: "100%", gap: "6rem" }}
-                  direction={"row"}
-                >
-                  <Stack direction="row" alignItems={"center"}>
-                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                    <Typography className="text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" alignItems={"center"}>
-                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                    <Typography className="text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </Typography>
-                  </Stack>
-                </Stack>
-                <Stack
-                  sx={{ marginTop: "2rem", width: "100%", gap: "6rem" }}
-                  direction={"row"}
-                >
-                  <Stack direction="row" alignItems={"center"}>
-                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                    <Typography className="text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </Typography>
-                  </Stack>
-                  <Stack direction="row" alignItems={"center"}>
-                    <div className="w-3 h-3 rounded-full bg-[#FF6652] mr-6"></div>
-                    <Typography className="text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </Typography>
-                  </Stack>
-                </Stack>
-              </Box>
-            </Box>
 
             <div className="">
               <h1 className=""></h1>
