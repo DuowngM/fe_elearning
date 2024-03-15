@@ -57,25 +57,28 @@ function HeaderUser() {
   //Hàm xử lý đăng nhập
   const handleLogin = async (infoUser) => {
     const response = await login(infoUser);
-    const { accessToken, expired, roles, fullName } = response.data;
-    setUser(fullName);
-    localStorage.setItem("user", fullName);
-    localStorage.setItem("roles", JSON.stringify(roles));
-    // Lưu accessToken vào cookies
-    Cookies.set("accessToken", accessToken, {
-      expires: expired / (24 * 60 * 60 * 1000),
-      secure: true,
-      sameSite: "strict",
-    });
+    if (response) {
+      console.log(response);
+      const { accessToken, expired, roles, fullName } = response?.data;
+      setUser(fullName);
+      localStorage.setItem("user", fullName);
+      localStorage.setItem("roles", JSON.stringify(roles));
+      // Lưu accessToken vào cookies
+      Cookies.set("accessToken", accessToken, {
+        expires: expired / (24 * 60 * 60 * 1000),
+        // secure: true,
+        // sameSite: "strict",
+      });
 
-    closeFormLogin();
-    const check = roles.some(
-      (item) => item === import.meta.env.VITE_ADMIN_ROLE
-    );
+      const check = roles.some(
+        (item) => item === import.meta.env.VITE_ADMIN_ROLE
+      );
 
-    // Xử lý chuyển hướng nếu cần
-    if (check) {
-      window.location.href = "/admin";
+      // Xử lý chuyển hướng nếu cần
+      if (check) {
+        window.location.href = "/admin";
+      }
+      closeFormLogin();
     }
   };
   // hàm xử lý đăng ký
@@ -113,7 +116,7 @@ function HeaderUser() {
         <Typography className="text-lg font-medium">{user}</Typography>
         {user ? (
           <>
-            <Avatar onClick={handleClick}>
+            <Avatar onClick={handleClick} className="cursor-pointer">
               <PersonIcon fontSize="large" />
             </Avatar>
             <Menu
@@ -151,19 +154,6 @@ function HeaderUser() {
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              {/* <MenuItem onClick={handleClose}>
-                <Avatar /> Profile
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Avatar /> My account
-              </MenuItem>
-              <Divider />
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <PersonAdd fontSize="small" />
-                </ListItemIcon>
-                Add another account
-              </MenuItem> */}
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
                   <Logout fontSize="small" />
@@ -171,7 +161,6 @@ function HeaderUser() {
                 Đăng xuất
               </MenuItem>
             </Menu>
-            {/* Hiển thị tên người dùng */}
           </>
         ) : (
           <>
