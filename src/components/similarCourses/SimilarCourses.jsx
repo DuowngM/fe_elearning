@@ -1,4 +1,3 @@
-
 import playBorder from "/images/playBorder.svg";
 import { useNavigate } from "react-router-dom";
 
@@ -24,6 +23,7 @@ export default function SimilarCourses({ item }) {
           maxWidth: "100%",
           display: "flex",
           justifyContent: "space-between",
+          cursor: "pointer",
         }}
       >
         <Stack direction={"row"}>

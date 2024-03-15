@@ -266,7 +266,7 @@ const CourseDetailMain = () => {
         </Box>
         <div className="w-full mb-60">
           <div className="max-w-[1500px] mx-auto my-0">
-            <h1 className="text-3xl mb-5 font-semibold ">Similar Courses</h1>
+            <h1 className="text-3xl mb-5 font-semibold ">Khóa học khác</h1>
             <Grid container spacing={6}>
               {/* item Courses */}
               {similarCourses?.map((item) => (
