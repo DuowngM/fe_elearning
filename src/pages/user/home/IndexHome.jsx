@@ -451,7 +451,7 @@ function IndexHome() {
 
         {/* ----------------------------------------------------------- Khóa học và bài giảng chất lượng cao ------------------------------------------ */}
         <Box className="w-full bg-[#F8F7FA]">
-          <div className="max-w-[1800px] mx-auto  py-32">
+          <div className="max-w-[1500px] mx-auto  py-32">
             <Typography
               component="h1"
               variant="h3"
@@ -587,7 +587,7 @@ function IndexHome() {
             </div>
           </Box> */}
         <Box className="w-full  my-32">
-          <div className="max-w-[1800px] mx-auto  py-32">
+          <div className="max-w-[1500px] mx-auto  py-32">
             <Typography
               component="h1"
               variant="h3"
