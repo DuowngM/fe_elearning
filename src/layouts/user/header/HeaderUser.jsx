@@ -6,10 +6,24 @@ import RegisterForm from "../../../components/auth/RegisterForm";
 import { getPhone, login, register } from "../../../api/userAPIs";
 import Cookies from "js-cookie";
 import { notify } from "../../../utils/notification";
+import PersonIcon from "@mui/icons-material/Person";
+import { Avatar, ListItemIcon, Menu, MenuItem, Paper } from "@mui/material";
+import { Divider, Typography } from "antd";
+import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 
 function HeaderUser() {
   const [showFormLogin, setShowFormLogin] = useState(false);
   const [showFormRegister, setShowFormRegister] = useState(false);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
     return savedUser || null;
@@ -120,18 +134,70 @@ function HeaderUser() {
           />
         </div>
       </div> */}
+
       <div className="actions flex gap-3 items-center">
+        <Typography className="text-lg font-medium">{user}</Typography>
         {user ? (
           <>
-            <span className="font-bold text-[#231651]">{user}</span>{" "}
-            {/* Hiển thị tên người dùng */}
-            <Button
-              variant="outlined"
-              sx={{ color: "#bc2228" }}
-              onClick={handleLogout}
+            <Avatar onClick={handleClick}>
+              <PersonIcon fontSize="large" />
+            </Avatar>
+            <Menu
+              anchorEl={anchorEl}
+              id="account-menu"
+              open={open}
+              onClose={handleClose}
+              onClick={handleClose}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: "visible",
+                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                  mt: 1.5,
+                  "& .MuiAvatar-root": {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  "&::before": {
+                    content: '""',
+                    display: "block",
+                    position: "absolute",
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: "background.paper",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    zIndex: 0,
+                  },
+                },
+              }}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              Đăng xuất
-            </Button>
+              {/* <MenuItem onClick={handleClose}>
+                <Avatar /> Profile
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Avatar /> My account
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <PersonAdd fontSize="small" />
+                </ListItemIcon>
+                Add another account
+              </MenuItem> */}
+              <MenuItem onClick={handleLogout}>
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
+                Đăng xuất
+              </MenuItem>
+            </Menu>
+            {/* Hiển thị tên người dùng */}
           </>
         ) : (
           <>
@@ -153,6 +219,7 @@ function HeaderUser() {
         )}
       </div>
       {/* Form thêm mới khóa học */}
+
       {showFormLogin && (
         <LoginForm
           closeForm={closeFormLogin}

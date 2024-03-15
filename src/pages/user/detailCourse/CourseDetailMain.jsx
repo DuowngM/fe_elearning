@@ -5,6 +5,7 @@ import {
   AccordionSummary,
   Box,
   Breadcrumbs,
+  Grid,
   Link,
   Stack,
 } from "@mui/material";
@@ -37,7 +38,7 @@ const CourseDetailMain = () => {
   useEffect(() => {
     dispatch(getChaptersThunk(id));
     dispatch(getLessonsThunk());
-    dispatch(getAllCoursesAPI({ page: 0, size: 4}));
+    dispatch(getAllCoursesAPI({ page: 0, size: 4 }));
   }, [dispatch, id]);
 
   // Nhóm dữ liệu lại
@@ -306,14 +307,14 @@ const CourseDetailMain = () => {
         <div className="w-full mb-60">
           <div className="max-w-[1500px] mx-auto my-0">
             <h1 className="text-3xl mb-5 font-semibold ">Similar Courses</h1>
-            <div className="flex flex-wrap w-full gap-10">
+            <Grid container spacing={6}>
               {/* item Courses */}
               {similarCourses?.map((item) => (
                 <React.Fragment key={item.id}>
                   <SimilarCourses item={item} />
                 </React.Fragment>
               ))}
-            </div>
+            </Grid>
           </div>
         </div>
       </Box>
