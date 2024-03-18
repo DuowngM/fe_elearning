@@ -28,9 +28,10 @@ export default function CardCourse({ item }) {
   const handleLearn = () => {
     const accessToken = getAccessTokenFromCookies();
     const userInfo = getUserInfoFromLocalStorage();
-
-    if (!accessToken || !userInfo)
+    if (!accessToken || !userInfo) {
       return notify("error", "Đăng nhập để học khóa này");
+    }
+
     navigate(`/detailcourse/${item.id}`);
   };
 

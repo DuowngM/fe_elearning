@@ -16,14 +16,6 @@ export default function Menu() {
             <ManageAccountsIcon />
             <span className="menu-text">Quản lý</span>
           </NavLink>
-          {/* <NavLink to="contact">
-            <ConnectWithoutContactIcon />
-            <span className="menu-text">Quản lý người dùng</span>
-          </NavLink> */}
-          {/* <NavLink to="bai-viet">
-            <LocalPostOfficeIcon />
-            <span className="menu-text">Bài viết</span>
-          </NavLink> */}
         </div>
       </menu>
     </>
