@@ -12,7 +12,6 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { object } from "prop-types";
 export default function CardCourse({ item }) {
   const navigate = useNavigate();
   const getAccessTokenFromCookies = () => {
@@ -29,9 +28,10 @@ export default function CardCourse({ item }) {
   const handleLearn = () => {
     const accessToken = getAccessTokenFromCookies();
     const userInfo = getUserInfoFromLocalStorage();
-
-    if (!accessToken || !userInfo)
+    if (!accessToken || !userInfo) {
       return notify("error", "Đăng nhập để học khóa này");
+    }
+
     navigate(`/detailcourse/${item.id}`);
   };
 
@@ -53,7 +53,7 @@ export default function CardCourse({ item }) {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              <span className="font-bold">{item.title}</span>
+              <span className="font-bold"> {item.title}</span>
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {item.subDescription}
@@ -61,14 +61,12 @@ export default function CardCourse({ item }) {
           </CardContent>
         </Box>
         <CardActions>
-          <Button
-            color="error"
-            size="large"
-            variant="outlined"
+          <button
             onClick={handleLearn}
+            className="border border-[#BC2228] text-[#BC2228] bg-white font-bold py-2 px-4 rounded cursor-pointer hover:bg-rikkei hover:text-white transition duration-300 ease-in-out"
           >
             Học ngay
-          </Button>
+          </button>
         </CardActions>
       </Card>
     </Grid>

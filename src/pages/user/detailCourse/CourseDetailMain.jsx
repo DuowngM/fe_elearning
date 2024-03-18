@@ -27,7 +27,7 @@ const CourseDetailMain = () => {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
   const similarCourses = useSelector((state) => state.courseSlice.courses);
-  const [expanded, setExpanded] = useState("panel2");
+  const [expanded, setExpanded] = useState("panel1");
   const [description, setDiscription] = useState("");
   const [sourceVideo, setSourceVideo] = useState(
     "https://www.youtube.com/embed/vdKE_Tz8cy0"
@@ -106,7 +106,7 @@ const CourseDetailMain = () => {
                   key="3"
                   className="text-[#BC2228] font-semibold text-2xl cursor-pointer"
                 >
-                  {chapters[0]?.courseName}
+                  {chapters[0]?.courseName || "Coming Soon"}
                 </p>
               </Breadcrumbs>
             </Stack>
@@ -246,17 +246,6 @@ const CourseDetailMain = () => {
                 </Typography>
               </Box>
             </Stack>
-
-            <div className="">
-              <h1 className=""></h1>
-
-              <div className="">
-                <div className="">
-                  <div className=""></div>
-                  <p className=""></p>
-                </div>
-              </div>
-            </div>
           </Box>
         </Box>
         <div className="w-full mb-60">

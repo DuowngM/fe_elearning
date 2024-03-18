@@ -84,6 +84,7 @@ const CoursePage = () => {
                 fontWeight={700}
                 fontSize={"1.5rem"}
                 onClick={() => navigate("/")}
+                sx={{ cursor: "pointer" }}
               >
                 Trang chủ
               </Link>
@@ -95,6 +96,7 @@ const CoursePage = () => {
                 fontWeight={700}
                 fontSize={"1.5rem"}
                 onClick={() => navigate("/course")}
+                sx={{ cursor: "pointer" }}
               >
                 Khóa học
               </Link>

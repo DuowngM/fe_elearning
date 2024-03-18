@@ -44,7 +44,10 @@ export default function BackTop() {
     <>
       {show && (
         <>
-          <button onClick={scrollToTop} className="btn-back-top cursor-pointer">
+          <button
+            onClick={scrollToTop}
+            className="btn-back-top  cursor-pointer border border-sky-500"
+          >
             <KeyboardControlKeyIcon className="arrow" />
           </button>
         </>

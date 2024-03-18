@@ -13,19 +13,13 @@ import teacherTung from "/images/teacher_tung.png";
 import teacherDung from "/images/teacher_dung.png";
 import teacherLam from "/images/teacher_lam.png";
 import personBg from "/images/person_bg.png";
-import IconDone from "/images/IconDone.svg";
 import Introducing from "/images/introducing.jpg";
-import {
-  Box,
-  Button,
-  Chip,
-  Grid,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import CardCourse from "../../../components/card-course/CardCourse";
 import { useNavigate } from "react-router-dom";
+import ListTeacher from "../../../components/listTeacher/ListTeacher";
+import TraningMethods from "../../../components/traningMethods/TraningMethods";
+import Advantages from "../../../components/advantages/Advantages";
 
 function IndexHome() {
   //#region redux
@@ -216,30 +210,15 @@ function IndexHome() {
                 sx={{ marginTop: 4 }}
                 className="w-full mt-[42px]"
               >
-                <Button
-                  variant="contained"
-                  sx={{
-                    color: "white",
-                    backgroundColor: "#BC2228",
-                    fontSize: "0,5rem",
-                  }}
-                >
-                  {" "}
+                <button className="bg-[#BC2228] border-none text-white font-bold py-2 px-4 rounded cursor-pointer hover:bg-white hover:text-rikkei transition duration-300 ease-in-out">
                   Nhận tư vấn 1:1
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  sx={{
-                    fontSize: "0,5rem",
-                    fontWeight: "400",
-                    color: "white",
-                    borderColor: "white",
-                  }}
+                </button>
+                <button
                   onClick={() => navigate("/course")}
+                  className="border border-[#BC2228] text-[#BC2228] bg-white font-bold py-2 px-4 rounded cursor-pointer hover:bg-rikkei hover:text-white transition duration-300 ease-in-out"
                 >
                   Các khóa học
-                </Button>
+                </button>
               </Stack>
             </Box>
             <img src={personBg} alt="" className="w-1/2" />
@@ -276,10 +255,10 @@ function IndexHome() {
                     </div>
                   </div>
                   <div className="flex flex-col justify-center sm:flex-row gap-2 lg:gap-4 mt-4 lg:mt-[42px]">
-                    <button className="bg-[#BC2228] text-white font-bold py-2 px-4 rounded cursor-pointer">
+                    <button className="bg-[#BC2228] border-none text-white font-bold py-2 px-4 rounded cursor-pointer transition duration-300 ease-in-out hover:bg-white hover:text-[#BC2228]">
                       Nhận tư vấn 1:1
                     </button>
-                    <button className="border border-[#BC2228] text-[#BC2228] bg-white font-bold py-2 px-4 rounded cursor-pointer">
+                    <button className="border border-[#BC2228] text-[#BC2228] bg-white font-bold py-2 px-4 rounded cursor-pointer transition duration-300 ease-in-out hover:bg-[#BC2228] hover:text-white">
                       Kiểm tra độ phù hợp
                     </button>
                   </div>
@@ -300,11 +279,9 @@ function IndexHome() {
                 Video bài giảng chất lượng cao
               </h2>
               <p className="text-[#231651]  leading-7">
-                High-definition video is video of higher resolution and quality
-                than standard-definition. While there is no standardized meaning
-                for high-definition, generally any video image with considerably
-                more than <br /> 480 vertical scan lines or 576 vertical lines
-                is considered high-definition.
+                Chúng tôi sẽ luôn thúc đẩy học viên có thể đi xa hơn trên con
+                đường phát triển của mình, nâng tầm sự nghiệp, sánh vai với bạn
+                bè quốc tế.
               </p>
             </div>
 
@@ -342,47 +319,7 @@ function IndexHome() {
             <Grid container spacing={8}>
               {dataStaticTranding?.map((item, index) => (
                 <Fragment key={index}>
-                  <Grid item xs={4} sx={{ minHeight: "400px" }}>
-                    <Paper
-                      variant="elevation"
-                      sx={{ padding: 3, minHeight: "100%" }}
-                    >
-                      <Typography
-                        component="h2"
-                        variant="h5"
-                        sx={{
-                          color: "#231651",
-                          fontWeight: "bold",
-                          marginBottom: 3,
-                        }}
-                      >
-                        {item.title}
-                      </Typography>
-                      <Stack spacing={2}>
-                        {item.children.map((item, index) => (
-                          <Fragment key={index}>
-                            <Stack direction="row">
-                              <img
-                                src={IconDone}
-                                alt=""
-                                className="mr-3 self-start"
-                              />
-                              <Typography
-                                sx={{
-                                  color: "#231651",
-                                  fontWeight: 600,
-
-                                  width: "85%",
-                                }}
-                              >
-                                {item.text}
-                              </Typography>
-                            </Stack>
-                          </Fragment>
-                        ))}
-                      </Stack>
-                    </Paper>
-                  </Grid>
+                  <TraningMethods item={item} />
                 </Fragment>
               ))}
             </Grid>
@@ -407,32 +344,7 @@ function IndexHome() {
             <Grid container spacing={4}>
               {dataAdvantage.map((item, index) => (
                 <Fragment key={index}>
-                  <Grid item xs={4} sx={{ minHeight: "200px" }}>
-                    <img
-                      src={item.icon}
-                      alt=""
-                      className="mr-3 self-start w-12 h-12"
-                    />
-                    <Typography
-                      component="h4"
-                      variant="h6"
-                      sx={{
-                        fontWeight: "medium",
-                        color: "#BC2228",
-                        marginY: 1,
-                      }}
-                    >
-                      {item.title}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        color: "#231651",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {item.text}
-                    </Typography>
-                  </Grid>
+                  <Advantages item={item} />
                 </Fragment>
               ))}
             </Grid>
@@ -462,9 +374,9 @@ function IndexHome() {
                 textAlign: "center",
               }}
             >
-              A lesson or class is a structured period of time where learning is
-              intended to occur. It involves one or more students being taught
-              by a teacher or instructor.
+              Rikkei Education tự hào có đội ngũ cố vấn và giảng viên xuất sắc,
+              tin cậy, đảm bảo mang đến trải nghiệm học tập tuyệt vời nhất, giúp
+              học viên phát triển toàn diện
             </Typography>
             <Box
               sx={{
@@ -491,7 +403,7 @@ function IndexHome() {
               className="w-full mt-11"
             >
               <button
-                className="bg-[#BC2228] text-white font-semibold cursor-pointer text-sm py-2 px-4 rounded hover:bg-white hover:text-[#BC2228] border border-transparent hover:border-[#BC2228] transition-colors duration-200"
+                className="bg-[#BC2228] text-white font-semibold cursor-pointer text-sm py-2 px-4 rounded hover:bg-white hover:text-[#BC2228] border border-transparent hover:border-[#BC2228] transition-colors duration-300"
                 onClick={() => navigate("/course")}
               >
                 Hiện tất cả khóa học
@@ -517,87 +429,7 @@ function IndexHome() {
             <Grid container spacing={8}>
               {listTeacher?.map((item, index) => (
                 <Fragment key={index}>
-                  <Grid item xs={3} sx={{ minHeight: "800px" }}>
-                    <Paper
-                      variant="elevation"
-                      sx={{ padding: 3, minHeight: "100%" }}
-                    >
-                      <div className="w-full h-80 ">
-                        <img src={item.img} alt="" className="h-full w-full" />
-                      </div>
-                      <Stack
-                        direction={"column"}
-                        sx={{ mt: 2 }}
-                        alignItems={"center"}
-                        paddingX={"1.4rem"}
-                        spacing={1}
-                      >
-                        <Typography
-                          component="h4"
-                          variant="h6"
-                          sx={{
-                            fontWeight: "medium",
-                            color: "#231651",
-                            textAlign: "center",
-                            fontSize: "1.4rem",
-                          }}
-                        >
-                          {item.name}
-                        </Typography>
-                        <Chip
-                          label={item.role}
-                          variant="outlined"
-                          sx={{
-                            backgroundColor: "#F8F7FA",
-                            borderColor: "#C1BCD1",
-                            color: "#231651",
-                            fontWeight: "bold",
-                            borderRadius: "4px",
-                          }}
-                        />
-                        <Typography
-                          sx={{
-                            color: "#231651",
-                            fontWeight: 600,
-                            textAlign: "center",
-                            fontSize: "1rem",
-                          }}
-                        >
-                          {item.detail}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color: "#231651",
-                            fontWeight: 600,
-                            textAlign: "center",
-                            fontSize: "1rem",
-                          }}
-                        >
-                          {item?.certificate}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color: "#231651",
-                            fontWeight: 600,
-                            textAlign: "center",
-                            fontSize: "1rem",
-                          }}
-                        >
-                          {item?.certificateGlobal}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color: "#231651",
-                            fontWeight: 600,
-                            textAlign: "center",
-                            fontSize: "1rem",
-                          }}
-                        >
-                          {item?.Pedagogy}
-                        </Typography>
-                      </Stack>
-                    </Paper>
-                  </Grid>
+                  <ListTeacher item={item} />
                 </Fragment>
               ))}
             </Grid>
