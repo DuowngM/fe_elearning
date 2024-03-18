@@ -110,7 +110,7 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
                   src={imageUrl}
                   style={{
                     width: "200px",
-                    height: "200px",
+                    height: "100px",
                     marginTop: "10px",
                     overflow: "hidden",
                     objectFit: "cover",
