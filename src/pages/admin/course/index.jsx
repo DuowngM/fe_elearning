@@ -49,7 +49,7 @@ export default function Course() {
     setPagination(value);
   };
   // Thêm key khi map
-  const dataSource = allCourses?.courses.map((course) => ({
+  const dataSource = allCourses?.courses?.map((course) => ({
     ...course,
     key: course.id,
   }));

@@ -59,7 +59,7 @@ export default function DetailCourse() {
   }, [dispatch, id]);
 
   // Nhóm dữ liệu lại
-  const groupedContentItems = chapters.map((chapter) => {
+  const groupedContentItems = chapters?.map((chapter) => {
     return {
       ...chapter,
       lessons: lesson.filter((item) => item.chapterId === chapter.id),
@@ -351,7 +351,7 @@ export default function DetailCourse() {
                       </div>
                       <div className="overflow-y-auto max-h-40 bg-white rounded-[20px] ">
                         {chapter?.lessons?.length > 0 ? (
-                          chapter.lessons.map((item) => (
+                          chapter?.lessons?.map((item) => (
                             <AccordionDetails
                               sx={{
                                 height: "60px",
