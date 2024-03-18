@@ -56,11 +56,7 @@ const CourseDetailMain = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  // Breadcrumbs
-  function handleClickNav(event) {
-    event.preventDefault();
-    console.info("You clicked a breadcrumb.");
-  }
+
   return (
     <>
       <Box sx={{ width: "100%" }}>

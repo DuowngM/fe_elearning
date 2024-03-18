@@ -53,7 +53,7 @@ export default function CardCourse({ item }) {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {item.title}
+              <span className="font-bold">{item.title}</span>
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {item.subDescription}

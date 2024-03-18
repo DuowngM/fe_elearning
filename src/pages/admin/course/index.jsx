@@ -6,11 +6,7 @@ import { Select } from "antd";
 import { Table } from "antd";
 import FormAddCourse from "../../../components/form/FormAddCourse";
 import { useNavigate } from "react-router-dom";
-import {
-  addNewCourse,
-  deleteCourse,
-  editCourse,
-} from "../../../api/courseAPIs";
+import { addNewCourse, editCourse } from "../../../api/courseAPIs";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import MyModal from "../../../components/modal/Modal";
@@ -49,7 +45,7 @@ export default function Course() {
     setPagination(value);
   };
   // Thêm key khi map
-  const dataSource = allCourses?.courses.map((course) => ({
+  const dataSource = allCourses?.courses?.map((course) => ({
     ...course,
     key: course.id,
   }));

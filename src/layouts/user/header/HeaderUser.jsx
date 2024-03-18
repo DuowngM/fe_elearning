@@ -58,7 +58,6 @@ function HeaderUser() {
   const handleLogin = async (infoUser) => {
     const response = await login(infoUser);
     if (response) {
-      console.log(response);
       const { accessToken, expired, roles, fullName } = response?.data;
       setUser(fullName);
       localStorage.setItem("user", fullName);
@@ -66,7 +65,7 @@ function HeaderUser() {
       // Lưu accessToken vào cookies
       Cookies.set("accessToken", accessToken, {
         expires: expired / (24 * 60 * 60 * 1000),
-        // secure: true,
+        secure: true,
         // sameSite: "strict",
       });
 

@@ -1,6 +1,14 @@
-import { Box, Breadcrumbs, Grid, Link, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Grid,
+  Link,
+  Pagination,
+  Stack,
+  Typography,
+} from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
@@ -12,9 +20,14 @@ import CardCourse from "../../../components/card-course/CardCourse";
 import { useNavigate } from "react-router-dom";
 
 const CoursePage = () => {
-  const allCourses = useSelector((state) => state.courseSlice.courses);
+  const allCourses = useSelector((state) => state.courseSlice);
+  const [pagination, setPagination] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const handlePageChange = (page, value) => {
+    dispatch(getAllCoursesAPI({ page: value - 1, size: 6, home: "home" }));
+    setPagination(value);
+  };
   //#endregion
   useEffect(() => {
     dispatch(getAllCoursesAPI({ page: 0, size: 6, home: "home" }));
@@ -67,21 +80,23 @@ const CoursePage = () => {
                 underline="hover"
                 key="1"
                 color="#BC2228"
+                className="cursor-pointer"
                 fontWeight={700}
                 fontSize={"1.5rem"}
                 onClick={() => navigate("/")}
               >
-                Home
+                Trang chủ
               </Link>
               <Link
                 underline="hover"
                 key="2"
                 color="#BC2228"
+                className="cursor-pointer"
                 fontWeight={700}
                 fontSize={"1.5rem"}
                 onClick={() => navigate("/course")}
               >
-                Courses
+                Khóa học
               </Link>
             </Breadcrumbs>
           </Stack>
@@ -94,11 +109,23 @@ const CoursePage = () => {
             }}
           >
             <Grid container spacing={8}>
-              {allCourses?.map((item, index) => (
-                <Fragment key={index}>
-                  <CardCourse item={item} />
-                </Fragment>
+              {allCourses?.courses?.map((item, index) => (
+                <>
+                  <Fragment key={index}>
+                    <CardCourse item={item} />
+                  </Fragment>
+                </>
               ))}
+            </Grid>
+            <Grid>
+              <div className="flex justify-center mt-5">
+                <Pagination
+                  count={allCourses?.totalPages}
+                  page={pagination}
+                  onChange={handlePageChange}
+                  color="primary"
+                />
+              </div>
             </Grid>
           </Box>
         </div>

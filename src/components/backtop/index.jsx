@@ -44,7 +44,7 @@ export default function BackTop() {
     <>
       {show && (
         <>
-          <button onClick={scrollToTop} className="btn-back-top">
+          <button onClick={scrollToTop} className="btn-back-top cursor-pointer">
             <KeyboardControlKeyIcon className="arrow" />
           </button>
         </>
