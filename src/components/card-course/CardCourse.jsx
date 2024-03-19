@@ -42,6 +42,7 @@ export default function CardCourse({ item }) {
           maxWidth: "100%",
           minHeight: "300px",
         }}
+        className="lg:h-full"
       >
         <Box>
           <CardMedia
@@ -50,9 +51,10 @@ export default function CardCourse({ item }) {
             height="280"
             image={import.meta.env.VITE_API_URL_IMG + item.image}
             sx={{ objectFit: "fill" }}
+            className="!lg:h-full"
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+          <CardContent className="lg:py-0">
+            <Typography gutterBottom variant="h5" component="div" className="!text-xl">
               {item.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
@@ -62,6 +64,7 @@ export default function CardCourse({ item }) {
         </Box>
         <CardActions>
           <Button
+            className=""
             color="error"
             size="large"
             variant="outlined"

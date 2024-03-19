@@ -6,9 +6,9 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 
 function FooterUser() {
   return (
-    <div className="bg-[#bc2228] text-white pt-[50px] pb-[30px]">
+    <div className="bg-[#bc2228] text-white pt-[50px] pb-[30px] lg:px-[20px] md:px-[18px]">
       <div className="footer_container max-w-[1500px] mx-auto">
-        <div className="footer_about flex gap-14">
+        <div className="footer_about flex gap-14 md:gap-3">
           <div className="main_about">
             <img
               src="https://rikkei.edu.vn/wp-content/uploads/2024/01/logorikkei.png"
@@ -16,7 +16,7 @@ function FooterUser() {
               className="h-[74px] block"
             />
             <div className="main_content flex flex-col gap-2 mt-5">
-              <h2>
+              <h2 className="md:text-lg lg:text-2xl">
                 <b>Công ty TNHH Rikkei Education</b>
               </h2>
               <p className="flex items-center">
@@ -36,10 +36,10 @@ function FooterUser() {
           </div>
           <ul className="flex justify-around w-full">
             <li>
-              <h2>
+              <h2 className="text-lg">
                 <b>Khóa học</b>
               </h2>
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-3 flex flex-col gap-2 md:!grid md:!grid-cols-2">
                 <li className="hover:text-orange-400 hover:cursor-pointer">Cho người mới bắt đầu</li>
                 <li className="hover:text-orange-400 hover:cursor-pointer">Lập trình viên nhật bản</li>
                 <li className="hover:text-orange-400 hover:cursor-pointer">Kỹ sư CNTT - PTIT</li>
@@ -48,10 +48,10 @@ function FooterUser() {
               </ul>
             </li>
             <li>
-              <h2>
+              <h2 className="text-lg">
                 <b>Tài nguyên</b>
               </h2>
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-3 flex flex-col gap-2 md:!grid md:!grid-cols-2">
                 <li className="hover:text-orange-400 hover:cursor-pointer">Blog</li>
                 <li className="hover:text-orange-400 hover:cursor-pointer">Kiến thức chuyên môn</li>
                 <li className="hover:text-orange-400 hover:cursor-pointer">Khám phá nhật bản</li>
@@ -60,10 +60,10 @@ function FooterUser() {
               </ul>
             </li>
             <li>
-              <h2>
+              <h2 className="text-lg">
                 <b>Vì sao chọn Rikkei Education</b>
               </h2>
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-3 flex flex-col gap-2 md:!grid md:!grid-cols-2">
                 <li className="hover:text-orange-400 hover:cursor-pointer">Về Rikkei Education</li>
                 <li className="hover:text-orange-400 hover:cursor-pointer">Hệ sinh thái Rikkei</li>
                 <li className="hover:text-orange-400 hover:cursor-pointer">Nhân sự Rikkei Education</li>

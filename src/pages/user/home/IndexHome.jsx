@@ -163,7 +163,7 @@ function IndexHome() {
         {/* ----------------------------------------------------- banner ---------------------------------------------------------------- */}
         <Box className=" bg-[#231651] ">
           <Stack
-            className="flex max-w-[1500px] mx-auto mt-4 items-center justify-between"
+            className="flex max-w-[1500px] mx-auto mt-4 items-center justify-between md:px-[20px]"
             direction={{ xs: "column", sm: "row" }}
             sx={{ marginX: "auto", marginTop: "1rem" }}
           >
@@ -177,6 +177,7 @@ function IndexHome() {
                   fontWeight: "bold",
                   lineHeight: "4rem",
                 }}
+                className=" md:text-2xl"
               >
                 Khóa Học Lập Trình Từ Con Số 0 <br /> Tự Tin Đi Làm Sau 6 Tháng
               </Typography>
@@ -185,7 +186,7 @@ function IndexHome() {
                   <div className="inline-block mr-[10px]">
                     <img src="/images/icon-check 1.png" alt="" />
                   </div>
-                  <span className=" text-white text-xl leading-12 w-full">
+                  <span className=" text-white text-xl leading-12 w-full  md:text-base">
                     Cam kết có việc làm
                   </span>
                 </div>
@@ -194,7 +195,7 @@ function IndexHome() {
                   <div className="inline-block mr-[10px]">
                     <img src="/images/icon-check 1.png" alt="" />
                   </div>
-                  <span className=" text-white leading-12 text-xl">
+                  <span className=" text-white leading-12 text-xl  md:text-base">
                     Chắc nền tảng, giỏi thực hành - Có ít nhất 2 Project sau
                     khóa học
                   </span>
@@ -204,7 +205,7 @@ function IndexHome() {
                   <div className="inline-block mr-[10px]">
                     <img src="/images/icon-check 1.png" alt="" />
                   </div>
-                  <span className=" text-white leading-12 text-xl">
+                  <span className=" text-white leading-12 text-xl  md:text-base">
                     Tốt nghiệp chinh phục công việc LƯƠNG 8 CHỮ SỐ
                   </span>
                 </div>
@@ -242,26 +243,27 @@ function IndexHome() {
                 </Button>
               </Stack>
             </Box>
-            <img src={personBg} alt="" className="w-1/2" />
+            <img src={personBg} alt="" className="w-1/2 md:w-1/3" />
           </Stack>
         </Box>
         {/* video Dream */}
-        <div className="w-full h-[650px] ">
-          <div className="  max-h-[550px] h-full bg-[#F2F2F2] py-40  flex items-center justify-center">
-            <div className="max-w-[1500px] h-full flex items-center justify-center">
+        <div className="w-full h-[650px]  ">
+          <div className="  max-h-[550px] h-full bg-[#F2F2F2] py-40  flex items-center justify-center px-[20px] md:py-5 md:h-[400px] ">
+            <div className="max-w-[1500px] h-full flex items-center justify-center ">
               <div className="mr-[100px] w-1/2 ">
-                <div className="w-full h-[400px] bg-[#B4B4B4]">
+                <div className="w-full h-[400px] bg-[#B4B4B4]  md:h-4/5">
                   <img src={Introducing} className="w-full h-full" alt="" />
                 </div>
               </div>
-              <div className="w-1/2">
-                <div className="w-3/4">
-                  <h1 className="font-bold text-2xl text-[#BC2228] leading-[3rem]">
+              <div className="w-1/2 md:h-3/4 md:items-start md:flex" >
+                <div className="w-3/4 md:h-full w-full">
+                  <h1 className="font-bold text-2xl text-[#BC2228] leading-[3rem]  leading-4 md:text-lg">
                     Rikkei Education - Where the dreams come true
                   </h1>
-                  <div className="mt-7 flex flex-col gap-4">
+                  <div className="mt-7 flex flex-col gap-4 md:mt-0">
                     <div className="align-middle">
-                      <p className=" text-[#0A033C] text-lg leading-12 w-full">
+                      <p className=" text-[#0A033C] text-3xl leading-12 w-full md:mt-0 md:text-sm">
+
                         Rikkei Education cam kết cung cấp nền tảng giáo dục và
                         đào tạo hiện đại, đưa công nghệ thông tin đến thế hệ trẻ
                         Việt Nam. Chúng tôi mong muốn trang bị cho các bạn đầy
@@ -282,8 +284,9 @@ function IndexHome() {
                       sx={{
                         color: "white",
                         backgroundColor: "#BC2228",
-                        fontSize: "1rem",
+                        
                       }}
+                      className="text-[1rem]  md:w-full md:text-[0.6rem] md:h-full"
                     >
                       {" "}
                       Nhận tư vấn 1:1
@@ -292,11 +295,12 @@ function IndexHome() {
                     <Button
                       variant="outlined"
                       sx={{
-                        fontSize: "1rem",
+                        
                         borderColor: "#fff",
                         color: "#BC2228",
                         bgcolor: "#fff",
                       }}
+                      className="text-[1rem] md:w-full md:text-[0.6rem] md:h-full"
                     >
                       Kiểm tra độ phù hợp
                     </Button>
@@ -307,16 +311,16 @@ function IndexHome() {
           </div>
         </div>
         {/* ----------------------------------------------- Video bài giảng chất lượng cao ------------------------------------------------- */}
-        <div className="max-w-[1500px] mx-auto">
+        <div className="max-w-[1500px] mx-auto lg:px-[20px] md:px-[20px]">
           <div className="pb-40">
             <div className="text-center">
               <h2
                 id="courses"
-                className="text-[#BC2228] text-5xl mb-[40px] font-bold"
+                className="text-[#BC2228] text-5xl mb-[40px] font-bold md:text-3xl"
               >
                 Video bài giảng chất lượng cao
               </h2>
-              <p className="text-[#231651]  leading-7">
+              <p className="text-[#231651]  leading-7 md:text-base">
                 High-definition video is video of higher resolution and quality
                 than standard-definition. While there is no standardized meaning
                 for high-definition, generally any video image with considerably
@@ -342,7 +346,7 @@ function IndexHome() {
           </div>
         </div>
         {/* ----------------------------------------------------------- Phương pháp đào tạo lập trình ưu việt ------------------------------------------ */}
-        <Box className="w-full bg-[#F8F7FA] my-32">
+        <Box className="w-full bg-[#F8F7FA] my-32 lg:px-[20px] md:px-[20px]">
           <div className="max-w-[1500px] mx-auto  py-32">
             <Typography
               component="h1"
@@ -353,6 +357,7 @@ function IndexHome() {
                 fontWeight: "bold",
                 textAlign: "center",
               }}
+              className="md:text-3xl"
             >
               Phương pháp đào tạo lập trình ưu việt
             </Typography>
@@ -407,7 +412,7 @@ function IndexHome() {
         </Box>
 
         {/* ----------------------------------------------------------- Ưu điểm vượt trội khi học lập trình tại Rikkei Academy --------------------------- */}
-        <Box className="w-full">
+        <Box className="w-full lg:px-[20px]">
           <div className="max-w-[1500px] mx-auto  py-32">
             <Typography
               component="h1"
@@ -457,7 +462,7 @@ function IndexHome() {
         </Box>
 
         {/* ----------------------------------------------------------- Khóa học và bài giảng chất lượng cao ------------------------------------------ */}
-        <Box className="w-full bg-[#F8F7FA]">
+        <Box className="w-full bg-[#F8F7FA] lg:px-[20px]">
           <div className="max-w-[1500px] mx-auto  py-32">
             <Typography
               component="h1"

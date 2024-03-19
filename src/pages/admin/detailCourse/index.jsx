@@ -9,7 +9,7 @@ import {
   editLesson,
 } from "../../../api/lessonAPIs";
 import AddIcon from "@mui/icons-material/Add";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, ButtonGroup } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Divider from "@mui/material/Divider";
 import React, { useEffect, useState } from "react";
@@ -24,6 +24,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import Cookies from "js-cookie";
+// import { Button } from "antd";
+import Button from '@mui/material/Button';
 export default function DetailCourse() {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
@@ -209,18 +211,20 @@ export default function DetailCourse() {
         />
       )}
       <div className="w-full">
-        <div className="bg-[#f8f8f8] shadow-lg py-20 overflow-hidden rounded-3xl">
-          <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg ml-16 mb-10">
+        <div className="bg-[#f8f8f8] shadow-lg pb-20 overflow-hidden rounded-3xl">
+          <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg ml-10 mb-4">
             <span className="text-rikkei">Khóa học: </span>
             {chapters[0]?.courseName}{" "}
           </h1>
 
-          <div className="my-0 mx-auto max-w-[1500px]">
-            <button onClick={() => setChoice("video")}>video</button>
-            <button onClick={() => setChoice("lesson")}>Bài học</button>
-            <button onClick={handleSaveDescription}>Lưu</button>
-            <div className="flex flex-wrap justify-between min-h-[500px]">
-              <div className="rounded-2xl overflow-hidden max-w-[850px] w-full relative">
+          <div className="my-0 mx-auto max-w-[1500px] px-10">
+            <ButtonGroup variant="outlined" aria-label="Basic button group" className="mb-[10px]">
+              <Button onClick={() => setChoice("video")}>video</Button>
+              <Button onClick={() => setChoice("lesson")}>Bài học</Button>
+              <Button onClick={handleSaveDescription}>Lưu</Button>
+            </ButtonGroup>
+            <div className="flex  justify-between min-h-[500px] gap-[20px]">
+              <div className="rounded-2xl overflow-hidden max-w-[950px] w-full relative">
                 {choice === "video" ? (
                   <VideoComponent sourceVideo={sourceVideo} />
                 ) : (
@@ -244,7 +248,7 @@ export default function DetailCourse() {
                   </div>
                 )}
               </div>
-              <div className="max-w-[600px] w-full flex flex-col">
+              <div className="max-w-[400px] w-full flex flex-col">
                 {groupedContentItems?.map((chapter) => (
                   <Accordion
                     sx={{ maxHeight: "50%" }}
