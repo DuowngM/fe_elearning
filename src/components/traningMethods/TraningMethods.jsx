@@ -11,7 +11,13 @@ export default function TraningMethods({ item }) {
   };
   return (
     <>
-      <Grid item xs={4} sx={{ minHeight: "400px", cursor: "pointer" }}>
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        md={4}
+        sx={{ minHeight: "400px", cursor: "pointer" }}
+      >
         <Paper
           variant="elevation"
           sx={{ padding: 3, minHeight: "100%", ...hoverStyle }}

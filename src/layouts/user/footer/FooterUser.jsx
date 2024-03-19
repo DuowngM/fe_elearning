@@ -1,24 +1,20 @@
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
-function FooterUser() {
+function Footer() {
   return (
-    <div className="bg-[#bc2228] text-white pt-[50px] pb-[30px]">
-      <div className="footer_container max-w-[1500px] mx-auto">
-        <div className="footer_about flex gap-14">
-          <div className="main_about">
+    <div className="bg-[#bc2228] text-white pt-12 pb-7">
+      <div className="footer_container max-w-6xl mx-auto px-4">
+        <div className="footer_about flex flex-col md:flex-row md:gap-14">
+          <div className="main_about mb-8 md:mb-0">
             <img
               src="https://rikkei.edu.vn/wp-content/uploads/2024/01/logorikkei.png"
               alt="logo footer"
               className="h-[74px] block"
             />
             <div className="main_content flex flex-col gap-2 mt-5">
-              <h2>
-                <b>Công ty TNHH Rikkei Education</b>
-              </h2>
+              <h2 className="font-bold">Công ty TNHH Rikkei Education</h2>
               <p className="flex items-center">
                 <ArrowRightIcon />{" "}
                 <span>
@@ -32,7 +28,7 @@ function FooterUser() {
                 </span>
               </p>
               <p className="location">
-                Địa chỉ: Tầng 7 tháp A toà Sông Đà, đường Phạm Hùng,quận Nam Từ
+                Địa chỉ: Tầng 7 tháp A toà Sông Đà, đường Phạm Hùng, quận Nam Từ
                 Liêm, Hà Nội
               </p>
               <p className="hotline">Hotline: 0862 069 233</p>
@@ -43,11 +39,9 @@ function FooterUser() {
               </div>
             </div>
           </div>
-          <ul className="flex justify-around w-full">
-            <li>
-              <h2>
-                <b>Khóa học</b>
-              </h2>
+          <div className="flex flex-wrap justify-between w-full">
+            <div className="footer_section mb-8 md:mb-0">
+              <h2 className="font-bold">Khóa học</h2>
               <ul className="mt-3 flex flex-col gap-2">
                 <li className="hover:text-orange-400 hover:cursor-pointer">
                   Cho người mới bắt đầu
@@ -65,11 +59,9 @@ function FooterUser() {
                   IT Fresher - Rikkei Certificate
                 </li>
               </ul>
-            </li>
-            <li>
-              <h2>
-                <b>Tài nguyên</b>
-              </h2>
+            </div>
+            <div className="footer_section mb-8 md:mb-0">
+              <h2 className="font-bold">Tài nguyên</h2>
               <ul className="mt-3 flex flex-col gap-2">
                 <li className="hover:text-orange-400 hover:cursor-pointer">
                   Blog
@@ -87,11 +79,9 @@ function FooterUser() {
                   What&apos;s New - What&apos;s Next?
                 </li>
               </ul>
-            </li>
-            <li>
-              <h2>
-                <b>Vì sao chọn Rikkei Education</b>
-              </h2>
+            </div>
+            <div className="footer_section">
+              <h2 className="font-bold">Vì sao chọn Rikkei Education</h2>
               <ul className="mt-3 flex flex-col gap-2">
                 <li className="hover:text-orange-400 hover:cursor-pointer">
                   Về Rikkei Education
@@ -112,18 +102,16 @@ function FooterUser() {
                   Cơ hội nghề nghiệp
                 </li>
               </ul>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
 
-        <div className="copy_right">
-          <p className="mt-20 text-center">
-            Copyright 2024 © Rikkei Academy All rights reserved.
-          </p>
+        <div className="copy_right mt-20 text-center">
+          <p>Copyright 2024 © Rikkei Academy All rights reserved.</p>
         </div>
       </div>
     </div>
   );
 }
 
-export default FooterUser;
+export default Footer;

@@ -12,7 +12,10 @@ import {
   Grid,
   Rating,
   Typography,
+  IconButton,
 } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"; // Để thêm nút yêu thích
+
 export default function CardCourse({ item }) {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
@@ -21,9 +24,11 @@ export default function CardCourse({ item }) {
     transition: "transform 0.3s ease-in-out",
     boxShadow: isHovered ? "0 4px 20px rgba(0,0,0,0.2)" : "",
   };
+
   const getAccessTokenFromCookies = () => {
     return Cookies.get("accessToken") || null;
   };
+
   const getUserInfoFromLocalStorage = () => {
     const userInfoString = localStorage.getItem("user");
     if (userInfoString) {
@@ -43,9 +48,11 @@ export default function CardCourse({ item }) {
   };
 
   return (
-    <Grid item xs={4}>
+    <Grid item xs={12} sm={6} md={4}>
       <Card
         sx={{
+          display: "flex",
+          flexDirection: "column",
           maxWidth: "100%",
           minHeight: "300px",
           cursor: "pointer",
@@ -54,15 +61,15 @@ export default function CardCourse({ item }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <Box>
-          <CardMedia
-            component="img"
-            alt="green iguana"
-            height="280"
-            image={import.meta.env.VITE_API_URL_IMG + item.image}
-            sx={{ objectFit: "fill" }}
-          />
-          <CardContent>
+        <CardMedia
+          component="img"
+          alt="green iguana"
+          height="280"
+          image={import.meta.env.VITE_API_URL_IMG + item.image}
+          sx={{ objectFit: "fill" }}
+        />
+        <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+          <CardContent sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="div">
               <span className="font-bold"> {item.title}</span>
             </Typography>
@@ -73,15 +80,19 @@ export default function CardCourse({ item }) {
               <Rating name="read-only" value={5} readOnly />
             </Typography>
           </CardContent>
+          <CardActions sx={{ justifyContent: "space-between" }}>
+            <Button
+              onClick={handleLearn}
+              variant="contained"
+              style={{ backgroundColor: "#BC2228", color: "#fff" }}
+            >
+              Học ngay
+            </Button>
+            <IconButton aria-label="add to favorites">
+              <FavoriteBorderIcon />
+            </IconButton>
+          </CardActions>
         </Box>
-        <CardActions>
-          <button
-            onClick={handleLearn}
-            className="border border-[#BC2228] text-[#BC2228] bg-white font-bold py-2 px-4 rounded cursor-pointer hover:bg-rikkei hover:text-white transition duration-300 ease-in-out"
-          >
-            Học ngay
-          </button>
-        </CardActions>
       </Card>
     </Grid>
   );

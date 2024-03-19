@@ -11,7 +11,14 @@ export default function ListTeacher({ item }) {
   return (
     <>
       {" "}
-      <Grid item xs={3} sx={{ minHeight: "800px", cursor: "pointer" }}>
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        md={4}
+        lg={3}
+        sx={{ minHeight: "800px", cursor: "pointer" }}
+      >
         <Paper
           variant="elevation"
           sx={{ padding: 3, minHeight: "100%", ...hoverStyle }}

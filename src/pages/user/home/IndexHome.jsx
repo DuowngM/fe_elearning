@@ -269,38 +269,67 @@ function IndexHome() {
         </div>
 
         {/* ----------------------------------------------- Video bài giảng chất lượng cao ------------------------------------------------- */}
-        <div className="max-w-[1500px] mx-auto">
-          <div className="pb-40">
-            <div className="text-center">
-              <h2
-                id="courses"
-                className="text-[#BC2228] text-5xl mb-[40px] font-bold"
-              >
-                Video bài giảng chất lượng cao
-              </h2>
-              <p className="text-[#231651]  leading-7">
-                Chúng tôi sẽ luôn thúc đẩy học viên có thể đi xa hơn trên con
-                đường phát triển của mình, nâng tầm sự nghiệp, sánh vai với bạn
-                bè quốc tế.
-              </p>
-            </div>
+        <Box className="w-full bg-[#F8F7FA]">
+          <div className="max-w-[1500px] mx-auto  py-32">
+            <Typography
+              component="h1"
+              variant="h3"
+              sx={{
+                color: "#BC2228",
+                marginBottom: 3,
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+              className="sm:text-[32px]"
+            >
+              Khóa học và bài giảng chất lượng cao
+            </Typography>
+            <Typography
+              component="p"
+              sx={{
+                color: "#5D5A6F",
+                marginBottom: 8,
+                textAlign: "center",
+              }}
+            >
+              Rikkei Education tự hào có đội ngũ cố vấn và giảng viên xuất sắc,
+              tin cậy, đảm bảo mang đến trải nghiệm học tập tuyệt vời nhất, giúp
+              học viên phát triển toàn diện
+            </Typography>
+            {/* ----------------------------------------------------------- Khóa học và bài giảng chất lượng cao ------------------------------------------ */}
+            <Box
+              sx={{
+                maxWidth: "1500px",
+                width: "100%",
+                marginX: "auto",
+                marginY: 0,
+              }}
+            >
+              <Grid container spacing={8}>
+                {allCourses?.map((item, index) => (
+                  <Fragment key={index}>
+                    <CardCourse item={item} />
+                  </Fragment>
+                ))}
+              </Grid>
+            </Box>
 
-            <div className="mt-8 w-full relative ">
-              <div className="w-full  ">
-                <img
-                  src={studensBanner}
-                  alt=""
-                  className="w-full m-auto rounded-md"
-                />
-              </div>
-              <img
-                className="absolute z-[-100] bottom-2/3 -top-10 left-[70%] "
-                src="/images/pattern.png"
-                alt=""
-              />
-            </div>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 1, sm: 2, md: 4 }}
+              sx={{ marginTop: 6 }}
+              justifyContent={"center"}
+              className="w-full mt-11"
+            >
+              <button
+                className="bg-[#BC2228] text-white font-semibold cursor-pointer text-sm py-2 px-4 rounded hover:bg-white hover:text-[#BC2228] border border-transparent hover:border-[#BC2228] transition-colors duration-300"
+                onClick={() => navigate("/course")}
+              >
+                Hiện tất cả khóa học
+              </button>
+            </Stack>
           </div>
-        </div>
+        </Box>
         {/* ----------------------------------------------------------- Phương pháp đào tạo lập trình ưu việt ------------------------------------------ */}
         <Box className="w-full bg-[#F8F7FA] my-32">
           <div className="max-w-[1500px] mx-auto  py-32">
@@ -337,6 +366,7 @@ function IndexHome() {
                 marginBottom: 8,
                 fontWeight: "bold",
                 textAlign: "center",
+                fontSize: { xs: "24px", sm: "30px", md: "36px" },
               }}
             >
               Ưu điểm vượt trội khi học lập trình tại Rikkei Academy
@@ -348,67 +378,6 @@ function IndexHome() {
                 </Fragment>
               ))}
             </Grid>
-          </div>
-        </Box>
-
-        {/* ----------------------------------------------------------- Khóa học và bài giảng chất lượng cao ------------------------------------------ */}
-        <Box className="w-full bg-[#F8F7FA]">
-          <div className="max-w-[1500px] mx-auto  py-32">
-            <Typography
-              component="h1"
-              variant="h3"
-              sx={{
-                color: "#BC2228",
-                marginBottom: 3,
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Khóa học và bài giảng chất lượng cao
-            </Typography>
-            <Typography
-              component="p"
-              sx={{
-                color: "#5D5A6F",
-                marginBottom: 8,
-                textAlign: "center",
-              }}
-            >
-              Rikkei Education tự hào có đội ngũ cố vấn và giảng viên xuất sắc,
-              tin cậy, đảm bảo mang đến trải nghiệm học tập tuyệt vời nhất, giúp
-              học viên phát triển toàn diện
-            </Typography>
-            <Box
-              sx={{
-                maxWidth: "1500px",
-                width: "100%",
-                marginX: "auto",
-                marginY: 0,
-              }}
-            >
-              <Grid container spacing={8}>
-                {allCourses?.map((item, index) => (
-                  <Fragment key={index}>
-                    <CardCourse item={item} />
-                  </Fragment>
-                ))}
-              </Grid>
-            </Box>
-
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 4 }}
-              sx={{ marginTop: 6 }}
-              justifyContent={"center"}
-              className="w-full mt-11"
-            >
-              <button
-                className="bg-[#BC2228] text-white font-semibold cursor-pointer text-sm py-2 px-4 rounded hover:bg-white hover:text-[#BC2228] border border-transparent hover:border-[#BC2228] transition-colors duration-300"
-                onClick={() => navigate("/course")}
-              >
-                Hiện tất cả khóa học
-              </button>
-            </Stack>
           </div>
         </Box>
 
