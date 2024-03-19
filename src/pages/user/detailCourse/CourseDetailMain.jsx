@@ -64,13 +64,13 @@ const CourseDetailMain = () => {
           className="shadow-lg"
           sx={{
             backgroundColor: "#f8f8f8",
-            paddingY: "5rem",
+            paddingY: "0.5rem",
             overflow: "hidden",
             borderRadius: "1.5rem",
           }}
         >
-          <Box className="my-0 mx-auto max-w-[1500px]">
-            <Stack spacing={2} sx={{ padding: "1rem" }}>
+          <Box className="my-0 mx-auto max-w-[1500px] xl:px-[20px] lg:px-[10px] md:px-2">
+            <Stack spacing={2} sx={{ padding: "0.5rem" }}>
               <Breadcrumbs
                 separator={
                   <NavigateNextIcon
@@ -110,7 +110,7 @@ const CourseDetailMain = () => {
                 </p>
               </Breadcrumbs>
             </Stack>
-            <Stack direction="row" justifyContent="space-between" space={4}>
+            <Stack direction="row" justifyContent="space-between" space={4} className="lg:mx-2">
               <Box
                 sx={{
                   borderRadius: "1rem",
@@ -118,8 +118,8 @@ const CourseDetailMain = () => {
                   width: "75%",
                   position: "relative",
                   maxWidth: "100%",
-                  height: "610px",
                 }}
+                className="xl:h-[610px] md:h-full"
               >
                 {sourceVideo ? (
                   <>
@@ -215,13 +215,14 @@ const CourseDetailMain = () => {
             </Stack>
           </Box>
         </Box>
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%" }} className="xl:px-[20px] lg:px-4 md:px-[18px]">
           <Box
             sx={{
               maxWidth: "1500px",
               marginX: "auto",
               marginY: "auto",
-              paddingY: "4rem",
+              paddingBottom: "4rem",
+              paddingTop: "2rem"
             }}
           >
             <Stack direction="column">
@@ -248,7 +249,7 @@ const CourseDetailMain = () => {
             </Stack>
           </Box>
         </Box>
-        <div className="w-full mb-60">
+        <div className="w-full mb-60 xl:px-[20px] lg:px-4 md:px-[18px]">
           <div className="max-w-[1500px] mx-auto my-0">
             <h1 className="text-3xl mb-5 font-semibold ">Khóa học khác</h1>
             <Grid container spacing={6}>

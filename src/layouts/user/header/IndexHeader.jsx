@@ -25,7 +25,7 @@ function IndexHeader() {
     };
   });
   return show ? (
-    <div className=" bg-white sticky top-0 z-10 shadow-lg" style={{ transition: "0.2s all ease" }}>
+    <div className=" bg-white sticky top-0 z-10 shadow-lg " style={{ transition: "0.2s all ease" }}>
       <HeaderUser />
     </div>
   ) : (

@@ -133,7 +133,7 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
           <div className="overlay" onClick={handleClickOutside}>
             <form
               ref={formRef}
-              className="fade-down bg-white w-[50%] px-[24px] py-[20px] rounded"
+              className="fade-down bg-white w-[40%] px-[24px] py-[20px] rounded"
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-[20px] font-semibold">Thêm mới bài học</h3>
@@ -142,7 +142,7 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
                   className="cursor-pointer hover:text-gray-500"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-5 mt-3">
+              <div className="grid  gap-5 mt-3">
                 <div>
                   <label htmlFor="">Tên bài học</label>
                   <Input
@@ -152,7 +152,7 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-5 mt-3">
+              <div className="grid  gap-5 mt-3">
                 <div>
                   <label htmlFor="">Link video</label>
                   <Input
@@ -162,7 +162,7 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-5 mt-3">
+              <div className="grid  gap-5 mt-3">
                 <div>
                   <label htmlFor="">Link tài nguyên</label>
                   <Input

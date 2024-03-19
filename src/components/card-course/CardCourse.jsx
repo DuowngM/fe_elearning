@@ -58,20 +58,20 @@ export default function CardCourse({ item }) {
           cursor: "pointer",
           ...hoverStyle,
         }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        className="lg:h-full"
       >
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="280"
-          image={import.meta.env.VITE_API_URL_IMG + item.image}
-          sx={{ objectFit: "fill" }}
-        />
-        <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-          <CardContent sx={{ flexGrow: 1 }}>
-            <Typography gutterBottom variant="h5" component="div">
-              <span className="font-bold"> {item.title}</span>
+        <Box>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="280"
+            image={import.meta.env.VITE_API_URL_IMG + item.image}
+            sx={{ objectFit: "fill" }}
+            className="!lg:h-full"
+          />
+          <CardContent className="lg:py-0">
+            <Typography gutterBottom variant="h5" component="div" className="!text-xl">
+              {item.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {item.subDescription}
@@ -93,6 +93,17 @@ export default function CardCourse({ item }) {
             </IconButton>
           </CardActions>
         </Box>
+        <CardActions>
+          <Button
+            className=""
+            color="error"
+            size="large"
+            variant="outlined"
+            onClick={handleLearn}
+          >
+            Học ngay
+          </Button>
+        </CardActions>
       </Card>
     </Grid>
   );
