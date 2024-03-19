@@ -4,9 +4,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Breadcrumbs,
-  Grid,
-  Link,
   Stack,
 } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -16,11 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getChaptersThunk } from "../../../redux/reducer/chapterSlice";
 import { getLessonsThunk } from "../../../redux/reducer/lessonSlice";
-import SimilarCourses from "../../../components/similarCourses/SimilarCourses";
 import { getAllCoursesAPI } from "../../../redux/reducer/courseSlice";
 import VideoComponent from "../../../components/video/VideoComponent";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { Typography } from "antd";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import Cookies from "js-cookie";
 
 const CourseDetailMain = () => {
@@ -59,18 +54,15 @@ const CourseDetailMain = () => {
 
   return (
     <>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%", height: "100%" }}>
         <Box
           className="shadow-lg"
           sx={{
             backgroundColor: "#f8f8f8",
-            paddingY: "5rem",
-            overflow: "hidden",
-            borderRadius: "1.5rem",
           }}
         >
-          <Box className="my-0 mx-auto max-w-[1500px]">
-            <Stack spacing={2} sx={{ padding: "1rem" }}>
+          <Box className=" max-w-100%">
+            {/* <Stack spacing={2} sx={{ padding: "1rem" }}>
               <Breadcrumbs
                 separator={
                   <NavigateNextIcon
@@ -109,8 +101,8 @@ const CourseDetailMain = () => {
                   {chapters[0]?.courseName || "Coming Soon"}
                 </p>
               </Breadcrumbs>
-            </Stack>
-            <Stack direction="row" justifyContent="space-between" space={4}>
+            </Stack> */}
+            <Stack direction="row" justifyContent={"end"} gap={5} space={4}>
               <Box
                 sx={{
                   borderRadius: "1rem",
@@ -118,20 +110,29 @@ const CourseDetailMain = () => {
                   width: "75%",
                   position: "relative",
                   maxWidth: "100%",
-                  height: "610px",
+                  height: "calc(100vh - 70px)",
                 }}
               >
                 {sourceVideo ? (
-                  <>
+                  <div className="">
                     <VideoComponent sourceVideo={sourceVideo} />
-                  </>
+                  </div>
                 ) : (
                   <>
-                    <div dangerouslySetInnerHTML={{ __html: description }} />
+                    <div
+                      className="ckEditor"
+                      dangerouslySetInnerHTML={{ __html: description }}
+                    />
                   </>
                 )}
               </Box>
-              <Stack direction="column" sx={{ maxWidth: "20%", width: "100%" }}>
+              <Stack
+                direction="column"
+                sx={{
+                  maxWidth: "20%",
+                  width: "100%",
+                }}
+              >
                 {groupedContentItems?.map((chapter) => (
                   <Accordion
                     sx={{ maxHeight: "50%" }}
@@ -163,7 +164,7 @@ const CourseDetailMain = () => {
                         fontSize: "16px",
                       }}
                     >
-                      {chapter?.title}
+                      <span className="font-bold">{chapter?.title}</span>
                     </AccordionSummary>
                     <div className="overflow-auto max-h-64 bg-white rounded-[20px] ">
                       <Divider />
@@ -195,11 +196,15 @@ const CourseDetailMain = () => {
                               {item?.title}
                             </p>
                             <div className="">
-                              <img
-                                src="/images/Playbtn.png"
-                                alt=""
-                                className="w-5 h-5"
-                              />
+                              {item?.video ? (
+                                <img
+                                  src="/images/Playbtn.png"
+                                  alt=""
+                                  className="w-5 h-5"
+                                />
+                              ) : (
+                                <MenuBookIcon className="text-rikkei" />
+                              )}
                             </div>
                           </AccordionDetails>
                         ))
@@ -215,7 +220,7 @@ const CourseDetailMain = () => {
             </Stack>
           </Box>
         </Box>
-        <Box sx={{ width: "100%" }}>
+        {/* <Box sx={{ width: "100%" }}>
           <Box
             sx={{
               maxWidth: "1500px",
@@ -247,12 +252,11 @@ const CourseDetailMain = () => {
               </Box>
             </Stack>
           </Box>
-        </Box>
-        <div className="w-full mb-60">
+        </Box> */}
+        {/* <div className="w-full mb-60">
           <div className="max-w-[1500px] mx-auto my-0">
             <h1 className="text-3xl mb-5 font-semibold ">Khóa học khác</h1>
             <Grid container spacing={6}>
-              {/* item Courses */}
               {similarCourses?.map((item) => (
                 <React.Fragment key={item.id}>
                   <SimilarCourses item={item} />
@@ -260,7 +264,7 @@ const CourseDetailMain = () => {
               ))}
             </Grid>
           </div>
-        </div>
+        </div> */}
       </Box>
     </>
   );

@@ -32,7 +32,7 @@ export default function SimilarCourses({ item }) {
             component="img"
             alt="green iguana"
             height="200"
-            image={import.meta.env.VITE_API_URL_IMG + item.image}
+            image={item.image}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" sx={{ width: "200px" }}>
