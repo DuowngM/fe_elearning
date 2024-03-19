@@ -9,7 +9,7 @@ export const getPhone = async (user) => {
     const response = await jsonAxios.post("/api/v1/user-clipboard", infoUser);
     return response;
   } catch (error) {
-    notify("error", "Đã có lỗi xảy ra");
+    console.log(error);
   }
 };
 export const register = async (infoUser) => {
@@ -23,19 +23,21 @@ export const register = async (infoUser) => {
     notify("success", "Đăng ký thành công");
     return response;
   } catch (error) {
-    notify("error", error.response.data);
+    notify("error", "Số điện thoại đã được đăng ký");
   }
 };
+
 export const login = async (user) => {
   const infoUser = {
     phone: user.phone,
     password: user.password,
   };
   try {
-    const response = await jsonAxios.post("/auth/login", infoUser);
+    const response = await jsonAxios.post("/api/v1/auth/login", infoUser);
     notify("success", "Đăng nhập thành công");
     return response;
   } catch (error) {
+    console.log(error);
     notify("error", "Sai tài khoản hoặc mật khẩu");
   }
 };
@@ -52,6 +54,7 @@ export const getAllUsers = async (searchQuery) => {
       return response;
     }
   } catch (error) {
+    console.log(error);
     if (error.response.status === 401) {
       notify("error", "Bạn không có quyền");
     } else {
@@ -79,6 +82,7 @@ export const editUserApi = async (userData) => {
     );
     notify("success", "Sửa thông tin người dùng thành công");
   } catch (error) {
+    console.log(error);
     if (error.response.status === 401) {
       notify("error", "Bạn không có quyền");
     } else if (error.response.status === 400) {

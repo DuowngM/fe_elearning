@@ -16,16 +16,21 @@ export default function UserMangagement() {
   const [showForm, setShowForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [editUser, setEditUser] = useState(null);
-  const [flag, setFlag] = useState(true);
+  const [flag, setFlag] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  //
+  const dataSource = allUsers?.map((course) => ({
+    ...course,
+    key: course.id,
+  }));
   // Sử dụng useDebounce
   const debouncedSearchTerm = useDebounce(searchTerm, 2000);
   // Phân trang
   const itemsPerPage = 5;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = allUsers.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = dataSource.slice(indexOfFirstItem, indexOfLastItem);
   const calculateIndex = (index) => index + 1;
   //Hàm hiển thị form thêm mới người dùng
   const openForm = () => {
@@ -66,7 +71,7 @@ export default function UserMangagement() {
     },
     {
       title: "Trạng thái",
-      dataIndex: "void",
+      dataIndex: "voided",
       align: "center",
       render: (text) => (
         <p>
@@ -85,7 +90,6 @@ export default function UserMangagement() {
         return (
           <div className="flex justify-evenly ">
             <Button
-              primary
               onClick={() => {
                 setEditUser(item);
                 openForm();
@@ -100,7 +104,7 @@ export default function UserMangagement() {
   ];
   useEffect(() => {
     dispatch(getUsersThunk());
-  }, [flag]);
+  }, [flag, dispatch]);
   const handleSave = async (userData) => {
     if (userData.type === "add") {
       await createUser(userData);
@@ -116,9 +120,9 @@ export default function UserMangagement() {
   const handleSearch = (searchValue) => {
     setSearchTerm(searchValue);
   };
-  const fetchCourses = () => {
+  const fetchUsers = () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       dispatch(getUsersThunk({ searchValue: searchTerm }));
     } catch (error) {
       console.error(error);
@@ -127,7 +131,7 @@ export default function UserMangagement() {
     }
   };
   useEffect(() => {
-    fetchCourses();
+    fetchUsers();
   }, [debouncedSearchTerm]);
   return (
     <>
@@ -171,11 +175,15 @@ export default function UserMangagement() {
         </div>
         <div className="table-container relative">
           <div className="mb-8">
-            <Table
-              columns={columns}
-              dataSource={currentItems}
-              pagination={false}
-            />
+            {isLoading ? (
+              <>Loading...</>
+            ) : (
+              <Table
+                columns={columns}
+                dataSource={currentItems}
+                pagination={false}
+              />
+            )}
           </div>
           <div className="flex justify-center">
             <Pagination

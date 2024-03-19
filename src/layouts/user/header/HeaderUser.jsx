@@ -57,30 +57,32 @@ function HeaderUser() {
   //Hàm xử lý đăng nhập
   const handleLogin = async (infoUser) => {
     const response = await login(infoUser);
-    const { accessToken, expired, roles, fullName } = response.data;
-    setUser(fullName);
-    localStorage.setItem("user", fullName);
-    localStorage.setItem("roles", JSON.stringify(roles));
-    // Lưu accessToken vào cookies
-    Cookies.set("accessToken", accessToken, {
-      expires: expired / (24 * 60 * 60 * 1000),
-      secure: true,
-      sameSite: "strict",
-    });
+    if (response) {
+      const { accessToken, expired, roles, fullName } = response?.data;
+      setUser(fullName);
+      localStorage.setItem("user", fullName);
+      localStorage.setItem("roles", JSON.stringify(roles));
+      // Lưu accessToken vào cookies
+      Cookies.set("accessToken", accessToken, {
+        expires: expired / (24 * 60 * 60 * 1000),
+        secure: true,
+        // sameSite: "strict",
+      });
 
-    closeFormLogin();
-    const check = roles.some(
-      (item) => item === import.meta.env.VITE_ADMIN_ROLE
-    );
+      const check = roles.some(
+        (item) => item === import.meta.env.VITE_ADMIN_ROLE
+      );
 
-    // Xử lý chuyển hướng nếu cần
-    if (check) {
-      window.location.href = "/admin";
+      // Xử lý chuyển hướng nếu cần
+      if (check) {
+        window.location.href = "/admin";
+      }
+      closeFormLogin();
     }
   };
   // hàm xử lý đăng ký
   const handleRegister = async (newUser) => {
-    await getPhone({ phone: newUser.phone, fullName: newUser.fullName });
+    // await getPhone({ phone: newUser.phone, fullName: newUser.fullName });
     await register(newUser);
     closeFormRegister();
     openFormLogin();

@@ -26,7 +26,7 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
     if (courseInfo) {
       setTitle(courseInfo.title);
       setDescription(courseInfo.description);
-      setImageUrl("http://10.101.44.218:8080/img/" + courseInfo.image);
+      setImageUrl(`${import.meta.env.VITE_API_URL_IMG}` + courseInfo.image);
       setSubDescription(courseInfo.subDescription);
     }
   }, [courseInfo]);
@@ -110,7 +110,7 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
                   src={imageUrl}
                   style={{
                     width: "200px",
-                    height: "200px",
+                    height: "100px",
                     marginTop: "10px",
                     overflow: "hidden",
                     objectFit: "cover",

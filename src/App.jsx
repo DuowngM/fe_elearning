@@ -14,7 +14,7 @@ function App() {
   }, [location.pathname]);
 
   const renderRoutes = (routes) => {
-    return routes.map((route, index) => (
+    return routes?.map((route, index) => (
       <Route key={index} path={route.path} element={route.element}>
         {route.children && renderRoutes(route.children)}
       </Route>
@@ -22,10 +22,10 @@ function App() {
   };
 
   return (
-    <>
+    <div className="w-full">
       <Routes>{renderRoutes(routesConfig)}</Routes>
       <BackTop />
-    </>
+    </div>
   );
 }
 

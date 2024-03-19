@@ -9,8 +9,10 @@ export const uploadImg = async (formData) => {
     return response.data;
   } catch (error) {
     if (error.response.status === 401) {
+      console.log(error);
       notify("error", "Bạn không có quyền");
     } else {
+      console.log(error);
       notify("error", "Có lỗi xảy ra khi lấy dữ liệu roles");
     }
   }

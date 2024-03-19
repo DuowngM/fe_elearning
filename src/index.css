@@ -1,7 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Ẩn các nút tăng giảm trong trình duyệt WebKit/Blink */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Tùy chọn cho Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+  border-color: var(--ck-color-base-border);
+  max-height: 700px;
+  overflow: auto;
+}
 .overlay {
   position: fixed;
   top: 0;
@@ -51,4 +66,13 @@ label {
 }
 *::-webkit-scrollbar-thumb:hover {
   background-color: #7f8c8d;
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 32px !important;
+    text-align: center !important;
+  }
+  .btn-back-top {
+    display: none;
+  }
 }

@@ -25,6 +25,7 @@ export default function SimilarCourses({ item }) {
           justifyContent: "space-between",
           cursor: "pointer",
         }}
+        onClick={navigateDetail}
       >
         <Stack direction={"row"}>
           <CardMedia

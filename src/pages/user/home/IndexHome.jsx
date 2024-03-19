@@ -13,19 +13,13 @@ import teacherTung from "/images/teacher_tung.png";
 import teacherDung from "/images/teacher_dung.png";
 import teacherLam from "/images/teacher_lam.png";
 import personBg from "/images/person_bg.png";
-import IconDone from "/images/IconDone.svg";
 import Introducing from "/images/introducing.jpg";
-import {
-  Box,
-  Button,
-  Chip,
-  Grid,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import CardCourse from "../../../components/card-course/CardCourse";
 import { useNavigate } from "react-router-dom";
+import ListTeacher from "../../../components/listTeacher/ListTeacher";
+import TraningMethods from "../../../components/traningMethods/TraningMethods";
+import Advantages from "../../../components/advantages/Advantages";
 
 function IndexHome() {
   //#region redux
@@ -73,7 +67,7 @@ function IndexHome() {
       title: "Training on Job",
       children: [
         {
-          text: "Trải nghiệm trực tiếp các hoạt động và dự án cùng RikkeiSoft và các Doanh nghiệp  đối tác",
+          text: "Trải nghiệm trực tiếp các hoạt động và dự án cùng Rikkeisoft và các Doanh nghiệp  đối tác",
         },
         {
           text: "Tạo CV & Online Profile",
@@ -217,36 +211,22 @@ function IndexHome() {
                 sx={{ marginTop: 4 }}
                 className="w-full mt-[42px]"
               >
-                <Button
-                  variant="contained"
-                  sx={{
-                    color: "white",
-                    backgroundColor: "#BC2228",
-                    fontSize: "0,5rem",
-                  }}
-                >
-                  {" "}
+                <button className="bg-[#BC2228] border-none text-white font-bold py-2 px-4 rounded cursor-pointer hover:bg-white hover:text-rikkei transition duration-300 ease-in-out">
                   Nhận tư vấn 1:1
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  sx={{
-                    fontSize: "0,5rem",
-                    fontWeight: "400",
-                    color: "white",
-                    borderColor: "white",
-                  }}
+                </button>
+                <button
                   onClick={() => navigate("/course")}
+                  className="border border-[#BC2228] text-[#BC2228] bg-white font-bold py-2 px-4 rounded cursor-pointer hover:bg-rikkei hover:text-white transition duration-300 ease-in-out"
                 >
                   Các khóa học
-                </Button>
+                </button>
               </Stack>
             </Box>
             <img src={personBg} alt="" className="w-1/2 md:w-1/3" />
           </Stack>
         </Box>
         {/* video Dream */}
+
         <div className="w-full h-[650px]  ">
           <div className="  max-h-[550px] h-full bg-[#F2F2F2] py-40  flex items-center justify-center px-[20px] md:py-5 md:h-[400px] ">
             <div className="max-w-[1500px] h-full flex items-center justify-center ">
@@ -263,7 +243,6 @@ function IndexHome() {
                   <div className="mt-7 flex flex-col gap-4 md:mt-0">
                     <div className="align-middle">
                       <p className=" text-[#0A033C] text-3xl leading-12 w-full md:mt-0 md:text-sm">
-
                         Rikkei Education cam kết cung cấp nền tảng giáo dục và
                         đào tạo hiện đại, đưa công nghệ thông tin đến thế hệ trẻ
                         Việt Nam. Chúng tôi mong muốn trang bị cho các bạn đầy
@@ -273,196 +252,21 @@ function IndexHome() {
                       </p>
                     </div>
                   </div>
-                  <Stack
-                    direction={{ xs: "column", sm: "row" }}
-                    spacing={{ xs: 1, sm: 2, md: 4 }}
-                    sx={{ marginTop: 4 }}
-                    className="w-full mt-[42px]"
-                  >
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "white",
-                        backgroundColor: "#BC2228",
-                        
-                      }}
-                      className="text-[1rem]  md:w-full md:text-[0.6rem] md:h-full"
-                    >
-                      {" "}
+                  <div className="flex flex-col justify-center sm:flex-row gap-2 lg:gap-4 mt-4 lg:mt-[42px]">
+                    <button className="bg-[#BC2228] border-none text-white font-bold py-2 px-4 rounded cursor-pointer transition duration-300 ease-in-out hover:bg-white hover:text-[#BC2228]">
                       Nhận tư vấn 1:1
-                    </Button>
-
-                    <Button
-                      variant="outlined"
-                      sx={{
-                        
-                        borderColor: "#fff",
-                        color: "#BC2228",
-                        bgcolor: "#fff",
-                      }}
-                      className="text-[1rem] md:w-full md:text-[0.6rem] md:h-full"
-                    >
+                    </button>
+                    <button className="border border-[#BC2228] text-[#BC2228] bg-white font-bold py-2 px-4 rounded cursor-pointer transition duration-300 ease-in-out hover:bg-[#BC2228] hover:text-white">
                       Kiểm tra độ phù hợp
-                    </Button>
-                  </Stack>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         {/* ----------------------------------------------- Video bài giảng chất lượng cao ------------------------------------------------- */}
-        <div className="max-w-[1500px] mx-auto lg:px-[20px] md:px-[20px]">
-          <div className="pb-40">
-            <div className="text-center">
-              <h2
-                id="courses"
-                className="text-[#BC2228] text-5xl mb-[40px] font-bold md:text-3xl"
-              >
-                Video bài giảng chất lượng cao
-              </h2>
-              <p className="text-[#231651]  leading-7 md:text-base">
-                High-definition video is video of higher resolution and quality
-                than standard-definition. While there is no standardized meaning
-                for high-definition, generally any video image with considerably
-                more than <br /> 480 vertical scan lines or 576 vertical lines
-                is considered high-definition.
-              </p>
-            </div>
-
-            <div className="mt-8 w-full relative ">
-              <div className="w-full  ">
-                <img
-                  src={studensBanner}
-                  alt=""
-                  className="w-full m-auto rounded-md"
-                />
-              </div>
-              <img
-                className="absolute z-[-100] bottom-2/3 -top-10 left-[70%] "
-                src="/images/pattern.png"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-        {/* ----------------------------------------------------------- Phương pháp đào tạo lập trình ưu việt ------------------------------------------ */}
-        <Box className="w-full bg-[#F8F7FA] my-32 lg:px-[20px] md:px-[20px]">
-          <div className="max-w-[1500px] mx-auto  py-32">
-            <Typography
-              component="h1"
-              variant="h3"
-              sx={{
-                color: "#BC2228",
-                marginBottom: 8,
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-              className="md:text-3xl"
-            >
-              Phương pháp đào tạo lập trình ưu việt
-            </Typography>
-            <Grid container spacing={8}>
-              {dataStaticTranding?.map((item, index) => (
-                <Fragment key={index}>
-                  <Grid item xs={4} sx={{ minHeight: "400px" }}>
-                    <Paper
-                      variant="elevation"
-                      sx={{ padding: 3, minHeight: "100%" }}
-                    >
-                      <Typography
-                        component="h2"
-                        variant="h5"
-                        sx={{
-                          color: "#231651",
-                          fontWeight: "bold",
-                          marginBottom: 3,
-                        }}
-                      >
-                        {item.title}
-                      </Typography>
-                      <Stack spacing={2}>
-                        {item.children.map((item, index) => (
-                          <Fragment key={index}>
-                            <Stack direction="row">
-                              <img
-                                src={IconDone}
-                                alt=""
-                                className="mr-3 self-start"
-                              />
-                              <Typography
-                                sx={{
-                                  color: "#231651",
-                                  fontWeight: 600,
-
-                                  width: "85%",
-                                }}
-                              >
-                                {item.text}
-                              </Typography>
-                            </Stack>
-                          </Fragment>
-                        ))}
-                      </Stack>
-                    </Paper>
-                  </Grid>
-                </Fragment>
-              ))}
-            </Grid>
-          </div>
-        </Box>
-
-        {/* ----------------------------------------------------------- Ưu điểm vượt trội khi học lập trình tại Rikkei Academy --------------------------- */}
-        <Box className="w-full lg:px-[20px]">
-          <div className="max-w-[1500px] mx-auto  py-32">
-            <Typography
-              component="h1"
-              variant="h3"
-              sx={{
-                color: "#BC2228",
-                marginBottom: 8,
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Ưu điểm vượt trội khi học lập trình tại Rikkei Academy
-            </Typography>
-            <Grid container spacing={4}>
-              {dataAdvantage.map((item, index) => (
-                <Fragment key={index}>
-                  <Grid item xs={4} sx={{ minHeight: "200px" }}>
-                    <img
-                      src={item.icon}
-                      alt=""
-                      className="mr-3 self-start w-12 h-12"
-                    />
-                    <Typography
-                      component="h4"
-                      variant="h6"
-                      sx={{
-                        fontWeight: "medium",
-                        color: "#BC2228",
-                        marginY: 1,
-                      }}
-                    >
-                      {item.title}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        color: "#231651",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {item.text}
-                    </Typography>
-                  </Grid>
-                </Fragment>
-              ))}
-            </Grid>
-          </div>
-        </Box>
-
-        {/* ----------------------------------------------------------- Khóa học và bài giảng chất lượng cao ------------------------------------------ */}
-        <Box className="w-full bg-[#F8F7FA] lg:px-[20px]">
+        <Box className="w-full bg-[#F8F7FA]">
           <div className="max-w-[1500px] mx-auto  py-32">
             <Typography
               component="h1"
@@ -473,6 +277,7 @@ function IndexHome() {
                 fontWeight: "bold",
                 textAlign: "center",
               }}
+              className="sm:text-[32px]"
             >
               Khóa học và bài giảng chất lượng cao
             </Typography>
@@ -484,10 +289,11 @@ function IndexHome() {
                 textAlign: "center",
               }}
             >
-              A lesson or class is a structured period of time where learning is
-              intended to occur. It involves one or more students being taught
-              by a teacher or instructor.
+              Rikkei Education tự hào có đội ngũ cố vấn và giảng viên xuất sắc,
+              tin cậy, đảm bảo mang đến trải nghiệm học tập tuyệt vời nhất, giúp
+              học viên phát triển toàn diện
             </Typography>
+            {/* ----------------------------------------------------------- Khóa học và bài giảng chất lượng cao ------------------------------------------ */}
             <Box
               sx={{
                 maxWidth: "1500px",
@@ -512,92 +318,66 @@ function IndexHome() {
               justifyContent={"center"}
               className="w-full mt-11"
             >
-              <Button
-                variant="contained"
-                sx={{
-                  color: "white",
-                  backgroundColor: "#BC2228",
-                  fontSize: "0,5rem",
-                }}
+              <button
+                className="bg-[#BC2228] text-white font-semibold cursor-pointer text-sm py-2 px-4 rounded hover:bg-white hover:text-[#BC2228] border border-transparent hover:border-[#BC2228] transition-colors duration-300"
                 onClick={() => navigate("/course")}
               >
                 Hiện tất cả khóa học
-              </Button>
+              </button>
             </Stack>
           </div>
         </Box>
-        {/* ----------------------------------------------------------Tài liệu chuyên môn chất lượng cao ---------------------------------------------- */}
-        {/* <Box className="w-full bg-[#F8F7FA]">
-            <div className="max-w-[1800px] mx-auto  py-32">
-              <Typography
-                component="h1"
-                variant="h3"
-                sx={{
-                  color: "#BC2228",
-                  marginBottom: 3,
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              >
-                Tài liệu chuyên môn chất lượng cao
-              </Typography>
-              <Typography
-                component="p"
-                sx={{
-                  color: "#5D5A6F",
-                  marginBottom: 8,
-                  textAlign: "center",
-                }}
-              >
-                A lesson or class is a structured period of time where learning is
-                intended to occur. It involves one or more students being taught
-                by a teacher or instructor.
-              </Typography>
-              <Grid container spacing={8}>
-                {dataAdvantage.map((item) => (
-                  <>
-                    <Grid item xs={6}>
-                      <div className="w-full h-96 bg-[#D9D9D9]"></div>
-                      <Stack direction={"row"} spacing={2} alignItems={"center"}>
-                        <Typography
-                          component="h4"
-                          variant="h6"
-                          sx={{
-                            fontWeight: "medium",
-                            color: "#231651",
-                            marginY: 1,
-                            lineHeight: 3,
-                          }}
-                        >
-                          {item.title}
-                        </Typography>
-                        <Button
-                          variant="outlined"
-                          sx={{
-                            fontSize: "0,5rem",
-                            fontWeight: "500",
-                            color: "#BC2228",
-                            borderColor: "#BC2228",
-                            padding: "0.3rem",
-                          }}
-                        >
-                          Truy cập ngay
-                        </Button>
-                      </Stack>
-                      <Typography
-                        sx={{
-                          color: "#231651",
-                          fontWeight: 600,
-                        }}
-                      >
-                        {item.text}
-                      </Typography>
-                    </Grid>
-                  </>
-                ))}
-              </Grid>
-            </div>
-          </Box> */}
+        {/* ----------------------------------------------------------- Phương pháp đào tạo lập trình ưu việt ------------------------------------------ */}
+        <Box className="w-full bg-[#F8F7FA] my-32">
+          <div className="max-w-[1500px] mx-auto  py-32">
+            <Typography
+              component="h1"
+              variant="h3"
+              sx={{
+                color: "#BC2228",
+                marginBottom: 8,
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              Phương pháp đào tạo lập trình ưu việt
+            </Typography>
+            <Grid container spacing={8}>
+              {dataStaticTranding?.map((item, index) => (
+                <Fragment key={index}>
+                  <TraningMethods item={item} />
+                </Fragment>
+              ))}
+            </Grid>
+          </div>
+        </Box>
+
+        {/* ----------------------------------------------------------- Ưu điểm vượt trội khi học lập trình tại Rikkei Academy --------------------------- */}
+        <Box className="w-full">
+          <div className="max-w-[1500px] mx-auto  py-32">
+            <Typography
+              component="h1"
+              variant="h3"
+              sx={{
+                color: "#BC2228",
+                marginBottom: 8,
+                fontWeight: "bold",
+                textAlign: "center",
+                fontSize: { xs: "24px", sm: "30px", md: "36px" },
+              }}
+            >
+              Ưu điểm vượt trội khi học lập trình tại Rikkei Academy
+            </Typography>
+            <Grid container spacing={4}>
+              {dataAdvantage.map((item, index) => (
+                <Fragment key={index}>
+                  <Advantages item={item} />
+                </Fragment>
+              ))}
+            </Grid>
+          </div>
+        </Box>
+
         <Box className="w-full  my-32">
           <div className="max-w-[1500px] mx-auto  py-32">
             <Typography
@@ -615,87 +395,7 @@ function IndexHome() {
             <Grid container spacing={8}>
               {listTeacher?.map((item, index) => (
                 <Fragment key={index}>
-                  <Grid item xs={3} sx={{ minHeight: "800px" }}>
-                    <Paper
-                      variant="elevation"
-                      sx={{ padding: 3, minHeight: "100%" }}
-                    >
-                      <div className="w-full h-80 ">
-                        <img src={item.img} alt="" className="h-full w-full" />
-                      </div>
-                      <Stack
-                        direction={"column"}
-                        sx={{ mt: 2 }}
-                        alignItems={"center"}
-                        paddingX={"1.4rem"}
-                        spacing={1}
-                      >
-                        <Typography
-                          component="h4"
-                          variant="h6"
-                          sx={{
-                            fontWeight: "medium",
-                            color: "#231651",
-                            textAlign: "center",
-                            fontSize: "1.4rem",
-                          }}
-                        >
-                          {item.name}
-                        </Typography>
-                        <Chip
-                          label={item.role}
-                          variant="outlined"
-                          sx={{
-                            backgroundColor: "#F8F7FA",
-                            borderColor: "#C1BCD1",
-                            color: "#231651",
-                            fontWeight: "bold",
-                            borderRadius: "4px",
-                          }}
-                        />
-                        <Typography
-                          sx={{
-                            color: "#231651",
-                            fontWeight: 600,
-                            textAlign: "center",
-                            fontSize: "1rem",
-                          }}
-                        >
-                          {item.detail}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color: "#231651",
-                            fontWeight: 600,
-                            textAlign: "center",
-                            fontSize: "1rem",
-                          }}
-                        >
-                          {item?.certificate}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color: "#231651",
-                            fontWeight: 600,
-                            textAlign: "center",
-                            fontSize: "1rem",
-                          }}
-                        >
-                          {item?.certificateGlobal}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color: "#231651",
-                            fontWeight: 600,
-                            textAlign: "center",
-                            fontSize: "1rem",
-                          }}
-                        >
-                          {item?.Pedagogy}
-                        </Typography>
-                      </Stack>
-                    </Paper>
-                  </Grid>
+                  <ListTeacher item={item} />
                 </Fragment>
               ))}
             </Grid>

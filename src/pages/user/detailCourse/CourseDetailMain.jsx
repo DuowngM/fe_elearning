@@ -27,7 +27,7 @@ const CourseDetailMain = () => {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
   const similarCourses = useSelector((state) => state.courseSlice.courses);
-  const [expanded, setExpanded] = useState("panel2");
+  const [expanded, setExpanded] = useState("panel1");
   const [description, setDiscription] = useState("");
   const [sourceVideo, setSourceVideo] = useState(
     "https://www.youtube.com/embed/vdKE_Tz8cy0"
@@ -56,12 +56,7 @@ const CourseDetailMain = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  // Breadcrumbs
-  function handleClickNav(event) {
-    event.preventDefault();
-    console.info("You clicked a breadcrumb.");
-  }
-  console.log(description);
+
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -111,7 +106,7 @@ const CourseDetailMain = () => {
                   key="3"
                   className="text-[#BC2228] font-semibold text-2xl cursor-pointer"
                 >
-                  {chapters[0]?.courseName}
+                  {chapters[0]?.courseName || "Coming Soon"}
                 </p>
               </Breadcrumbs>
             </Stack>
@@ -233,7 +228,7 @@ const CourseDetailMain = () => {
             <Stack direction="column">
               <Box sx={{ color: "#0A033C" }}>
                 <Typography component="h2" variant="h4">
-                  Bài đọc
+                  {sourceVideo ? <p> Bài đọc </p> : <p> Video </p>}
                 </Typography>
                 <Typography component="p" className="text-base">
                   Cập nhật tháng 3/2024
@@ -242,7 +237,7 @@ const CourseDetailMain = () => {
                   component="p"
                   className="text-base leading-10 max-h-[800px] overflow-y-auto"
                 >
-                  {description ? (
+                  {sourceVideo ? (
                     <>
                       <div dangerouslySetInnerHTML={{ __html: description }} />
                     </>
@@ -252,8 +247,6 @@ const CourseDetailMain = () => {
                 </Typography>
               </Box>
             </Stack>
-
-
           </Box>
         </Box>
         <div className="w-full mb-60 xl:px-[20px] lg:px-4 md:px-[18px]">

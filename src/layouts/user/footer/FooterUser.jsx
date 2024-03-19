@@ -1,10 +1,8 @@
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
-function FooterUser() {
+function Footer() {
   return (
     <div className="bg-[#bc2228] text-white pt-[50px] pb-[30px] lg:px-[20px] md:px-[18px]">
       <div className="footer_container max-w-[1500px] mx-auto">
@@ -20,12 +18,21 @@ function FooterUser() {
                 <b>Công ty TNHH Rikkei Education</b>
               </h2>
               <p className="flex items-center">
-                <ArrowRightIcon /> <span>Tổ chức quản lý trang thông tin: Công ty TNHH Rikkei Education</span>
+                <ArrowRightIcon />{" "}
+                <span>
+                  Tổ chức quản lý trang thông tin: Công ty TNHH Rikkei Education
+                </span>
               </p>
               <p className="flex items-center">
-                <ArrowRightIcon /> <span>Quản lý trang thông tin: Nguyễn Văn Nam (phòng Marketing)</span>
+                <ArrowRightIcon />{" "}
+                <span>
+                  Quản lý trang thông tin: Nguyễn Văn Nam (phòng Marketing)
+                </span>
               </p>
-              <p className="location">Địa chỉ: Tầng 7 tháp A toà Sông Đà, đường Phạm Hùng,quận Nam Từ Liêm, Hà Nội</p>
+              <p className="location">
+                Địa chỉ: Tầng 7 tháp A toà Sông Đà, đường Phạm Hùng, quận Nam Từ
+                Liêm, Hà Nội
+              </p>
               <p className="hotline">Hotline: 0862 069 233</p>
               <p className="email">Email: academy@rikkeisoft.com</p>
               <div className="social_footer flex gap-2">
@@ -91,81 +98,32 @@ function FooterUser() {
                 <li className="flex gap-2">
                   <LocalPhoneIcon /> <span>Hotline: 0862 069 233</span>
                 </li>
-              </ul>
-            </li>
-            <li>
-              <h2 className="mb-5">
-                <b>Cơ sở 2</b>
-              </h2>
-              <ul>
-                <li className="flex gap-2">
-                  <LocationOnIcon />
-                  <span>
-                    Tầng 22, khối A tòa nhà Sông Đà, đường Phạm Hùng , Phường Mỹ Đình 1, Quận Nam Từ Liêm, Hà Nội.
-                  </span>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Hệ sinh thái Rikkei
                 </li>
-                <li className="flex gap-2">
-                  <LocalPhoneIcon /> <span>Hotline: 086 206 9233</span>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Nhân sự Rikkei Education
                 </li>
-              </ul>
-            </li>
-            <li>
-              <h2 className="mb-5">
-                <b>Cơ sở 3</b>
-              </h2>
-              <ul>
-                <li className="flex gap-2">
-                  <LocationOnIcon />
-                  <span>Tầng 4, tòa nhà Ricco, số 363 Nguyễn Hữu Thọ, phường Khuê Trung, Quận Cẩm Lệ, Đà Nẵng</span>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Cộng đồng RA Alumni
                 </li>
-                <li className="flex gap-2">
-                  <LocalPhoneIcon /> <span>Hotline: 0904 694 869</span>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Ươm mầm xanh & CSR
+                </li>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Cơ hội nghề nghiệp
                 </li>
               </ul>
-            </li>
-            <li>
-              <h2 className="mb-5">
-                <b>Cơ sở 4</b>
-              </h2>
-              <p className="flex gap-2">
-                <LocationOnIcon />
-                <span>
-                  Tầng 12, Tòa nhà Đảm Bảo An Toàn Hàng Hải phía Nam Số 42 đường Tự Cường, phường 4, Tân Bình, TP. Hồ
-                  Chí Minh.
-                </span>
-              </p>
-            </li>
-            <li>
-              <h2 className="mb-5">
-                <b>Cơ sở 5</b>
-              </h2>
-              <ul>
-                <li className="flex gap-2">
-                  <LocationOnIcon />
-                  <span>Tầng 3, toà TSA Bulding, Số 77 Lê Trung Nghĩa, Phường 12, Tân Bình, TP. Hồ Chí Minh.</span>
-                </li>
-                <li className="flex gap-2">
-                  <LocalPhoneIcon /> <span>Hotline: 0962 703 893</span>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <h2 className="mb-5">
-                <b>Cơ sở Fukuoka</b>
-              </h2>
-              <p className="flex gap-2">
-                <LocationOnIcon />
-                <span>Tokan Fukuoka 2nd Building 417 Hiecho 1-chome-18, Hakata-ku, Fukuoka, Japan</span>
-              </p>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
-        <div className="copy_right">
-          <p className="mt-20 text-center">Copyright 2024 © Rikkei Academy All rights reserved.</p>
+
+        <div className="copy_right mt-20 text-center">
+          <p>Copyright 2024 © Rikkei Academy All rights reserved.</p>
         </div>
       </div>
     </div>
   );
 }
 
-export default FooterUser;
+export default Footer;

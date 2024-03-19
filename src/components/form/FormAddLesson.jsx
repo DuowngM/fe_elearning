@@ -27,7 +27,7 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
             formData.append("file", file);
             axios
               .post(
-                "http://10.101.44.212:8080/api/v1/file/upload-file",
+                `${import.meta.env.VITE_API_URL}/api/v1/file/upload-file`,
                 formData,
                 {
                   headers: {
@@ -37,7 +37,7 @@ export default function FormAddLesson({ closeForm, handleOk, editLesson }) {
               )
               .then((response) => {
                 resolve({
-                  default: "http://10.101.44.212:8080" + response.data,
+                  default: `${import.meta.env.VITE_API_URL}` + response.data,
                 });
               })
               .catch((error) => {

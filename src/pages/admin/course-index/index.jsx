@@ -27,7 +27,7 @@ export default function CourseIndex() {
     <>
       <div className="px-6 py-3 flex flex-col  w-full">
         <ul className="flex items-center gap-2" id="tab">
-          {tabs.map((tab, index) => (
+          {tabs?.map((tab, index) => (
             <div key={index}>
               <li
                 onClick={() => handleChangeTab(tab.id)}
