@@ -1,24 +1,20 @@
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 function Footer() {
   return (
-    <div className="bg-[#bc2228] text-white pt-[50px] pb-[30px] lg:px-[20px] md:px-[18px]">
-      <div className="footer_container max-w-[1500px] mx-auto">
-        <div className="footer_about flex gap-14 md:gap-3">
-          <div className="main_about">
+    <div className="bg-[#bc2228] text-white pt-12 pb-7">
+      <div className="footer_container max-w-6xl mx-auto px-4">
+        <div className="footer_about flex flex-col md:flex-row md:gap-14">
+          <div className="main_about mb-8 md:mb-0">
             <img
               src="https://rikkei.edu.vn/wp-content/uploads/2024/01/logorikkei.png"
               alt="logo footer"
               className="h-[74px] block"
             />
             <div className="main_content flex flex-col gap-2 mt-5">
-              <h2 className="md:text-lg lg:text-2xl">
-                <b>Công ty TNHH Rikkei Education</b>
-              </h2>
+              <h2 className="font-bold">Công ty TNHH Rikkei Education</h2>
               <p className="flex items-center">
                 <ArrowRightIcon />{" "}
                 <span>
@@ -43,62 +39,52 @@ function Footer() {
               </div>
             </div>
           </div>
-          <ul className="flex justify-around w-full">
-            <li>
-              <h2 className="text-lg">
-                <b>Khóa học</b>
-              </h2>
-              <ul className="mt-3 flex flex-col gap-2 md:!grid md:!grid-cols-2">
-                <li className="hover:text-orange-400 hover:cursor-pointer">Cho người mới bắt đầu</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Lập trình viên nhật bản</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Kỹ sư CNTT - PTIT</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Data Analysis - HUST</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">IT Fresher - Rikkei Certificate</li>
-              </ul>
-            </li>
-            <li>
-              <h2 className="text-lg">
-                <b>Tài nguyên</b>
-              </h2>
-              <ul className="mt-3 flex flex-col gap-2 md:!grid md:!grid-cols-2">
-                <li className="hover:text-orange-400 hover:cursor-pointer">Blog</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Kiến thức chuyên môn</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Khám phá nhật bản</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Thông tin sự kiện</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">What&apos;s New - What&apos;s Next?</li>
-              </ul>
-            </li>
-            <li>
-              <h2 className="text-lg">
-                <b>Vì sao chọn Rikkei Education</b>
-              </h2>
-              <ul className="mt-3 flex flex-col gap-2 md:!grid md:!grid-cols-2">
-                <li className="hover:text-orange-400 hover:cursor-pointer">Về Rikkei Education</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Hệ sinh thái Rikkei</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Nhân sự Rikkei Education</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Cộng đồng RA Alumni</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Ươm mầm xanh & CSR</li>
-                <li className="hover:text-orange-400 hover:cursor-pointer">Cơ hội nghề nghiệp</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div className=" my-10 h-[1px] w-full bg-white"></div>
-        <div className="footer_info">
-          <ul className="grid grid-cols-3 gap-x-10 gap-y-10">
-            <li>
-              <h2 className="mb-5">
-                <b>Cơ sở 1</b>
-              </h2>
-              <ul>
-                <li className="flex gap-2">
-                  <LocationOnIcon />
-                  <span>
-                    Tầng 7, khối A tòa nhà Sông Đà, đường Phạm Hùng , Phường Mỹ Đình 1, Quận Nam Từ Liêm, Hà Nội.
-                  </span>
+          <div className="flex flex-wrap justify-between w-full">
+            <div className="footer_section mb-8 md:mb-0">
+              <h2 className="font-bold">Khóa học</h2>
+              <ul className="mt-3 flex flex-col gap-2">
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Cho người mới bắt đầu
                 </li>
-                <li className="flex gap-2">
-                  <LocalPhoneIcon /> <span>Hotline: 0862 069 233</span>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Lập trình viên nhật bản
+                </li>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Kỹ sư CNTT - PTIT
+                </li>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Data Analysis - HUST
+                </li>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  IT Fresher - Rikkei Certificate
+                </li>
+              </ul>
+            </div>
+            <div className="footer_section mb-8 md:mb-0">
+              <h2 className="font-bold">Tài nguyên</h2>
+              <ul className="mt-3 flex flex-col gap-2">
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Blog
+                </li>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Kiến thức chuyên môn
+                </li>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Khám phá nhật bản
+                </li>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Thông tin sự kiện
+                </li>
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  What&apos;s New - What&apos;s Next?
+                </li>
+              </ul>
+            </div>
+            <div className="footer_section">
+              <h2 className="font-bold">Vì sao chọn Rikkei Education</h2>
+              <ul className="mt-3 flex flex-col gap-2">
+                <li className="hover:text-orange-400 hover:cursor-pointer">
+                  Về Rikkei Education
                 </li>
                 <li className="hover:text-orange-400 hover:cursor-pointer">
                   Hệ sinh thái Rikkei
@@ -116,8 +102,8 @@ function Footer() {
                   Cơ hội nghề nghiệp
                 </li>
               </ul>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
 
         <div className="copy_right mt-20 text-center">

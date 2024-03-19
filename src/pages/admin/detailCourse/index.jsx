@@ -13,7 +13,7 @@ import {
   editLesson,
 } from "../../../api/lessonAPIs";
 import AddIcon from "@mui/icons-material/Add";
-import { Accordion, AccordionDetails, AccordionSummary, ButtonGroup } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, ButtonGroup, IconButton } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
