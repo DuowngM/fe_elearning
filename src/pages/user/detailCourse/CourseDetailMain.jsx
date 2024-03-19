@@ -59,10 +59,13 @@ const CourseDetailMain = () => {
           className="shadow-lg"
           sx={{
             backgroundColor: "#f8f8f8",
+            paddingY: "0.5rem",
+            overflow: "hidden",
+            borderRadius: "1.5rem",
           }}
         >
-          <Box className=" max-w-100%">
-            {/* <Stack spacing={2} sx={{ padding: "1rem" }}>
+          <Box className="my-0 mx-auto max-w-[1500px] xl:px-[20px] lg:px-[10px] md:px-2">
+            <Stack spacing={2} sx={{ padding: "0.5rem" }}>
               <Breadcrumbs
                 separator={
                   <NavigateNextIcon
@@ -101,8 +104,8 @@ const CourseDetailMain = () => {
                   {chapters[0]?.courseName || "Coming Soon"}
                 </p>
               </Breadcrumbs>
-            </Stack> */}
-            <Stack direction="row" justifyContent={"end"} gap={5} space={4}>
+            </Stack>
+            <Stack direction="row" justifyContent="space-between" space={4} className="lg:mx-2">
               <Box
                 sx={{
                   borderRadius: "1rem",
@@ -110,8 +113,8 @@ const CourseDetailMain = () => {
                   width: "75%",
                   position: "relative",
                   maxWidth: "100%",
-                  height: "calc(100vh - 70px)",
                 }}
+                className="xl:h-[610px] md:h-full"
               >
                 {sourceVideo ? (
                   <div className="">
@@ -226,7 +229,8 @@ const CourseDetailMain = () => {
               maxWidth: "1500px",
               marginX: "auto",
               marginY: "auto",
-              paddingY: "4rem",
+              paddingBottom: "4rem",
+              paddingTop: "2rem"
             }}
           >
             <Stack direction="column">
