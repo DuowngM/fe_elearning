@@ -280,6 +280,7 @@ function IndexHome() {
                 fontWeight: "bold",
                 textAlign: "center",
               }}
+              className="sm:text-[32px]"
             >
               Khóa học và bài giảng chất lượng cao
             </Typography>

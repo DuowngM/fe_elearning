@@ -81,7 +81,11 @@ export default function CardCourse({ item }) {
             </Typography>
           </CardContent>
           <CardActions sx={{ justifyContent: "space-between" }}>
-            <Button onClick={handleLearn} variant="contained" color="primary">
+            <Button
+              onClick={handleLearn}
+              variant="contained"
+              style={{ backgroundColor: "#BC2228", color: "#fff" }}
+            >
               Học ngay
             </Button>
             <IconButton aria-label="add to favorites">
