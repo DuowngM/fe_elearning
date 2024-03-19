@@ -69,7 +69,7 @@ export default function CardCourse({ item }) {
           sx={{ objectFit: "fill" }}
         />
         <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-          <CardContent sx={{ flexGrow: 1 }}>
+          <CardContent sx={{ flexGrow: 1, padding: "20px 24px" }}>
             <Typography gutterBottom variant="h5" component="div">
               <span className="font-bold"> {item.title}</span>
             </Typography>
@@ -80,7 +80,9 @@ export default function CardCourse({ item }) {
               <Rating name="read-only" value={5} readOnly />
             </Typography>
           </CardContent>
-          <CardActions sx={{ justifyContent: "space-between" }}>
+          <CardActions
+            sx={{ justifyContent: "space-between", padding: "0 20px 24px" }}
+          >
             <Button
               onClick={handleLearn}
               variant="contained"
