@@ -25,6 +25,7 @@ export default function SimilarCourses({ item }) {
           justifyContent: "space-between",
           cursor: "pointer",
         }}
+        onClick={navigateDetail}
       >
         <Stack direction={"row"}>
           <CardMedia
@@ -47,10 +48,7 @@ export default function SimilarCourses({ item }) {
             justifyContent: "flex-end",
           }}
         >
-          <div
-            className=" w-16 h-16 rounded-lg bg-[#F8F2FF] flex justify-center items-center self-end"
-            onClick={navigateDetail}
-          >
+          <div className=" w-16 h-16 rounded-lg bg-[#F8F2FF] flex justify-center items-center self-end">
             <img src={playBorder} alt="" width={18} height={18} />
           </div>
         </CardActions>

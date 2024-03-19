@@ -67,7 +67,7 @@ function IndexHome() {
       title: "Training on Job",
       children: [
         {
-          text: "Trải nghiệm trực tiếp các hoạt động và dự án cùng RikkeiSoft và các Doanh nghiệp  đối tác",
+          text: "Trải nghiệm trực tiếp các hoạt động và dự án cùng Rikkeisoft và các Doanh nghiệp  đối tác",
         },
         {
           text: "Tạo CV & Online Profile",

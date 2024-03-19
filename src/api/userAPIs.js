@@ -26,13 +26,14 @@ export const register = async (infoUser) => {
     notify("error", "Số điện thoại đã được đăng ký");
   }
 };
+
 export const login = async (user) => {
   const infoUser = {
     phone: user.phone,
     password: user.password,
   };
   try {
-    const response = await jsonAxios.post("/auth/login", infoUser);
+    const response = await jsonAxios.post("/api/v1/auth/login", infoUser);
     notify("success", "Đăng nhập thành công");
     return response;
   } catch (error) {

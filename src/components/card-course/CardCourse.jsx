@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Cookies from "js-cookie";
 import { notify } from "../../utils/notification";
 import { useNavigate } from "react-router";
@@ -10,10 +10,17 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Rating,
   Typography,
 } from "@mui/material";
 export default function CardCourse({ item }) {
+  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const hoverStyle = {
+    transform: isHovered ? "scale(1.05)" : "none",
+    transition: "transform 0.3s ease-in-out",
+    boxShadow: isHovered ? "0 4px 20px rgba(0,0,0,0.2)" : "",
+  };
   const getAccessTokenFromCookies = () => {
     return Cookies.get("accessToken") || null;
   };
@@ -41,7 +48,11 @@ export default function CardCourse({ item }) {
         sx={{
           maxWidth: "100%",
           minHeight: "300px",
+          cursor: "pointer",
+          ...hoverStyle,
         }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <Box>
           <CardMedia
@@ -57,6 +68,9 @@ export default function CardCourse({ item }) {
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {item.subDescription}
+            </Typography>
+            <Typography sx={{ marginTop: "10px" }}>
+              <Rating name="read-only" value={5} readOnly />
             </Typography>
           </CardContent>
         </Box>
