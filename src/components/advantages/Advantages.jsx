@@ -12,7 +12,9 @@ export default function Advantages({ item }) {
     <>
       <Grid
         item
-        xs={4}
+        xs={12}
+        sm={6}
+        md={4}
         sx={{ minHeight: "200px", cursor: "pointer", ...hoverStyle }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

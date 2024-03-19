@@ -67,3 +67,8 @@ label {
 *::-webkit-scrollbar-thumb:hover {
   background-color: #7f8c8d;
 }
+@media (max-width: 768px) {
+  .btn-back-top {
+    display: none;
+  }
+}

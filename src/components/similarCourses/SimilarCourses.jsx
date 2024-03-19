@@ -35,7 +35,7 @@ export default function SimilarCourses({ item }) {
             image={import.meta.env.VITE_API_URL_IMG + item.image}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5">
+            <Typography gutterBottom variant="h5" sx={{ width: "200px" }}>
               {item.title}
             </Typography>
             <Rating name="read-only" value={5} readOnly />
