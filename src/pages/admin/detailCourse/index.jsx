@@ -13,15 +13,7 @@ import {
   editLesson,
 } from "../../../api/lessonAPIs";
 import AddIcon from "@mui/icons-material/Add";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  ButtonGroup,
-  IconButton,
-} from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, ButtonGroup, IconButton } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,6 +27,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import Cookies from "js-cookie";
+// import { Button } from "antd";
+import Button from '@mui/material/Button';
 export default function DetailCourse() {
   const chapters = useSelector((state) => state.chapterSlice.chapters);
   const lesson = useSelector((state) => state.lessonSlice.lesson);
@@ -220,26 +214,53 @@ export default function DetailCourse() {
         />
       )}
       <div className="w-full">
-        <div className="bg-[#f8f8f8]  py-20 overflow-hidden h-full">
-          <div className="my-0 mx-auto max-w-[1500px]">
-            <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg mb-10">
-              <span className="text-rikkei">Khóa học: </span>
-              {chapters[0]?.courseName}{" "}
-            </h1>
-            <div className="my-0 mx-auto max-w-[1500px]">
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  "& > *": {
-                    m: 1,
-                  },
-                }}
-              >
-                {selectedLesson ? (
+        <div className="bg-[#f8f8f8] shadow-lg pb-20 overflow-hidden rounded-3xl">
+          <h1 className="text-2xl font-bold text-[#170F49]  bg-[#f8f8f8] rounded-lg ml-10 mb-4">
+            <span className="text-rikkei">Khóa học: </span>
+            {chapters[0]?.courseName}{" "}
+          </h1>
+
+          <div className="my-0 mx-auto max-w-[1500px] px-10">
+            <ButtonGroup variant="outlined" aria-label="Basic button group" className="mb-[10px]">
+              <Button onClick={() => setChoice("video")}>video</Button>
+              <Button onClick={() => setChoice("lesson")}>Bài học</Button>
+              <Button onClick={handleSaveDescription}>Lưu</Button>
+            </ButtonGroup>
+            <div className="flex  justify-between min-h-[500px] gap-[20px]">
+              <div className="rounded-2xl overflow-hidden max-w-[950px] w-full relative">
+                {choice === "video" ? (
+                  <VideoComponent sourceVideo={sourceVideo} />
+                ) : (
+                  <div className="bg-slate-50">
+                    <CKEditor
+                      config={{
+                        extraPlugins: [uploadPlugins],
+                        styles: {
+                          content: {
+                            height: "fit-content",
+                            overflowY: "hidden",
+                          },
+                        },
+                      }}
+                      editor={ClassicEditor}
+                      data={description}
+                      onReady={(editor) => {}}
+                      onChange={handleEditorChange}
+                      style={{ maxHeight: "500px", overflowY: "auto" }}
+                    />
+                  </div>
+                )}
+              </div>
+              <Accordion className="max-w-[400px] w-full flex flex-col">
+                {groupedContentItems?.map((chapter) => chapter? (
                   <ButtonGroup
-                    variant="outlined"
-                    aria-label="Basic button group"
+                    sx={{ maxHeight: "50%" }}
+                    className="text-xl font-medium text-[#170F49] "
+                    expanded={expanded === `panel${chapter.id}`}
+                    onChange={handleChange(`panel${chapter.id}`)}
+                    key={chapter.id}
+                    onClick={() => setIdChapter(chapter.id)}
+
                   >
                     <Button
                       onClick={() => setChoice("video")}
@@ -266,8 +287,8 @@ export default function DetailCourse() {
                   </ButtonGroup>
                 ) : (
                   ""
-                )}
-              </Box>
+                ))}
+              </Accordion>
               <div className="flex flex-wrap justify-between">
                 <div className="rounded-2xl overflow-hidden max-w-[70%] w-full relative h-[610px] ">
                   {choice === "video" ? (

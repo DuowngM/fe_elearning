@@ -19,13 +19,18 @@ export default function UserMangagement() {
   const [flag, setFlag] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  //
+  const dataSource = allUsers?.map((course) => ({
+    ...course,
+    key: course.id,
+  }));
   // Sử dụng useDebounce
   const debouncedSearchTerm = useDebounce(searchTerm, 2000);
   // Phân trang
   const itemsPerPage = 5;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = allUsers.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = dataSource.slice(indexOfFirstItem, indexOfLastItem);
   const calculateIndex = (index) => index + 1;
   //Hàm hiển thị form thêm mới người dùng
   const openForm = () => {
@@ -85,7 +90,6 @@ export default function UserMangagement() {
         return (
           <div className="flex justify-evenly ">
             <Button
-              primary
               onClick={() => {
                 setEditUser(item);
                 openForm();

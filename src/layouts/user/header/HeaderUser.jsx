@@ -82,7 +82,7 @@ function HeaderUser() {
   };
   // hàm xử lý đăng ký
   const handleRegister = async (newUser) => {
-    await getPhone({ phone: newUser.phone, fullName: newUser.fullName });
+    // await getPhone({ phone: newUser.phone, fullName: newUser.fullName });
     await register(newUser);
     closeFormRegister();
     openFormLogin();
@@ -100,7 +100,7 @@ function HeaderUser() {
     setShowFormRegister(!showFormRegister);
   };
   return (
-    <div className="max-w-[1500px] h-[70px] mx-auto flex justify-between items-center  ">
+    <div className="max-w-[1500px] h-[70px] mx-auto flex justify-between items-center lg:px-[20px] md:px-[18px]">
       <div className="logo">
         <Link to={"/"}>
           <img

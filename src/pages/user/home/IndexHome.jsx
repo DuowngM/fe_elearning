@@ -157,7 +157,7 @@ function IndexHome() {
         {/* ----------------------------------------------------- banner ---------------------------------------------------------------- */}
         <Box className=" bg-[#231651] ">
           <Stack
-            className="flex max-w-[1500px] mx-auto mt-4 items-center justify-between"
+            className="flex max-w-[1500px] mx-auto mt-4 items-center justify-between md:px-[20px]"
             direction={{ xs: "column", sm: "row" }}
             sx={{ marginX: "auto", marginTop: "1rem" }}
           >
@@ -171,6 +171,7 @@ function IndexHome() {
                   fontWeight: "bold",
                   lineHeight: "4rem",
                 }}
+                className=" md:text-2xl"
               >
                 Khóa Học Lập Trình Từ Con Số 0 <br /> Tự Tin Đi Làm Sau 6 Tháng
               </Typography>
@@ -179,7 +180,7 @@ function IndexHome() {
                   <div className="inline-block mr-[10px]">
                     <img src="/images/icon-check 1.png" alt="" />
                   </div>
-                  <span className=" text-white text-xl leading-12 w-full">
+                  <span className=" text-white text-xl leading-12 w-full  md:text-base">
                     Cam kết có việc làm
                   </span>
                 </div>
@@ -188,7 +189,7 @@ function IndexHome() {
                   <div className="inline-block mr-[10px]">
                     <img src="/images/icon-check 1.png" alt="" />
                   </div>
-                  <span className=" text-white leading-12 text-xl">
+                  <span className=" text-white leading-12 text-xl  md:text-base">
                     Chắc nền tảng, giỏi thực hành - Có ít nhất 2 Project sau
                     khóa học
                   </span>
@@ -198,7 +199,7 @@ function IndexHome() {
                   <div className="inline-block mr-[10px]">
                     <img src="/images/icon-check 1.png" alt="" />
                   </div>
-                  <span className=" text-white leading-12 text-xl">
+                  <span className=" text-white leading-12 text-xl  md:text-base">
                     Tốt nghiệp chinh phục công việc LƯƠNG 8 CHỮ SỐ
                   </span>
                 </div>
@@ -221,30 +222,27 @@ function IndexHome() {
                 </button>
               </Stack>
             </Box>
-            <img src={personBg} alt="" className="w-1/2" />
+            <img src={personBg} alt="" className="w-1/2 md:w-1/3" />
           </Stack>
         </Box>
         {/* video Dream */}
-        <div className="w-full h-[650px]">
-          <div className="max-h-[550px] h-full bg-[#F2F2F2] py-10 lg:py-40 flex items-center justify-center">
-            <div className="max-w-[1500px] h-full flex flex-col lg:flex-row items-center justify-center">
-              <div className="lg:mr-28 mb-8 lg:mb-0 w-full lg:w-1/2">
-                <div className="w-full h-[200px] lg:h-[400px] bg-[#B4B4B4]">
-                  <img
-                    src={Introducing}
-                    className="w-full h-full object-cover"
-                    alt=""
-                  />
+
+        <div className="w-full h-[650px]  ">
+          <div className="  max-h-[550px] h-full bg-[#F2F2F2] py-40  flex items-center justify-center px-[20px] md:py-5 md:h-[400px] ">
+            <div className="max-w-[1500px] h-full flex items-center justify-center ">
+              <div className="mr-[100px] w-1/2 ">
+                <div className="w-full h-[400px] bg-[#B4B4B4]  md:h-4/5">
+                  <img src={Introducing} className="w-full h-full" alt="" />
                 </div>
               </div>
-              <div className="w-full lg:w-1/2">
-                <div className="w-5/6 lg:w-3/4 mx-auto">
-                  <h1 className="font-bold text-xl lg:text-2xl text-[#BC2228] leading-tight lg:leading-[3rem]">
+              <div className="w-1/2 md:h-3/4 md:items-start md:flex" >
+                <div className="w-3/4 md:h-full w-full">
+                  <h1 className="font-bold text-2xl text-[#BC2228] leading-[3rem]  leading-4 md:text-lg">
                     Rikkei Education - Where the dreams come true
                   </h1>
-                  <div className="mt-4 lg:mt-7 flex flex-col gap-4">
+                  <div className="mt-7 flex flex-col gap-4 md:mt-0">
                     <div className="align-middle">
-                      <p className="text-[#0A033C] text-base lg:text-lg leading-normal lg:leading-loose w-full">
+                      <p className=" text-[#0A033C] text-3xl leading-12 w-full md:mt-0 md:text-sm">
                         Rikkei Education cam kết cung cấp nền tảng giáo dục và
                         đào tạo hiện đại, đưa công nghệ thông tin đến thế hệ trẻ
                         Việt Nam. Chúng tôi mong muốn trang bị cho các bạn đầy
@@ -267,7 +265,6 @@ function IndexHome() {
             </div>
           </div>
         </div>
-
         {/* ----------------------------------------------- Video bài giảng chất lượng cao ------------------------------------------------- */}
         <Box className="w-full bg-[#F8F7FA]">
           <div className="max-w-[1500px] mx-auto  py-32">
