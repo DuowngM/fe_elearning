@@ -22,10 +22,10 @@ function App() {
   };
 
   return (
-    <>
+    <div className="w-full">
       <Routes>{renderRoutes(routesConfig)}</Routes>
       <BackTop />
-    </>
+    </div>
   );
 }
 

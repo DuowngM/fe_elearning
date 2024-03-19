@@ -16,6 +16,7 @@ export default function ListTeacher({ item }) {
         xs={12}
         sm={6}
         md={4}
+        lg={3}
         sx={{ minHeight: "800px", cursor: "pointer" }}
       >
         <Paper
