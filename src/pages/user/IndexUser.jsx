@@ -11,7 +11,7 @@ function IndexUser() {
       <Outlet />
 
       {/* footer */}
-      <FooterUser />
+      {/* <FooterUser /> */}
     </div>
   );
 }

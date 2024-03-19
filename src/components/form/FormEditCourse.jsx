@@ -26,7 +26,7 @@ function FormEditCourse({ closeFormEdit, handleEdit, courseInfo }) {
     if (courseInfo) {
       setTitle(courseInfo.title);
       setDescription(courseInfo.description);
-      setImageUrl(`${import.meta.env.VITE_API_URL_IMG}` + courseInfo.image);
+      setImageUrl(courseInfo.image);
       setSubDescription(courseInfo.subDescription);
     }
   }, [courseInfo]);
