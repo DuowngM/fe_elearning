@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function HomeAdmin() {
-  return <div>HomeAdmin</div>;
+  return <div>Trang admin</div>;
 }

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Cookies from "js-cookie";
 import { notify } from "../../utils/notification";
 import { useNavigate } from "react-router";
@@ -10,11 +10,17 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Rating,
   Typography,
 } from "@mui/material";
-import { object } from "prop-types";
 export default function CardCourse({ item }) {
+  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const hoverStyle = {
+    transform: isHovered ? "scale(1.05)" : "none",
+    transition: "transform 0.3s ease-in-out",
+    boxShadow: isHovered ? "0 4px 20px rgba(0,0,0,0.2)" : "",
+  };
   const getAccessTokenFromCookies = () => {
     return Cookies.get("accessToken") || null;
   };
@@ -29,9 +35,10 @@ export default function CardCourse({ item }) {
   const handleLearn = () => {
     const accessToken = getAccessTokenFromCookies();
     const userInfo = getUserInfoFromLocalStorage();
-
-    if (!accessToken || !userInfo)
+    if (!accessToken || !userInfo) {
       return notify("error", "Đăng nhập để học khóa này");
+    }
+
     navigate(`/detailcourse/${item.id}`);
   };
 
@@ -41,7 +48,11 @@ export default function CardCourse({ item }) {
         sx={{
           maxWidth: "100%",
           minHeight: "300px",
+          cursor: "pointer",
+          ...hoverStyle,
         }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <Box>
           <CardMedia
@@ -53,22 +64,23 @@ export default function CardCourse({ item }) {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {item.title}
+              <span className="font-bold"> {item.title}</span>
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {item.subDescription}
             </Typography>
+            <Typography sx={{ marginTop: "10px" }}>
+              <Rating name="read-only" value={5} readOnly />
+            </Typography>
           </CardContent>
         </Box>
         <CardActions>
-          <Button
-            color="error"
-            size="large"
-            variant="outlined"
+          <button
             onClick={handleLearn}
+            className="border border-[#BC2228] text-[#BC2228] bg-white font-bold py-2 px-4 rounded cursor-pointer hover:bg-rikkei hover:text-white transition duration-300 ease-in-out"
           >
             Học ngay
-          </Button>
+          </button>
         </CardActions>
       </Card>
     </Grid>

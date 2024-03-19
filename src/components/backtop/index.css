@@ -5,10 +5,11 @@
   bottom: 30px;
   padding: 10px;
   border-radius: 4px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #bc2228;
+  color: #fff;
   animation: fadeUp 0.3s linear;
   transition: all 0.5s ease;
+  height: 45px;
 }
 
 .arrow {
