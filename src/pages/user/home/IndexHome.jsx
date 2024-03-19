@@ -227,22 +227,22 @@ function IndexHome() {
         </Box>
         {/* video Dream */}
 
-        <div className="w-full h-[650px]  ">
-          <div className="  max-h-[550px] h-full bg-[#F2F2F2] py-40  flex items-center justify-center px-[20px] md:py-5 md:h-[400px] ">
+        <div className="w-full h-[650px] pt-20 ">
+          <div className="  max-h-[550px] h-full bg-[#F2F2F2] py-40  flex items-center justify-around px-[20px] md:py-5 md:h-[400px] ">
             <div className="max-w-[1500px] h-full flex items-center justify-center ">
               <div className="mr-[100px] w-1/2 ">
                 <div className="w-full h-[400px] bg-[#B4B4B4]  md:h-4/5">
                   <img src={Introducing} className="w-full h-full" alt="" />
                 </div>
               </div>
-              <div className="w-1/2 md:h-3/4 md:items-start md:flex" >
-                <div className="w-3/4 md:h-full w-full">
-                  <h1 className="font-bold text-2xl text-[#BC2228] leading-[3rem]  leading-4 md:text-lg">
+              <div className="w-1/2 md:h-3/4 md:items-start md:flex">
+                <div className="w-3/4 md:h-full w-full text-center leading-tight">
+                  <h1 className="font-bold !text-2xl text-[#BC2228] leading-[3rem]  leading-4 md:text-lg">
                     Rikkei Education - Where the dreams come true
                   </h1>
-                  <div className="mt-7 flex flex-col gap-4 md:mt-0">
+                  <div className="mt-4 flex flex-col gap-4 md:mt-0">
                     <div className="align-middle">
-                      <p className=" text-[#0A033C] text-3xl leading-12 w-full md:mt-0 md:text-sm">
+                      <p className=" text-[#0A033C] text-base lg:text-lg leading-normal lg:leading-loose w-full">
                         Rikkei Education cam kết cung cấp nền tảng giáo dục và
                         đào tạo hiện đại, đưa công nghệ thông tin đến thế hệ trẻ
                         Việt Nam. Chúng tôi mong muốn trang bị cho các bạn đầy
