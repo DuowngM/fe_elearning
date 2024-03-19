@@ -13,7 +13,7 @@ import {
   editLesson,
 } from "../../../api/lessonAPIs";
 import AddIcon from "@mui/icons-material/Add";
-import { Accordion, AccordionDetails, AccordionSummary, ButtonGroup } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, ButtonGroup, IconButton } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -251,9 +251,9 @@ export default function DetailCourse() {
                   </div>
                 )}
               </div>
-              <div className="max-w-[400px] w-full flex flex-col">
-                {groupedContentItems?.map((chapter) => (
-                  <Accordion
+              <Accordion className="max-w-[400px] w-full flex flex-col">
+                {groupedContentItems?.map((chapter) => chapter? (
+                  <ButtonGroup
                     sx={{ maxHeight: "50%" }}
                     className="text-xl font-medium text-[#170F49] "
                     expanded={expanded === `panel${chapter.id}`}
@@ -287,8 +287,8 @@ export default function DetailCourse() {
                   </ButtonGroup>
                 ) : (
                   ""
-                )}
-              </Box>
+                ))}
+              </Accordion>
               <div className="flex flex-wrap justify-between">
                 <div className="rounded-2xl overflow-hidden max-w-[70%] w-full relative h-[610px] ">
                   {choice === "video" ? (
