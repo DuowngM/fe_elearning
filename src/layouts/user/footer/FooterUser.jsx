@@ -1,6 +1,8 @@
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 function Footer() {
   return (
@@ -114,8 +116,8 @@ function Footer() {
                   Cơ hội nghề nghiệp
                 </li>
               </ul>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
 
         <div className="copy_right mt-20 text-center">
