@@ -66,9 +66,7 @@ export default function Course() {
       title: "Hình ảnh",
       dataIndex: "image",
       align: "center",
-      render: (text) => (
-        <img src={import.meta.env.VITE_API_URL_IMG + text} width={100} />
-      ),
+      render: (text) => <img src={text} width={100} />,
     },
     {
       title: "Ngày tạo",

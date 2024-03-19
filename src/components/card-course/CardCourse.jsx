@@ -65,7 +65,7 @@ export default function CardCourse({ item }) {
           component="img"
           alt="green iguana"
           height="280"
-          image={import.meta.env.VITE_API_URL_IMG + item.image}
+          image={item.image}
           sx={{ objectFit: "fill" }}
         />
         <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
