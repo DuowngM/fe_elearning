@@ -76,3 +76,6 @@ label {
     display: none;
   }
 }
+.ckEditor img {
+  max-width: 100% !important;
+}

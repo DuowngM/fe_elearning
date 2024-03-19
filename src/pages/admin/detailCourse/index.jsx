@@ -166,7 +166,7 @@ export default function DetailCourse() {
               )
               .then((response) => {
                 resolve({
-                  default: `${import.meta.env.VITE_API_URL}` + response.data,
+                  default: response.data,
                 });
               })
               .catch((error) => {

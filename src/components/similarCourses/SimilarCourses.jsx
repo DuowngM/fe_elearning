@@ -31,11 +31,11 @@ export default function SimilarCourses({ item }) {
           <CardMedia
             component="img"
             alt="green iguana"
-            image={import.meta.env.VITE_API_URL_IMG + item.image}
-            className="lg:!w-3/4 md:!w-4/6 lg:h-[200px] md:h-[150px]" 
+            height="200"
+            image={item.image}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" className="lg:!text-lg md:!text-base">
+            <Typography gutterBottom variant="h5" sx={{ width: "200px" }}>
               {item.title}
             </Typography>
             <Rating name="read-only" value={5} readOnly />
@@ -48,11 +48,8 @@ export default function SimilarCourses({ item }) {
             justifyContent: "flex-end",
           }}
         >
-          <div
-            className=" w-16 h-16 rounded-lg bg-[#F8F2FF] flex justify-center items-center self-end md:w-10 md:h-10"
-            onClick={navigateDetail}
-          >
-            <img src={playBorder} alt="" width={18} height={18} className="md:!h-6 md:!w-6"/>
+          <div className=" w-16 h-16 rounded-lg bg-[#F8F2FF] flex justify-center items-center self-end">
+            <img src={playBorder} alt="" width={18} height={18} />
           </div>
         </CardActions>
       </Card>
